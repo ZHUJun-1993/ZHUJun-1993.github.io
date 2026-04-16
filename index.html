@@ -53,10 +53,12 @@
     #loader {
       position: fixed; inset: 0; z-index: 9999;
       background: var(--bg);
-      display: flex; align-items: center; justify-content: center;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 20px;
       transition: opacity 0.6s ease, visibility 0.6s ease;
     }
     #loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .loader-logo { font-family: 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; }
     .loader-bar {
       width: 120px; height: 2px;
       background: var(--border);
@@ -548,6 +550,7 @@
       font-size: 12px; color: var(--text-3);
     }
     footer a { color: var(--accent); text-decoration: none; }
+    footer span { color: var(--teal); font-style: italic; }
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 900px) {
@@ -570,7 +573,7 @@
 <body>
 
 <!-- Loading -->
-<div id="loader"><div class="loader-bar"></div></div>
+<div id="loader"><div class="loader-logo">朱珺</div><div class="loader-bar"></div></div>
 
 <!-- BG Orbs -->
 <div class="bg-orbs">
@@ -582,7 +585,7 @@
 <!-- Nav -->
 <nav id="mainNav">
   <div class="nav-inner">
-    <div class="nav-logo">JUN ZHU</div>
+    <div class="nav-logo">朱珺</div>
     <ul class="nav-links">
       <li><a href="#" class="active">关于我</a></li>
       <li><a href="projects.html">项目经历</a></li>
@@ -590,8 +593,8 @@
       <li><a href="contact.html">联系方式</a></li>
     </ul>
     <div class="nav-actions">
-      <a href="index-en.html" class="lang-toggle">🌐 EN</a>
       <button class="theme-toggle" id="themeToggle" title="切换主题">☀</button>
+      <a href="index-en.html" class="lang-toggle">🌐 EN</a>
     </div>
   </div>
 </nav>
@@ -606,7 +609,7 @@
       </div>
       <h1 class="reveal reveal-delay-1">
         朱珺<br>
-        <span class="line-accent">Bridging Theory<br>& Practice</span>
+        <span class="line-accent">连接理论与实践</span>
       </h1>
       <p class="hero-subtitle reveal reveal-delay-2">
         中关村学院 · 中关村人工智能研究院 · 科研项目经理。<br>
@@ -844,7 +847,7 @@
 
 <!-- Footer -->
 <footer>
-  <p>朱珺 · Bridging Academic Training and Professional Practice · 2026 &nbsp;·&nbsp; <a href="contact.html">jzhubh@connect.ust.hk</a></p>
+  <p>朱珺 · <span>连接学术训练与职业实践</span> · 2026</p>
 </footer>
 
 <script>

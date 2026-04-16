@@ -14,12 +14,14 @@
       --accent: #7c6fff; --accent-2: #a78bfa; --accent-glow: rgba(124,111,255,0.3);
       --coral: #ff6b6b; --teal: #4ecdc4;
     }
+    [data-theme="light"] { --bg: #f5f3f0; --bg-2: #eeecea; --surface: rgba(0,0,0,0.03); --surface-2: rgba(0,0,0,0.05); --border: rgba(0,0,0,0.07); --border-bright: rgba(0,0,0,0.12); --text: #1a1a2e; --text-2: #4a4a6a; --text-3: #8a8aaa; --card-bg: rgba(255,255,255,0.7); }
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body { font-family: 'Space Grotesk','Noto Serif SC',sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; overflow-x: hidden; }
 
-    #loader { position: fixed; inset: 0; z-index: 9999; background: var(--bg); display: flex; align-items: center; justify-content: center; transition: opacity 0.6s ease, visibility 0.6s ease; }
+    #loader { position: fixed; inset: 0; z-index: 9999; background: var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; transition: opacity 0.6s ease, visibility 0.6s ease; }
     #loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .loader-logo { font-family: 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; }
     .loader-bar { width: 120px; height: 2px; background: var(--border); border-radius: 2px; overflow: hidden; }
     .loader-bar::after { content: ''; display: block; width: 40%; height: 100%; background: var(--accent); border-radius: 2px; animation: loadSlide 1s ease-in-out infinite; }
     @keyframes loadSlide { 0% { transform: translateX(-100%); } 100% { transform: translateX(350%); } }
@@ -45,6 +47,8 @@
     .nav-actions { display: flex; align-items: center; gap: 12px; }
     .lang-toggle { display: inline-flex; align-items: center; gap: 6px; background: var(--surface-2); border: 1px solid var(--border); color: var(--text-2); padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 500; text-decoration: none; transition: all 0.2s; backdrop-filter: blur(8px); }
     .lang-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .theme-toggle { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border); background: var(--surface); color: var(--text-2); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; transition: all 0.3s; }
+    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
 
     .page { position: relative; z-index: 1; padding: 0 40px; min-height: 100vh; display: flex; align-items: center; }
     .page-inner { max-width: 1160px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 420px; gap: 80px; align-items: start; padding: 120px 0 80px; }
@@ -76,6 +80,7 @@
 
     footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 28px 40px; text-align: center; font-size: 12px; color: var(--text-3); }
     footer a { color: var(--accent); text-decoration: none; }
+    footer span { color: var(--teal); font-style: italic; }
 
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -93,7 +98,7 @@
 </head>
 <body>
 
-<div id="loader"><div class="loader-bar"></div></div>
+<div id="loader"><div class="loader-logo">朱珺</div><div class="loader-bar"></div></div>
 <div class="bg-orbs">
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
@@ -102,7 +107,7 @@
 
 <nav id="mainNav">
   <div class="nav-inner">
-    <div class="nav-logo">JUN ZHU</div>
+    <div class="nav-logo">朱珺</div>
     <ul class="nav-links">
       <li><a href="index.html">关于我</a></li>
       <li><a href="projects.html">项目经历</a></li>
@@ -110,6 +115,7 @@
       <li><a href="#" class="active">联系方式</a></li>
     </ul>
     <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" title="切换主题">☀</button>
       <a href="contact-en.html" class="lang-toggle">🌐 EN</a>
     </div>
   </div>
@@ -123,8 +129,8 @@
         Contact · 联系方式
       </div>
       <h1 class="reveal reveal-delay-1">
-        Let's<br>
-        <span class="accent-line">Connect</span>
+        联系<br>
+        <span class="accent-line">方式</span>
       </h1>
       <p class="lead reveal reveal-delay-2">
         如果您对我的研究方向感兴趣，或希望探讨合作可能，欢迎通过以下方式联系。我会尽快回复。
@@ -156,7 +162,7 @@
 </div>
 
 <footer>
-  <p>Jun Zhu · Bridging Academic Training and Professional Practice · 2026 &nbsp;·&nbsp; <a href="mailto:jzhubh@connect.ust.hk">jzhubh@connect.ust.hk</a></p>
+  <p>朱珺 · <span>连接学术训练与职业实践</span> · 2026</p>
 </footer>
 
 <script>
@@ -165,6 +171,8 @@
   const reveals = document.querySelectorAll('.reveal');
   const obs = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } }); }, { threshold: 0.08 });
   reveals.forEach(el => obs.observe(el));
+  const themeToggle = document.getElementById('themeToggle');
+  themeToggle.addEventListener('click', () => { const isLight = document.documentElement.getAttribute('data-theme') === 'light'; document.documentElement.setAttribute('data-theme', isLight ? '' : 'light'); themeToggle.textContent = isLight ? '☀' : '🌙'; });
 </script>
 </body>
 </html>
