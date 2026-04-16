@@ -52,9 +52,29 @@
     .research-card p { font-size: 14px; color: var(--ink-soft); line-height: 1.75; }
     .research-card p strong { color: var(--ink); font-weight: 600; }
 
+    /* ── Research Question ── */
+    .rq-section { background: var(--ink); color: white; }
+    .rq-inner { max-width: 1080px; margin: 0 auto; padding: 80px 48px; }
+    .rq-label { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 12px; }
+    .rq-title { font-family: 'Playfair Display', Georgia, serif; font-size: 28px; font-weight: 700; color: white; margin-bottom: 40px; }
+    .rq-central {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+      border-left: 4px solid var(--blue-mid); border-radius: 12px;
+      padding: 36px 40px; margin-bottom: 40px;
+    }
+    .rq-central .rq-tag { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--blue-mid); margin-bottom: 14px; }
+    .rq-central h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 22px; font-weight: 700; color: white; line-height: 1.5; margin-bottom: 16px; }
+    .rq-central p { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.8; }
+    .rq-sub { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 40px; }
+    .rq-sub-item { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 24px; }
+    .rq-sub-item .sub-num { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; color: rgba(255,255,255,0.08); line-height: 1; margin-bottom: 12px; }
+    .rq-sub-item h4 { font-size: 14px; font-weight: 600; color: white; margin-bottom: 10px; }
+    .rq-sub-item p { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.7; }
+    .method-tag { display: inline-block; background: var(--blue); color: white; padding: 4px 14px; border-radius: 20px; font-size: 12px; font-weight: 500; margin-right: 8px; margin-bottom: 8px; }
+
     .framework-section { background: var(--bg-warm); }
     .framework-inner { max-width: 1080px; margin: 0 auto; padding: 80px 48px; }
-    .core-intro { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px 48px; margin-bottom: 40px; display: grid; grid-template-columns: auto 1fr; gap: 48px; align-items: center; box-shadow: var(--shadow); }
+    .core-intro { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px 48px; margin-bottom: 40px; display: grid; grid-template-columns: auto 1fr; gap: 48px; align-items: center; box-shadow: var(--shadow); border-top: 3px solid var(--blue); }
     .core-acronym { font-family: 'Playfair Display', Georgia, serif; font-size: 72px; font-weight: 700; color: var(--blue); line-height: 1; }
     .core-intro h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 22px; font-weight: 700; margin-bottom: 12px; }
     .core-intro p { font-size: 15px; color: var(--ink-soft); line-height: 1.8; }
@@ -94,7 +114,8 @@
     @media (max-width: 900px) {
       .core-intro { grid-template-columns: 1fr; gap: 20px; }
       .core-acronym { font-size: 48px; }
-      .research-grid, .journey-grid, .core-pillars { grid-template-columns: 1fr; }
+      .research-grid, .journey-grid, .core-pillars, .rq-sub { grid-template-columns: 1fr; }
+      .rq-inner, .rq-central { padding: 40px 24px; }
       .nav-links { display: none; }
       .hero h1 { font-size: 28px; }
       .section, .journey-inner, .framework-inner { padding: 60px 24px; }
@@ -155,6 +176,49 @@
       </div>
     </div>
   </section>
+
+  <!-- Research Question & Methodology -->
+  <div class="rq-section">
+    <div class="rq-inner">
+      <div class="rq-label">Research Question</div>
+      <h2 class="rq-title">Central Question & Hypotheses</h2>
+
+      <div class="rq-central">
+        <div class="rq-tag">Central Research Question</div>
+        <h3>How do AI doctoral students intentionally develop professional competencies beyond academic skills through structured project experiences?</h3>
+        <p>This study proposes that by intentionally designing AI doctoral project experiences based on the CORE framework, measurable gains can be achieved in collaborative practice, self-management, and professional communication — thereby bridging the structural gap between academic training and industry competency demands.</p>
+      </div>
+
+      <div class="rq-sub">
+        <div class="rq-sub-item">
+          <div class="sub-num">Q1</div>
+          <h4>Does the competency gap exist?</h4>
+          <p>What systematic gaps exist between the competencies AI doctoral students develop through academic training and those expected by industry?</p>
+        </div>
+        <div class="rq-sub-item">
+          <div class="sub-num">Q2</div>
+          <h4>How do project experiences drive development?</h4>
+          <p>Can structured project experiences (collaborative delivery, iterative reflection, cross-team coordination) promote AI doctoral students' practical competency development?</p>
+        </div>
+        <div class="rq-sub-item">
+          <div class="sub-num">Q3</div>
+          <h4>Is the CORE framework effective?</h4>
+          <p>Can the CORE framework be operationally embedded into AI doctoral training to produce measurable competency improvements?</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="rq-label" style="margin-bottom:16px;">Methodology</div>
+        <div>
+          <span class="method-tag">Qualitative</span>
+          <span class="method-tag">Grounded Theory Coding</span>
+          <span class="method-tag">Survey</span>
+          <span class="method-tag">Competency Self-Assessment</span>
+          <span class="method-tag">Mixed Methods</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- CORE Framework -->
   <div class="framework-section" id="framework">

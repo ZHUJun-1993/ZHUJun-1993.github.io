@@ -85,6 +85,32 @@
     .research-card p { font-size: 14px; color: var(--ink-soft); line-height: 1.75; }
     .research-card p strong { color: var(--ink); font-weight: 600; }
 
+    /* ── Research Question ── */
+    .rq-section { background: var(--ink); color: white; }
+    .rq-inner { max-width: 1080px; margin: 0 auto; padding: 80px 48px; }
+    .rq-label { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 12px; }
+    .rq-title { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: white; margin-bottom: 40px; }
+
+    .rq-central {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+      border-left: 4px solid var(--blue-mid); border-radius: 12px;
+      padding: 36px 40px; margin-bottom: 40px;
+    }
+    .rq-central .rq-tag { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--blue-mid); margin-bottom: 14px; }
+    .rq-central h3 { font-family: 'Noto Serif SC', serif; font-size: 22px; font-weight: 700; color: white; line-height: 1.5; margin-bottom: 16px; }
+    .rq-central p { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.8; }
+
+    .rq-sub { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 40px; }
+    .rq-sub-item {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px; padding: 24px;
+    }
+    .rq-sub-item .sub-num { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; color: rgba(255,255,255,0.08); line-height: 1; margin-bottom: 12px; }
+    .rq-sub-item h4 { font-size: 14px; font-weight: 600; color: white; margin-bottom: 10px; }
+    .rq-sub-item p { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.7; }
+
+    .method-tag { display: inline-block; background: var(--blue); color: white; padding: 4px 14px; border-radius: 20px; font-size: 12px; font-weight: 500; margin-right: 8px; margin-bottom: 8px; }
+
     /* ── CORE Framework ── */
     .framework-section { background: var(--bg-warm); }
     .framework-inner { max-width: 1080px; margin: 0 auto; padding: 80px 48px; }
@@ -92,7 +118,7 @@
       background: var(--card); border: 1px solid var(--border); border-radius: 16px;
       padding: 40px 48px; margin-bottom: 40px;
       display: grid; grid-template-columns: auto 1fr; gap: 48px; align-items: center;
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadow); border-top: 3px solid var(--blue);
     }
     .core-acronym { font-family: 'Playfair Display', serif; font-size: 72px; font-weight: 700; color: var(--blue); line-height: 1; }
     .core-intro h3 { font-family: 'Noto Serif SC', serif; font-size: 22px; font-weight: 700; margin-bottom: 12px; }
@@ -152,7 +178,8 @@
     @media (max-width: 900px) {
       .core-intro { grid-template-columns: 1fr; gap: 20px; }
       .core-acronym { font-size: 48px; }
-      .research-grid, .bg-grid, .core-pillars, .journey-grid { grid-template-columns: 1fr; }
+      .research-grid, .bg-grid, .core-pillars, .journey-grid, .rq-sub { grid-template-columns: 1fr; }
+      .rq-inner, .rq-central { padding: 40px 24px; }
       .nav-links { display: none; }
       .hero h1 { font-size: 30px; }
       .section, .journey-inner, .framework-inner { padding: 60px 24px; }
@@ -214,6 +241,49 @@
       </div>
     </div>
   </section>
+
+  <!-- Research Question & Methodology -->
+  <div class="rq-section">
+    <div class="rq-inner">
+      <div class="rq-label">研究问题</div>
+      <h2 class="rq-title">核心问题与研究假设</h2>
+
+      <div class="rq-central">
+        <div class="rq-tag">Central Research Question</div>
+        <h3>AI博士研究生如何在结构化项目体验中，有意图地发展超越学术技能的专业胜任力？</h3>
+        <p>本研究提出：通过对AI博士项目体验进行意图性设计（基于CORE框架），可以显著提升其在协作实践、自我管理、专业沟通等非学术胜任力域的发展水平，从而弥合学术训练与产业胜任力需求之间的结构性缺口。</p>
+      </div>
+
+      <div class="rq-sub">
+        <div class="rq-sub-item">
+          <div class="sub-num">Q1</div>
+          <h4>胜任力缺口存在吗？</h4>
+          <p>AI博士在学术训练中获得的胜任力，与工业界对博士的胜任力预期之间，存在哪些系统性差距？</p>
+        </div>
+        <div class="rq-sub-item">
+          <div class="sub-num">Q2</div>
+          <h4>项目体验如何影响发展？</h4>
+          <p>结构化项目体验（协作交付、迭代复盘、跨团队协调）能否，以及如何促进AI博士的实践性胜任力发展？</p>
+        </div>
+        <div class="rq-sub-item">
+          <div class="sub-num">Q3</div>
+          <h4>CORE框架有效吗？</h4>
+          <p>CORE框架（胜任力定义+结构化项目+反思机制+评估反馈）能否可操作地嵌入AI博士培养过程，产生可测量的胜任力提升？</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="rq-label" style="margin-bottom:16px;">研究方法</div>
+        <div>
+          <span class="method-tag">质性研究</span>
+          <span class="method-tag">扎根理论编码</span>
+          <span class="method-tag">问卷调查</span>
+          <span class="method-tag">胜任力自评工具</span>
+          <span class="method-tag">混合方法</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- CORE Framework -->
   <div class="framework-section" id="framework">
