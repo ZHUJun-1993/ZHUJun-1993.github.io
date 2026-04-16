@@ -3,580 +3,220 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>朱珺 · 研究兴趣</title>
+  <title>朱珺 · 关于我</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #FAFAF8;
-      --bg-warm: #F5F3EF;
-      --ink: #1A1A2E;
-      --ink-soft: #4A4A6A;
-      --ink-muted: #8A8AAA;
-      --blue: #2563EB;
-      --blue-light: #DBEAFE;
-      --blue-mid: #3B82F6;
-      --red: #DC2626;
-      --green: #16A34A;
-      --border: #E2E0DC;
-      --card: #FFFFFF;
+      --bg: #FAFAF8; --bg-warm: #F5F3EF; --ink: #1A1A2E; --ink-soft: #4A4A6A; --ink-muted: #8A8AAA;
+      --blue: #2563EB; --blue-light: #DBEAFE; --blue-mid: #3B82F6;
+      --border: #E2E0DC; --card: #FFFFFF;
       --shadow: 0 1px 3px rgba(26,26,46,0.06), 0 4px 16px rgba(26,26,46,0.04);
       --shadow-md: 0 4px 12px rgba(26,26,46,0.08), 0 8px 32px rgba(26,26,46,0.06);
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Noto Sans SC', sans-serif;
-      background: var(--bg);
-      color: var(--ink);
-      line-height: 1.8;
-    }
+    body { font-family: 'Noto Sans SC', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.8; }
     ::selection { background: var(--blue-light); }
 
-    /* ── Nav ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(250,250,248,0.92);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 48px;
-    }
-    .nav-inner {
-      max-width: 1080px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between; height: 60px;
-    }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(250,250,248,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 32px; }
+    .nav-inner { max-width: 1080px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 52px; }
     .nav-logo { font-size: 15px; font-weight: 600; letter-spacing: 0.5px; }
     .nav-logo span { color: var(--blue); }
-    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
     .nav-links a { color: var(--ink-soft); text-decoration: none; font-size: 14px; transition: color 0.2s; }
     .nav-links a:hover { color: var(--ink); }
-    .lang-toggle {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--card); border: 1px solid var(--border);
-      color: var(--ink-soft); padding: 6px 14px; border-radius: 20px;
-      font-size: 13px; text-decoration: none; transition: all 0.2s;
-    }
+    .nav-links a.active { color: var(--blue); font-weight: 600; }
+    .lang-toggle { display: inline-flex; align-items: center; gap: 6px; background: var(--card); border: 1px solid var(--border); color: var(--ink-soft); padding: 5px 12px; border-radius: 20px; font-size: 12px; text-decoration: none; transition: all 0.2s; }
     .lang-toggle:hover { border-color: var(--blue); color: var(--blue); }
 
-    /* ── Hero ── */
-    .hero {
-      padding: 140px 48px 100px;
-      max-width: 1080px; margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 64px; align-items: start;
-    }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--blue-light); color: var(--blue);
-      padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 500;
-      margin-bottom: 28px; letter-spacing: 0.5px;
-    }
-    .hero h1 {
-      font-family: 'Noto Serif SC', serif;
-      font-size: 42px; font-weight: 700; line-height: 1.25;
-      margin-bottom: 24px; letter-spacing: -0.5px;
-    }
+    .hero { padding: 96px 32px 48px; max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: start; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: var(--blue-light); color: var(--blue); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; margin-bottom: 16px; letter-spacing: 0.5px; }
+    .hero h1 { font-family: 'Noto Serif SC', serif; font-size: 36px; font-weight: 700; line-height: 1.25; margin-bottom: 14px; letter-spacing: -0.5px; }
     .hero h1 em { font-style: normal; color: var(--blue); }
-    .hero-sub {
-      font-size: 17px; color: var(--ink-soft); line-height: 1.8;
-      margin-bottom: 32px; max-width: 560px;
-    }
+    .hero-sub { font-size: 15px; color: var(--ink-soft); line-height: 1.75; margin-bottom: 12px; max-width: 520px; }
     .hero-sub strong { color: var(--ink); font-weight: 600; }
-    .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
-    .tag {
-      display: inline-block; background: var(--bg-warm);
-      border: 1px solid var(--border); color: var(--ink-soft);
-      padding: 4px 14px; border-radius: 16px; font-size: 13px;
-    }
-    .hero-actions { display: flex; gap: 12px; }
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--ink); color: white; padding: 12px 28px;
-      border-radius: 8px; font-size: 14px; font-weight: 500;
-      text-decoration: none; transition: all 0.2s; border: none; cursor: pointer;
-    }
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; }
+    .tag { display: inline-block; background: var(--bg-warm); border: 1px solid var(--border); color: var(--ink-soft); padding: 3px 12px; border-radius: 16px; font-size: 12px; }
+    .hero-actions { display: flex; gap: 10px; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 6px; background: var(--ink); color: white; padding: 9px 20px; border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; transition: all 0.2s; }
     .btn-primary:hover { background: var(--blue); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+    .btn-secondary { display: inline-flex; align-items: center; gap: 6px; background: var(--card); color: var(--ink-soft); padding: 9px 18px; border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; border: 1px solid var(--border); transition: all 0.2s; }
+    .btn-secondary:hover { border-color: var(--blue); color: var(--blue); }
+
+    .hero-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 20px; min-width: 240px; box-shadow: var(--shadow); }
+    .hero-card-label { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 12px; }
+    .affiliation-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); }
+    .affiliation-item:last-child { border-bottom: none; }
+    .affil-logo { width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: white; flex-shrink: 0; }
+    .affil-info h4 { font-size: 13px; font-weight: 600; line-height: 1.3; }
+    .affil-info p { font-size: 11px; color: var(--ink-muted); margin-top: 1px; }
+
+    .section { padding: 56px 32px; max-width: 1080px; margin: 0 auto; }
+    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--blue); margin-bottom: 8px; }
+    .section-title { font-family: 'Noto Serif SC', serif; font-size: 26px; font-weight: 700; margin-bottom: 28px; letter-spacing: -0.3px; }
+
+    .bg-intro { display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: start; margin-bottom: 36px; }
+    .bg-intro h3 { font-family: 'Noto Serif SC', serif; font-size: 18px; font-weight: 600; margin-bottom: 10px; }
+    .bg-intro p { font-size: 14px; color: var(--ink-soft); line-height: 1.75; }
+    .stats-row { display: flex; flex-direction: column; gap: 8px; }
+    .stat-item { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; text-align: center; box-shadow: var(--shadow); }
+    .stat-num { font-size: 24px; font-weight: 700; color: var(--blue); font-family: 'Playfair Display', serif; }
+    .stat-label { font-size: 10px; color: var(--ink-muted); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    .bg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+    .bg-col-header { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+    .bg-col-header h3 { font-family: 'Noto Serif SC', serif; font-size: 16px; font-weight: 600; }
+    .timeline { position: relative; padding-left: 18px; }
+    .timeline::before { content: ''; position: absolute; left: 5px; top: 6px; bottom: 6px; width: 1px; background: var(--border); }
+    .timeline-item { position: relative; margin-bottom: 20px; }
+    .timeline-item::before { content: ''; position: absolute; left: -15px; top: 6px; width: 8px; height: 8px; border-radius: 50%; background: var(--blue); border: 2px solid var(--bg); }
+    .timeline-item .year { font-size: 11px; color: var(--blue); font-weight: 600; margin-bottom: 2px; }
+    .timeline-item h4 { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+    .timeline-item h4 .highlight { color: var(--blue); font-weight: 500; }
+    .timeline-item p { font-size: 12px; color: var(--ink-soft); line-height: 1.6; }
+    .institution-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; color: var(--ink-muted); background: var(--bg-warm); border: 1px solid var(--border); padding: 1px 7px; border-radius: 10px; font-weight: 400; }
+
+    /* Research CTA strip */
+    .research-strip { background: var(--ink); color: white; }
+    .research-strip-inner { max-width: 1080px; margin: 0 auto; padding: 40px 32px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+    .research-strip h3 { font-family: 'Noto Serif SC', serif; font-size: 20px; font-weight: 700; color: white; margin-bottom: 6px; }
+    .research-strip p { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; max-width: 560px; }
+    .research-strip .btn-primary { background: white; color: var(--ink); }
+    .research-strip .btn-primary:hover { background: var(--blue-light); color: var(--blue); }
+
+    footer { text-align: center; padding: 24px 32px; border-top: 1px solid var(--border); color: var(--ink-muted); font-size: 12px; }
+    footer span { color: var(--blue); font-family: 'Playfair Display', serif; font-style: italic; }
+
+    .cta { text-align: center; padding: 80px 48px; max-width: 640px; margin: 0 auto; }
+    .cta h2 { font-family: 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; margin-bottom: 16px; }
+    .cta p { color: var(--ink-soft); font-size: 15px; margin-bottom: 32px; line-height: 1.8; }
     .btn-secondary {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--card); color: var(--ink-soft); padding: 12px 24px;
-      border-radius: 8px; font-size: 14px; font-weight: 500;
+      display: inline-flex; align-items: center; gap: 6px; background: var(--card);
+      color: var(--ink); padding: 12px 28px; border-radius: 8px; font-size: 14px; font-weight: 500;
       text-decoration: none; border: 1px solid var(--border); transition: all 0.2s;
     }
     .btn-secondary:hover { border-color: var(--blue); color: var(--blue); }
 
-    /* ── Hero Side: Affiliation Card ── */
-    .hero-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 16px; padding: 28px; min-width: 260px;
-      box-shadow: var(--shadow);
-    }
-    .hero-card-label {
-      font-size: 10px; font-weight: 600; letter-spacing: 2px;
-      text-transform: uppercase; color: var(--ink-muted); margin-bottom: 16px;
-    }
-    .affiliation-item {
-      display: flex; align-items: center; gap: 12px;
-      padding: 10px 0; border-bottom: 1px solid var(--border);
-    }
-    .affiliation-item:last-child { border-bottom: none; }
-    .affil-logo {
-      width: 32px; height: 32px; border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 11px; font-weight: 700; color: white; flex-shrink: 0;
-    }
-    .affil-info h4 { font-size: 13px; font-weight: 600; line-height: 1.3; }
-    .affil-info p { font-size: 11px; color: var(--ink-muted); margin-top: 1px; }
-
-    /* ── Section base ── */
-    .section { padding: 96px 48px; max-width: 1080px; margin: 0 auto; }
-    .section-label {
-      font-size: 11px; font-weight: 600; letter-spacing: 2px;
-      text-transform: uppercase; color: var(--blue); margin-bottom: 12px;
-    }
-    .section-title {
-      font-family: 'Noto Serif SC', serif;
-      font-size: 30px; font-weight: 700; margin-bottom: 48px;
-      letter-spacing: -0.3px;
-    }
-
-    /* ── Research Cards ── */
-    .research-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
-    }
-    .research-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 12px; padding: 32px;
-      box-shadow: var(--shadow); transition: all 0.25s;
-      position: relative; overflow: hidden;
-    }
-    .research-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
-    .research-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: var(--blue);
-    }
-    .card-label {
-      font-size: 10px; font-weight: 600; letter-spacing: 2px;
-      text-transform: uppercase; color: var(--blue); margin-bottom: 14px;
-    }
-    .research-card h3 {
-      font-family: 'Noto Serif SC', serif;
-      font-size: 18px; font-weight: 600; margin-bottom: 12px; line-height: 1.4;
-    }
-    .research-card p { font-size: 14px; color: var(--ink-soft); line-height: 1.75; }
-    .research-card p strong { color: var(--ink); font-weight: 600; }
-
-    /* ── CORE Framework ── */
-    .framework-section { background: var(--bg-warm); }
-    .framework-inner {
-      max-width: 1080px; margin: 0 auto; padding: 96px 48px;
-    }
-    .core-intro {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 16px; padding: 40px 48px; margin-bottom: 40px;
-      display: grid; grid-template-columns: auto 1fr; gap: 48px; align-items: center;
-      box-shadow: var(--shadow);
-    }
-    .core-acronym {
-      font-family: 'Playfair Display', serif;
-      font-size: 72px; font-weight: 700; color: var(--blue);
-      line-height: 1; opacity: 0.9;
-    }
-    .core-intro h3 {
-      font-family: 'Noto Serif SC', serif;
-      font-size: 22px; font-weight: 700; margin-bottom: 12px;
-    }
-    .core-intro p { font-size: 15px; color: var(--ink-soft); line-height: 1.8; }
-    .core-pillars {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
-    }
-    .pillar {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 12px; padding: 28px 20px; text-align: center;
-      box-shadow: var(--shadow); transition: all 0.25s;
-    }
-    .pillar:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
-    .pillar-icon { font-size: 28px; margin-bottom: 14px; }
-    .pillar h4 { font-size: 14px; font-weight: 600; margin-bottom: 10px; line-height: 1.4; }
-    .pillar p { font-size: 12px; color: var(--ink-muted); line-height: 1.65; }
-
-    /* ── Background / Timeline ── */
-    .bg-intro {
-      display: grid; grid-template-columns: 1fr auto; gap: 40px;
-      align-items: start; margin-bottom: 48px;
-    }
-    .bg-intro h3 {
-      font-family: 'Noto Serif SC', serif;
-      font-size: 20px; font-weight: 600; margin-bottom: 12px;
-    }
-    .bg-intro p { font-size: 15px; color: var(--ink-soft); line-height: 1.8; }
-    .stats-row { display: flex; flex-direction: column; gap: 12px; }
-    .stat-item {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 10px; padding: 14px 20px; text-align: center;
-      box-shadow: var(--shadow);
-    }
-    .stat-num { font-size: 28px; font-weight: 700; color: var(--blue); font-family: 'Playfair Display', serif; }
-    .stat-label { font-size: 11px; color: var(--ink-muted); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.5px; }
-
-    /* Two-column timeline */
-    .bg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
-    .bg-col-header {
-      display: flex; align-items: center; gap: 10px; margin-bottom: 24px;
-    }
-    .bg-col-header h3 {
-      font-family: 'Noto Serif SC', serif;
-      font-size: 17px; font-weight: 600;
-    }
-    .timeline { position: relative; padding-left: 20px; }
-    .timeline::before {
-      content: ''; position: absolute; left: 5px; top: 6px; bottom: 6px;
-      width: 1px; background: var(--border);
-    }
-    .timeline-item { position: relative; margin-bottom: 28px; }
-    .timeline-item::before {
-      content: ''; position: absolute; left: -17px; top: 7px;
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--blue); border: 2px solid var(--bg);
-    }
-    .timeline-item .year { font-size: 11px; color: var(--blue); font-weight: 600; margin-bottom: 3px; }
-    .timeline-item h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
-    .timeline-item h4 .highlight { color: var(--blue); font-weight: 500; }
-    .timeline-item h4 .org-badge {
-      display: inline-flex; align-items: center; gap: 5px;
-      vertical-align: middle; margin-left: 6px;
-    }
-    .timeline-item p { font-size: 13px; color: var(--ink-soft); line-height: 1.65; }
-
-    /* Institution logos as inline badges */
-    .institution-badge {
-      display: inline-flex; align-items: center; gap: 5px;
-      font-size: 11px; color: var(--ink-muted);
-      background: var(--bg-warm); border: 1px solid var(--border);
-      padding: 2px 8px; border-radius: 10px; font-weight: 400;
-    }
-
-    /* ── Research Journey ── */
-    .journey-section { background: var(--ink); color: white; }
-    .journey-inner {
-      max-width: 1080px; margin: 0 auto; padding: 96px 48px;
-    }
-    .journey-section .section-label { color: rgba(255,255,255,0.5); }
-    .journey-section .section-title { color: white; }
-    .journey-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-    .journey-step {
-      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 12px; padding: 32px; position: relative;
-      transition: all 0.25s;
-    }
-    .journey-step:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
-    .journey-step .step-num {
-      font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700;
-      color: rgba(255,255,255,0.06); position: absolute; top: 16px; right: 20px;
-      line-height: 1;
-    }
-    .journey-step .step-phase {
-      font-size: 10px; font-weight: 600; letter-spacing: 2px;
-      text-transform: uppercase; color: var(--blue-mid); margin-bottom: 12px;
-    }
-    .journey-step h4 { font-size: 16px; font-weight: 600; margin-bottom: 14px; color: white; }
-    .journey-step p { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.75; margin-bottom: 16px; }
-    .journey-step ul { list-style: none; }
-    .journey-step li {
-      font-size: 13px; color: rgba(255,255,255,0.5); padding: 3px 0;
-      padding-left: 16px; position: relative;
-    }
-    .journey-step li::before {
-      content: '→'; position: absolute; left: 0; color: var(--blue-mid); font-size: 12px;
-    }
-
-    /* ── Contact ── */
-    .contact { text-align: center; padding: 100px 48px; max-width: 680px; margin: 0 auto; }
-    .contact h2 { font-family: 'Noto Serif SC', serif; font-size: 34px; font-weight: 700; margin-bottom: 16px; }
-    .contact p { color: var(--ink-soft); font-size: 16px; margin-bottom: 40px; line-height: 1.8; }
-    .contact-links { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
-    .contact-link {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--card); border: 1px solid var(--border);
-      color: var(--ink-soft); padding: 10px 20px; border-radius: 8px;
-      font-size: 14px; text-decoration: none; transition: all 0.2s;
-    }
-    .contact-link:hover { border-color: var(--blue); color: var(--blue); }
-
-    /* ── Footer ── */
-    footer {
-      text-align: center; padding: 32px 48px;
-      border-top: 1px solid var(--border); color: var(--ink-muted); font-size: 12px;
-    }
-    footer span { color: var(--blue); font-family: 'Playfair Display', serif; font-style: italic; }
-
-    /* ── Responsive ── */
     @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; }
+      .hero { grid-template-columns: 1fr; padding: 84px 20px 40px; }
       .hero-card { min-width: unset; }
-      .core-intro { grid-template-columns: 1fr; gap: 20px; }
-      .core-acronym { font-size: 48px; }
-      .research-grid, .bg-grid, .core-pillars, .journey-grid { grid-template-columns: 1fr; }
+      .bg-grid { grid-template-columns: 1fr; }
       .bg-intro { grid-template-columns: 1fr; }
+      .research-strip-inner { flex-direction: column; align-items: flex-start; }
       .nav-links { display: none; }
       .hero h1 { font-size: 30px; }
-      .section, .journey-inner, .framework-inner { padding: 60px 24px; }
+      .section, .research-strip-inner { padding: 40px 20px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
   <nav>
     <div class="nav-inner">
-      <div class="nav-logo">朱珺 <span>/</span> 研究兴趣</div>
+      <div class="nav-logo">朱珺 <span>/</span> 关于我</div>
       <ul class="nav-links">
-        <li><a href="#research">研究方向</a></li>
-        <li><a href="#framework">CORE框架</a></li>
-        <li><a href="#background">个人背景</a></li>
-        <li><a href="#contact">联系方式</a></li>
+        <li><a href="#" class="active">关于我</a></li>
+        <li><a href="projects.html">项目经历</a></li>
+        <li><a href="research.html">研究兴趣</a></li>
+        <li><a href="contact.html">联系方式</a></li>
         <li><a href="index-en.html" class="lang-toggle">🌐 English</a></li>
       </ul>
     </div>
   </nav>
 
   <!-- Hero -->
-  <section class="hero" id="top">
+  <section class="hero">
     <div>
-      <div class="hero-badge">📖 持续更新中</div>
-      <h1>AI博士生的<em>胜任力发展</em><br>与体验式学习研究</h1>
+      <div class="hero-eyebrow">📌 科研项目经理 · 北京</div>
+      <h1>朱珺</h1>
       <p class="hero-sub">
-        我是朱珺，9年<strong>项目管理</strong>经验（科研管理从2021年上海霍莱沃开始，AI项目从2023年六分科技开始），中关村学院 & 中关村人工智能研究院科研项目经理，研究AI博士生的胜任力发展。
+        中关村学院 · 中关村人工智能研究院 · 科研项目经理，专注AI博士生胜任力发展与体验式学习研究。
       </p>
-      <p class="hero-sub" style="font-size:15px; color:var(--ink-muted); margin-top:-16px; margin-bottom:32px;">
-        研究问题：AI博士如何在结构化项目体验中，有意图地发展 <strong style="color:var(--ink)">超越学术技能的专业胜任力</strong>。
+      <p class="hero-sub" style="margin-top:-8px;">
+        9年<strong>项目管理</strong>经验（科研管理从2021年上海霍莱沃开始，AI项目从2023年六分科技开始），项目管理是我认识世界的方式。
       </p>
       <div class="hero-tags">
-        <span class="tag">胜任力本位教育 CBE</span>
-        <span class="tag">Kolb 体验学习</span>
-        <span class="tag">项目式学习 PBL</span>
-        <span class="tag">PMP · PRINCE-2</span>
-      </div>
-      <div class="hero-actions">
-        <a href="#research" class="btn-primary">了解研究 →</a>
-        <a href="#contact" class="btn-secondary">联系方式</a>
+        <span class="tag">项目管理 PMP · PRINCE-2</span>
+        <span class="tag">AI R&D</span>
+        <span class="tag">胜任力发展</span>
+        <span class="tag">体验式学习</span>
       </div>
     </div>
 
-    <!-- Affiliation Card -->
     <div class="hero-card">
       <div class="hero-card-label">当前机构</div>
       <div class="affiliation-item">
-        <div class="affil-logo" style="background:#2563EB;">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2L2 6v6l7 4 7-4V6L9 2z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 2v10M2 6l7 4 7-4" stroke="white" stroke-width="1.5" stroke-linejoin="round"/></svg>
-        </div>
-        <div class="affil-info">
-          <h4>中关村学院</h4>
-          <p>科研项目经理 · 2025.10</p>
-        </div>
-      </div>
-      <div class="affiliation-item">
-        <div class="affil-logo" style="background:#7C3AED;">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="white" stroke-width="1.5"/><path d="M6 9l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <div class="affil-info">
-          <h4>中关村人工智能研究院</h4>
-          <p>科研项目经理</p>
-        </div>
+        <div class="affil-logo" style="background:#6D28D9;"><span style="font-size:9px; font-weight:700; color:#fff; line-height:1.3;">ZGCA<br>ZGCI</span></div>
+        <div class="affil-info"><h4>中关村学院 · 中关村人工智能研究院</h4><p>科研项目经理 · 2025.10</p></div>
       </div>
       <div class="hero-card-label" style="margin-top:20px;">教育背景</div>
       <div class="affiliation-item">
-        <div class="affil-logo" style="background:#006400;">
-          <span style="font-size:10px; font-weight:700;">HKUST</span>
-        </div>
-        <div class="affil-info">
-          <h4>香港科技大学</h4>
-          <p>工程企业管理硕士 · 2020</p>
-        </div>
+        <div class="affil-logo" style="background:#006400;"><span style="font-size:10px; font-weight:700;">HKUST</span></div>
+        <div class="affil-info"><h4>香港科技大学</h4><p>工程企业管理硕士 · 2020</p></div>
       </div>
       <div class="affiliation-item">
-        <div class="affil-logo" style="background:#003087;">
-          <span style="font-size:9px; font-weight:700;">PolyU</span>
-        </div>
-        <div class="affil-info">
-          <h4>香港理工大学</h4>
-          <p>商学 & 工程双学位 · 2016</p>
-        </div>
+        <div class="affil-logo" style="background:#003087;"><span style="font-size:9px; font-weight:700;">PolyU</span></div>
+        <div class="affil-info"><h4>香港理工大学</h4><p>商学 & 工程双学位 · 2016</p></div>
       </div>
     </div>
   </section>
-
-  <!-- Research Direction -->
-  <section class="section" id="research">
-    <div class="section-label">研究问题</div>
-    <h2 class="section-title">为什么关注这个方向？</h2>
-    <div class="research-grid">
-      <div class="research-card">
-        <div class="card-label">观察</div>
-        <h3>AI博士培养的结构性缺口</h3>
-        <p>AI领域技术迭代以月计，但博士训练周期以年计。学术产出压力与工业界就业预期并存——博士掌握模型精度，却缺乏项目交付、团队协作、跨场景迁移等实践胜任力。</p>
-      </div>
-      <div class="research-card">
-        <div class="card-label">发现</div>
-        <h3>体验学习中的隐性成长</h3>
-        <p>AI研究环境（实验迭代、开源贡献、会议冲刺、团队协作）本身提供了丰富的胜任力发展机会，但缺乏<strong>意图性的设计</strong>——成长主要靠偶发，而非系统。</p>
-      </div>
-      <div class="research-card">
-        <div class="card-label">框架</div>
-        <h3>CORE框架的提出</h3>
-        <p>基于胜任力本位教育(CBE)与Kolb体验学习理论，提出CORE框架——将研究项目本身重塑为胜任力发展的结构化情境，帮助AI博士<strong>有意识地</strong>建构实践性胜任力。</p>
-      </div>
-      <div class="research-card">
-        <div class="card-label">价值</div>
-        <h3>框架可迁移、可验证</h3>
-        <p>AI博士是CORE框架的典型应用场景，其核心逻辑可迁移至工程、数据科学、计算机等研究型专业。框架设计包含可操作的胜任力定义、反思机制与评估工具。</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CORE Framework -->
-  <div class="framework-section">
-    <div class="framework-inner" id="framework">
-      <div class="section-label">理论框架</div>
-      <h2 class="section-title">CORE — Competency-Oriented Research Education</h2>
-      <div class="core-intro">
-        <div class="core-acronym">CORE</div>
-        <div>
-          <h3>让研究项目成为胜任力发展的载体</h3>
-          <p>CORE框架整合胜任力本位教育(CBE)与Kolb体验学习理论，通过四组件协同，帮助博士研究生在完成科研任务的同时，有意图地发展超越学术技能的专业胜任力。核心逻辑：将Kolb体验循环嵌入项目结构——让每一次实验迭代都成为"具体经验→反思→概念化→应用"的完整学习循环。</p>
-        </div>
-      </div>
-      <div class="core-pillars">
-        <div class="pillar">
-          <div class="pillar-icon">🧭</div>
-          <h4>胜任力定义<br>& 映射</h4>
-          <p>定义六大胜任力域：学科专业知识、研究方法、协作实践、自我管理、反思性实践、专业沟通</p>
-        </div>
-        <div class="pillar">
-          <div class="pillar-icon">🔩</div>
-          <h4>结构化<br>项目体验</h4>
-          <p>协作项目结构、迭代计划与回顾周期、交付导向成果，让项目成为有设计的体验情境</p>
-        </div>
-        <div class="pillar">
-          <div class="pillar-icon">🔄</div>
-          <h4>反思性实践<br>结构</h4>
-          <p>结构化反思协议、定期回顾、同伴反思，让隐性经验显性化为胜任力成长</p>
-        </div>
-        <div class="pillar">
-          <div class="pillar-icon">📊</div>
-          <h4>评估<br>& 反馈</h4>
-          <p>胜任力自评工具、导师反馈、Portfolio记录，实现胜任力发展的可见、可评、可追踪</p>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- Background -->
   <section class="section" id="background">
     <div class="section-label">个人背景</div>
-    <h2 class="section-title">从实践中来的研究问题</h2>
+    <h2 class="section-title">从实践中来</h2>
 
     <div class="bg-intro">
       <div>
-        <h3>9年项目管理实践带来的洞察</h3>
-        <p>从2021年科研管理到2023年AI项目，再到2025年深度接触博士研究生群体——亲眼看到学术训练与产业胜任力之间的断裂。这是文献里看不到的，是<strong>第一手发现的问题</strong>。</p>
+        <h3>9年项目管理实践</h3>
+        <p>从2021年科研管理到2023年AI项目，再到2025年深度接触博士研究生群体——亲眼看到学术训练与产业胜任力之间的断裂。这成为我提出CORE框架的第一手来源。</p>
       </div>
       <div class="stats-row">
-        <div class="stat-item">
-          <div class="stat-num">9+</div>
-          <div class="stat-label">年项目管理经验</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">30+</div>
-          <div class="stat-label">企业级项目交付</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">2</div>
-          <div class="stat-label">段 AI 项目经验</div>
-        </div>
+        <div class="stat-item"><div class="stat-num">9+</div><div class="stat-label">年项目管理经验</div></div>
+        <div class="stat-item"><div class="stat-num">30+</div><div class="stat-label">企业级项目交付</div></div>
+        <div class="stat-item"><div class="stat-num">2</div><div class="stat-label">段 AI 项目经验</div></div>
       </div>
     </div>
 
     <div class="bg-grid">
       <div>
-        <div class="bg-col-header">
-          <span style="font-size:20px;">🎓</span>
-          <h3>学习经历</h3>
-        </div>
+        <div class="bg-col-header"><span style="font-size:20px;">🎓</span><h3>学习经历</h3></div>
         <div class="timeline">
           <div class="timeline-item">
             <div class="year">2018.09 — 2020.11</div>
-            <h4>
-              <span class="highlight">香港科技大学</span>
-              <span class="institution-badge" style="background:#E6F4EA; border-color:#A8D5A2; color:#1E6B1E;">
-                <span style="display:inline-block;width:8px;height:8px;background:#006400;border-radius:50%;"></span>
-                HKUST MSc
-              </span>
-            </h4>
-            <p>工程企业管理硕士（GPA优异）；系统学习项目管理理论与实践；深入理解PBL教学法；论文聚焦AI产业人才发展</p>
+            <h4><span class="highlight">香港科技大学</span> <span class="institution-badge" style="background:#E6F4EA; border-color:#A8D5A2; color:#1E6B1E;"><span style="display:inline-block;width:8px;height:8px;background:#006400;border-radius:50%;"></span>HKUST MSc</span></h4>
+            <p>工程企业管理硕士（GPA优异）；系统学习项目管理理论与实践；深入理解PBL教学法</p>
           </div>
           <div class="timeline-item">
             <div class="year">2011.09 — 2016.11</div>
-            <h4>
-              <span class="highlight">香港理工大学</span>
-              <span class="institution-badge" style="background:#EBF0FB; border-color:#B8C8E8; color:#1A3A8A;">
-                <span style="display:inline-block;width:8px;height:8px;background:#003087;border-radius:50%;"></span>
-                PolyU 双学位
-              </span>
-            </h4>
+            <h4><span class="highlight">香港理工大学</span> <span class="institution-badge" style="background:#EBF0FB; border-color:#B8C8E8; color:#1A3A8A;"><span style="display:inline-block;width:8px;height:8px;background:#003087;border-radius:50%;"></span>PolyU 双学位</span></h4>
             <p>BBA (管理学, 荣誉) + BEng (电气工程, 荣誉) 双学位</p>
           </div>
         </div>
       </div>
 
       <div>
-        <div class="bg-col-header">
-          <span style="font-size:20px;">💼</span>
-          <h3>工作经历</h3>
-        </div>
+        <div class="bg-col-header"><span style="font-size:20px;">💼</span><h3>工作经历</h3></div>
         <div class="timeline">
           <div class="timeline-item">
             <div class="year">2025.10 — 至今</div>
-            <h4>
-              <span class="highlight">中关村学院 & 中关村人工智能研究院</span>
-              <span class="institution-badge" style="background:#F3E8FF; border-color:#D8B4FE; color:#7C3AED;">
-                <span style="display:inline-block;width:8px;height:8px;background:#7C3AED;border-radius:50%;"></span>
-                科研项目经理
-              </span>
-            </h4>
+            <h4><span class="highlight">中关村学院 · 中关村人工智能研究院</span> <span class="institution-badge" style="background:#F3E8FF; border-color:#D8B4FE; color:#7C3AED;"><span style="display:inline-block;width:8px;height:8px;background:#7C3AED;border-radius:50%;"></span>科研项目经理</span></h4>
             <p>主导AI人才培养项目；深度接触博士研究生群体；发现学术训练与职业胜任力之间的结构性缺口</p>
           </div>
           <div class="timeline-item">
             <div class="year">2023.02 — 2025.07</div>
-            <h4>
-              <span class="highlight">六分科技（四维图新）</span>
-              <span class="institution-badge" style="background:#DBEAFE; border-color:#93C5FD; color:#1D4ED8;">
-                <span style="display:inline-block;width:8px;height:8px;background:#2563EB;border-radius:50%;"></span>
-                项目经理
-              </span>
-            </h4>
+            <h4><span class="highlight">六分科技（四维图新）</span> <span class="institution-badge" style="background:#DBEAFE; border-color:#93C5FD; color:#1D4ED8;"><span style="display:inline-block;width:8px;height:8px;background:#2563EB;border-radius:50%;"></span>项目经理</span></h4>
             <p>主导高精度定位AI算法落地；管理8-10人跨职能团队；同时推进8-12个项目；完成GNSS和IMU模块研发交付；提升团队效率、降低项目成本20%</p>
           </div>
           <div class="timeline-item">
             <div class="year">2021.06 — 2023.01</div>
-            <h4>
-              <span class="highlight">上海霍莱沃电子系统有限公司</span>
-              <span class="institution-badge" style="background:#FEF3C7; border-color:#FCD34D; color:#92400E;">
-                <span style="display:inline-block;width:8px;height:8px;background:#D97706;border-radius:50%;"></span>
-                项目经理
-              </span>
-            </h4>
+            <h4><span class="highlight">上海霍莱沃电子系统有限公司</span> <span class="institution-badge" style="background:#FEF3C7; border-color:#FCD34D; color:#92400E;"><span style="display:inline-block;width:8px;height:8px;background:#D97706;border-radius:50%;"></span>项目经理</span></h4>
             <p>完成上海卫星装备研究所、中兴通讯等项目；参与CMMI认证与国军标质量体系认证</p>
           </div>
           <div class="timeline-item">
             <div class="year">2016.10 — 2021.01</div>
-            <h4>
-              <span class="highlight">曼恩/大昌行（香港）</span>
-              <span class="institution-badge" style="background:#FEE2E2; border-color:#FCA5A5; color:#991B1B;">
-                <span style="display:inline-block;width:8px;height:8px;background:#DC2626;border-radius:50%;"></span>
-                项目工程师
-              </span>
-            </h4>
+            <h4><span class="highlight">曼恩/大昌行（香港）</span> <span class="institution-badge" style="background:#FEE2E2; border-color:#FCA5A5; color:#991B1B;"><span style="display:inline-block;width:8px;height:8px;background:#DC2626;border-radius:50%;"></span>项目工程师</span></h4>
             <p>完成香港特区政府部门多项项目（机电署、消防处、政府档案处）；参与CMMI认证</p>
           </div>
         </div>
@@ -584,63 +224,13 @@
     </div>
   </section>
 
-  <!-- Research Journey -->
-  <div class="journey-section">
-    <div class="journey-inner">
-      <div class="section-label">研究进展</div>
-      <h2 class="section-title">研究框架</h2>
-      <div class="journey-grid">
-        <div class="journey-step">
-          <div class="step-num">01</div>
-          <div class="step-phase">核心问题</div>
-          <h4>AI博士胜任力发展缺口</h4>
-          <p>AI领域技术迭代以月计，但博士训练周期以年计。博士掌握模型精度，却缺乏项目交付、团队协作、跨场景迁移等实践胜任力。</p>
-          <ul>
-            <li>学术产出 vs 工业胜任力的双重压力</li>
-            <li>科研项目缺乏胜任力发展的意图设计</li>
-            <li>就业力与职业发展结构性不匹配</li>
-          </ul>
-        </div>
-        <div class="journey-step">
-          <div class="step-num">02</div>
-          <div class="step-phase">理论框架</div>
-          <h4>CORE框架设计</h4>
-          <p>整合胜任力本位教育(CBE)与Kolb体验学习理论，通过结构化项目体验和反思性实践，帮助博士有意图地发展专业胜任力。</p>
-          <ul>
-            <li>胜任力定义与映射（6大域）</li>
-            <li>Kolb体验循环嵌入项目结构</li>
-            <li>可操作的评估与反馈机制</li>
-          </ul>
-        </div>
-        <div class="journey-step">
-          <div class="step-num">03</div>
-          <div class="step-phase">研究基础</div>
-          <h4>9年PM实践 × 博士群体接触</h4>
-          <p>从2021年科研管理到2023年AI项目，再到2025年深度接触博士研究生群体——问题来自第一手观察，框架设计来自实践验证。</p>
-          <ul>
-            <li>30+企业级项目交付经验</li>
-            <li>深度接触博士研究生群体</li>
-            <li>第一手发现胜任力发展缺口</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Contact -->
-  <section class="contact" id="contact">
-    <div class="section-label">联系方式</div>
-    <h2>期待与您连接</h2>
-    <p>如果您对我的研究方向感兴趣，或希望交流探讨，欢迎通过以下方式联系。</p>
-    <div class="contact-links">
-      <div class="contact-link">📧 jzhubh@connect.ust.hk</div>
-      <div class="contact-link">📱 175 1162 8618</div>
-      <div class="contact-link">🎓 香港科技大学</div>
-    </div>
-    <a href="mailto:jzhubh@connect.ust.hk" class="btn-primary">发送邮件 →</a>
+  <!-- CTA -->
+  <section class="cta">
+    <h2>项目经历：9年项目管理的完整轨迹</h2>
+    <p>从科研项目管理到AI领域，从交付导向到博士生培养，我的项目管理经验覆盖了研发、质控、供应链全链条。</p>
+    <a href="projects.html" class="btn-secondary">项目经历 →</a>
   </section>
 
-  <!-- Footer -->
   <footer>
     <p>朱珺 · <span>Bridging Academic Training and Professional Practice</span> · 2026</p>
   </footer>
