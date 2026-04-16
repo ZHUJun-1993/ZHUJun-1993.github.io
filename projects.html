@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>朱珺 · 项目经历</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Noto Serif SC:wght@400;600;700&family=Noto Sans SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FAFAF8; --bg-warm: #F5F3EF; --ink: #1A1A2E; --ink-soft: #4A4A6A; --ink-muted: #8A8AAA;
+      --blue: #2563EB; --blue-light: #DBEAFE; --blue-mid: #3B82F6;
+      --border: #E2E0DC; --card: #FFFFFF;
+      --shadow: 0 1px 3px rgba(26,26,46,0.06), 0 4px 16px rgba(26,26,46,0.04);
+      --shadow-md: 0 4px 12px rgba(26,26,46,0.08), 0 8px 32px rgba(26,26,46,0.06);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Noto Sans SC', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.8; }
+    ::selection { background: var(--blue-light); }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(250,250,248,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 32px; }
+    .nav-inner { max-width: 1080px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 52px; }
+    .nav-logo { font-size: 15px; font-weight: 600; letter-spacing: 0.5px; }
+    .nav-logo span { color: var(--blue); }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { color: var(--ink-soft); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a.active { color: var(--blue); font-weight: 600; }
+    .lang-toggle { display: inline-flex; align-items: center; gap: 6px; background: var(--card); border: 1px solid var(--border); color: var(--ink-soft); padding: 5px 12px; border-radius: 20px; font-size: 12px; text-decoration: none; transition: all 0.2s; }
+    .lang-toggle:hover { border-color: var(--blue); color: var(--blue); }
+
+    .hero { padding: 96px 32px 56px; max-width: 1080px; margin: 0 auto; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: var(--blue-light); color: var(--blue); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; margin-bottom: 16px; letter-spacing: 0.5px; }
+    .hero h1 { font-family: 'Noto Serif SC', serif; font-size: 36px; font-weight: 700; line-height: 1.25; margin-bottom: 14px; letter-spacing: -0.5px; }
+    .hero-sub { font-size: 15px; color: var(--ink-soft); line-height: 1.75; }
+
+    .section { padding: 56px 32px; max-width: 1080px; margin: 0 auto; }
+    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--blue); margin-bottom: 8px; }
+    .section-title { font-family: 'Noto Serif SC', serif; font-size: 26px; font-weight: 700; margin-bottom: 32px; letter-spacing: -0.3px; }
+
+    .company-section { margin-bottom: 56px; }
+    .company-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+    .company-logo { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: white; flex-shrink: 0; }
+    .company-info h3 { font-family: 'Noto Serif SC', serif; font-size: 18px; font-weight: 700; margin-bottom: 2px; }
+    .company-info p { font-size: 13px; color: var(--ink-muted); }
+
+    .project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .project-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+      padding: 24px; box-shadow: var(--shadow); transition: all 0.25s;
+    }
+    .project-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .project-card-label { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
+    .project-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 10px; line-height: 1.4; }
+    .project-card p { font-size: 13px; color: var(--ink-soft); line-height: 1.7; margin-bottom: 14px; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag { display: inline-block; background: var(--bg-warm); border: 1px solid var(--border); color: var(--ink-muted); padding: 2px 10px; border-radius: 12px; font-size: 11px; }
+
+    .project-stats { display: flex; gap: 16px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+    .stat { text-align: center; }
+    .stat-num { font-size: 18px; font-weight: 700; color: var(--blue); font-family: 'Playfair Display', serif; }
+    .stat-label { font-size: 10px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+
+    footer { text-align: center; padding: 32px 32px; border-top: 1px solid var(--border); color: var(--ink-muted); font-size: 12px; }
+    footer span { color: var(--blue); font-family: 'Playfair Display', serif; font-style: italic; }
+
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 6px; background: var(--card);
+      color: var(--ink-soft); padding: 9px 18px; border-radius: 8px; font-size: 14px;
+      font-weight: 500; text-decoration: none; border: 1px solid var(--border); transition: all 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--blue); color: var(--blue); }
+    .back-link { padding: 0 32px 40px; max-width: 1080px; margin: 0 auto; }
+
+    .cta { text-align: center; padding: 80px 48px; max-width: 640px; margin: 0 auto; }
+    .cta h2 { font-family: 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; margin-bottom: 16px; }
+    .cta p { color: var(--ink-soft); font-size: 15px; margin-bottom: 32px; line-height: 1.8; }
+
+    @media (max-width: 900px) {
+      .project-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .hero h1 { font-size: 30px; }
+      .section { padding: 40px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-logo">朱珺 <span>/</span> 项目经历</div>
+      <ul class="nav-links">
+        <li><a href="index.html">关于我</a></li>
+        <li><a href="#" class="active">项目经历</a></li>
+        <li><a href="research.html">研究兴趣</a></li>
+        <li><a href="contact.html">联系方式</a></li>
+        <li><a href="projects-en.html" class="lang-toggle">🌐 English</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-eyebrow">📌 项目经历</div>
+    <h1>从项目交付到胜任力发展</h1>
+    <p class="hero-sub">
+      9年项目交付经验，30+企业级项目，涵盖AI算法落地、卫星通讯、汽车OEM等多个领域。每一个项目都是对团队协作、风险管理和技术交付的深度历练。
+    </p>
+  </section>
+
+  <!-- Projects -->
+  <section class="section">
+    <div class="section-label">企业项目</div>
+    <h2 class="section-title">代表性项目</h2>
+
+    <!-- 六分科技 -->
+    <div class="company-section">
+      <div class="company-header">
+        <div class="company-logo" style="background:#2563EB;">六分</div>
+        <div class="company-info">
+          <h3>六分科技（四维图新）</h3>
+          <p>2023.02 — 2025.07 · 项目经理</p>
+        </div>
+      </div>
+      <div class="project-grid">
+        <div class="project-card">
+          <div class="project-card-label">OEM 项目</div>
+          <h4>高精度定位OEM项目交付</h4>
+          <p>主导上汽大通612SP、奇瑞M116、百度IDG-RT6等主机厂项目，完成从需求对接到验收交付全流程管理；同时拓展小鹏、移远等新客户，达成初步合作意向。</p>
+          <div class="project-tags">
+            <span class="tag">OEM</span>
+            <span class="tag">客户开发</span>
+            <span class="tag">全周期管理</span>
+          </div>
+          <div class="project-stats">
+            <div class="stat"><div class="stat-num">5+</div><div class="stat-label">OEM项目</div></div>
+            <div class="stat"><div class="stat-num">3</div><div class="stat-label">新客户拓展</div></div>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-card-label">研发项目</div>
+          <h4>GNSS/IMU模块研发交付</h4>
+          <p>主导高精度定位AI算法落地，协调跨职能团队（算法、硬件、测试），识别里程碑与风险，完成GNSS和IMU模块按期交付，协助通过ASPICE L2、IATF 16949质量认证。</p>
+          <div class="project-tags">
+            <span class="tag">AI算法</span>
+            <span class="tag">跨职能协调</span>
+            <span class="tag">质量认证</span>
+          </div>
+          <div class="project-stats">
+            <div class="stat"><div class="stat-num">20%</div><div class="stat-label">成本降低</div></div>
+            <div class="stat"><div class="stat-num">8-10</div><div class="stat-label">团队规模</div></div>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-card-label">项目组合管理</div>
+          <h4>多项目并行推进</h4>
+          <p>同时管理8-12个项目，处理资源冲突与优先级排序，建立阶段审查机制，确保多个客户项目的高质量并行交付，95%以上按时交付率。</p>
+          <div class="project-tags">
+            <span class="tag">多项目管理</span>
+            <span class="tag">资源协调</span>
+            <span class="tag">阶段审查</span>
+          </div>
+          <div class="project-stats">
+            <div class="stat"><div class="stat-num">8-12</div><div class="stat-label">并行项目</div></div>
+            <div class="stat"><div class="stat-num">95%+</div><div class="stat-label">按时交付率</div></div>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-card-label">质量体系</div>
+          <h4>质量体系认证与客户审核</h4>
+          <p>主导ASPICE L2、IATF 16949等质量体系认证准备，对接比亚迪、奇瑞等客户审核，确保100%通过率；完善供应链管理和项目交付流程。</p>
+          <div class="project-tags">
+            <span class="tag">ASPICE L2</span>
+            <span class="tag">IATF 16949</span>
+            <span class="tag">客户审核</span>
+          </div>
+          <div class="project-stats">
+            <div class="stat"><div class="stat-num">100%</div><div class="stat-label">审核通过率</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 霍莱沃 -->
+    <div class="company-section">
+      <div class="company-header">
+        <div class="company-logo" style="background:#D97706;">霍莱沃</div>
+        <div class="company-info">
+          <h3>上海霍莱沃电子系统有限公司</h3>
+          <p>2021.06 — 2023.01 · 项目经理</p>
+        </div>
+      </div>
+      <div class="project-grid">
+        <div class="project-card">
+          <div class="project-card-label">企业项目</div>
+          <h4>科研院所项目交付</h4>
+          <p>完成上海卫星装备研究所、中兴通讯等企业项目，涵盖需求分析、方案设计、项目执行到验收交付全流程；参与华为、新微等企业客户开发，积累科研项目管理经验。</p>
+          <div class="project-tags">
+            <span class="tag">科研院所</span>
+            <span class="tag">客户开发</span>
+            <span class="tag">全周期管理</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-card-label">质量体系</div>
+          <h4>CMMI认证与国军标认证</h4>
+          <p>参与CMMI三级认证准备与国军标质量体系认证，负责项目过程文档规范化，推动团队过程改进，提升项目管理的标准化水平。</p>
+          <div class="project-tags">
+            <span class="tag">CMMI</span>
+            <span class="tag">国军标</span>
+            <span class="tag">过程改进</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 曼恩/大昌行 -->
+    <div class="company-section">
+      <div class="company-header">
+        <div class="company-logo" style="background:#DC2626;">曼恩</div>
+        <div class="company-info">
+          <h3>曼恩/大昌行（香港）</h3>
+          <p>2016.10 — 2021.01 · 项目工程师</p>
+        </div>
+      </div>
+      <div class="project-grid">
+        <div class="project-card">
+          <div class="project-card-label">政府项目</div>
+          <h4>特区政府部门项目</h4>
+          <p>完成香港特区政府机电署、消防处、政府档案处等多个部门项目，涵盖项目策划、执行、交付全流程；对接政府部门合规要求，积累政企项目管理经验。</p>
+          <div class="project-tags">
+            <span class="tag">政府项目</span>
+            <span class="tag">合规管理</span>
+            <span class="tag">多部门协调</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-card-label">企业项目</div>
+          <h4>企业级项目交付</h4>
+          <p>完成香港石化公司、九龙巴士（1933）有限公司等企业项目；参与供应商管理与产品验收测试，提升供应链协调能力。</p>
+          <div class="project-tags">
+            <span class="tag">企业管理</span>
+            <span class="tag">供应商管理</span>
+            <span class="tag">验收测试</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <h2>了解更多关于我的研究</h2>
+    <p>我的研究问题来自9年项目管理实践中的第一手观察。如果你想了解我关于AI博士胜任力发展的研究框架，欢迎访问研究兴趣页面。</p>
+    <a href="research.html" class="btn-secondary">研究兴趣 →</a>
+  </section>
+
+  <footer>
+    <p>朱珺 · <span>Bridging Academic Training and Professional Practice</span> · 2026</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zhu Jun · Contact</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FAFAF8; --bg-warm: #F5F3EF; --ink: #1A1A2E; --ink-soft: #4A4A6A; --ink-muted: #8A8AAA;
+      --blue: #2563EB; --blue-light: #DBEAFE; --blue-mid: #3B82F6;
+      --border: #E2E0DC; --card: #FFFFFF;
+      --shadow: 0 1px 3px rgba(26,26,46,0.06), 0 4px 16px rgba(26,26,46,0.04);
+      --shadow-md: 0 4px 12px rgba(26,26,46,0.08), 0 8px 32px rgba(26,26,46,0.06);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Noto Sans SC', 'Helvetica Neue', Arial, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.8; }
+    ::selection { background: var(--blue-light); }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(250,250,248,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 32px; }
+    .nav-inner { max-width: 1080px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 52px; }
+    .nav-logo { font-size: 15px; font-weight: 600; letter-spacing: 0.5px; }
+    .nav-logo span { color: var(--blue); }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { color: var(--ink-soft); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a.active { color: var(--blue); font-weight: 600; }
+    .lang-toggle { display: inline-flex; align-items: center; gap: 6px; background: var(--card); border: 1px solid var(--border); color: var(--ink-soft); padding: 5px 12px; border-radius: 20px; font-size: 12px; text-decoration: none; transition: all 0.2s; }
+    .lang-toggle:hover { border-color: var(--blue); color: var(--blue); }
+
+    .page { padding: 96px 32px 80px; max-width: 640px; margin: 0 auto; }
+
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; background: var(--blue-light); color: var(--blue); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; margin-bottom: 20px; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: var(--blue-light); color: var(--blue); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; margin-bottom: 20px; }
+    h1 { font-family: 'Playfair Display', Georgia, serif; font-size: 40px; font-weight: 700; line-height: 1.2; margin-bottom: 16px; letter-spacing: -0.3px; }
+    .lead { font-size: 16px; color: var(--ink-soft); line-height: 1.8; margin-bottom: 48px; }
+
+    .contact-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; box-shadow: var(--shadow); margin-bottom: 24px; }
+    .contact-row { display: flex; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--border); }
+    .contact-row:last-child { border-bottom: none; }
+    .contact-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--blue-light); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .contact-label { font-size: 11px; color: var(--ink-muted); font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
+    .contact-value { font-size: 15px; color: var(--ink); font-weight: 500; }
+    .contact-value a { color: var(--ink); text-decoration: none; transition: color 0.2s; }
+    .contact-value a:hover { color: var(--blue); }
+
+    .cta { display: flex; gap: 12px; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 6px; background: var(--ink); color: white; padding: 11px 24px; border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; transition: all 0.2s; }
+    .btn-primary:hover { background: var(--blue); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+    .btn-secondary { display: inline-flex; align-items: center; gap: 6px; background: var(--card); color: var(--ink-soft); padding: 11px 20px; border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; border: 1px solid var(--border); transition: all 0.2s; }
+    .btn-secondary:hover { border-color: var(--blue); color: var(--blue); }
+
+    footer { text-align: center; padding: 32px 32px; border-top: 1px solid var(--border); color: var(--ink-muted); font-size: 12px; }
+    footer span { color: var(--blue); font-family: 'Playfair Display', Georgia, serif; font-style: italic; }
+
+    @media (max-width: 700px) {
+      .nav-links { display: none; }
+      .cta { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-logo">Zhu Jun <span>/</span> Contact</div>
+      <ul class="nav-links">
+        <li><a href="index-en.html">About</a></li>
+        <li><a href="projects-en.html">Projects</a></li>
+        <li><a href="research-en.html">Research</a></li>
+        <li><a href="#" class="active">Contact</a></li>
+        <li><a href="contact.html" class="lang-toggle">🌐 中文</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="page">
+    <div class="hero-eyebrow">📌 Contact</div>
+    <h1>Let's Connect</h1>
+    <p class="lead">If you're interested in my research or would like to discuss collaboration opportunities, feel free to reach out. I respond promptly.</p>
+
+    <div class="contact-card">
+      <div class="contact-row">
+        <div class="contact-icon">📧</div>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value"><a href="mailto:jzhubh@connect.ust.hk">jzhubh@connect.ust.hk</a></div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-icon">📱</div>
+        <div>
+          <div class="contact-label">Phone</div>
+          <div class="contact-value">+86 175 1162 8618</div>
+        </div>
+      </div>
+    </div>
+
+  <footer>
+    <p>Zhu Jun · <span>Bridging Academic Training and Professional Practice</span> · 2026</p>
+  </footer>
+
+</body>
+</html>

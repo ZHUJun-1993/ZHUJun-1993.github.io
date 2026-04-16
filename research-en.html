@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zhu Jun · Research Interest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FAFAF8; --bg-warm: #F5F3EF; --ink: #1A1A2E; --ink-soft: #4A4A6A; --ink-muted: #8A8AAA;
+      --blue: #2563EB; --blue-light: #DBEAFE; --blue-mid: #3B82F6;
+      --border: #E2E0DC; --card: #FFFFFF;
+      --shadow: 0 1px 3px rgba(26,26,46,0.06), 0 4px 16px rgba(26,26,46,0.04);
+      --shadow-md: 0 4px 12px rgba(26,26,46,0.08), 0 8px 32px rgba(26,26,46,0.06);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Noto Sans SC', 'Helvetica Neue', Arial, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.8; }
+    ::selection { background: var(--blue-light); }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(250,250,248,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 32px; }
+    .nav-inner { max-width: 1080px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 52px; }
+    .nav-logo { font-size: 15px; font-weight: 600; letter-spacing: 0.5px; }
+    .nav-logo span { color: var(--blue); }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { color: var(--ink-soft); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a.active { color: var(--blue); font-weight: 600; }
+    .lang-toggle { display: inline-flex; align-items: center; gap: 6px; background: var(--card); border: 1px solid var(--border); color: var(--ink-soft); padding: 5px 12px; border-radius: 20px; font-size: 12px; text-decoration: none; transition: all 0.2s; }
+    .lang-toggle:hover { border-color: var(--blue); color: var(--blue); }
+
+    .hero { padding: 96px 32px 48px; max-width: 1080px; margin: 0 auto; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: var(--blue-light); color: var(--blue); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; margin-bottom: 16px; letter-spacing: 0.5px; }
+    .hero h1 { font-family: 'Playfair Display', Georgia, serif; font-size: 36px; font-weight: 700; line-height: 1.2; margin-bottom: 14px; letter-spacing: -0.3px; }
+    .hero h1 em { font-style: normal; color: var(--blue); }
+    .hero-sub { font-size: 15px; color: var(--ink-soft); line-height: 1.75; margin-bottom: 12px; }
+    .hero-sub strong { color: var(--ink); font-weight: 600; }
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 0; }
+    .tag { display: inline-block; background: var(--bg-warm); border: 1px solid var(--border); color: var(--ink-soft); padding: 3px 12px; border-radius: 16px; font-size: 12px; }
+
+    .section { padding: 80px 48px; max-width: 1080px; margin: 0 auto; }
+    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--blue); margin-bottom: 12px; }
+    .section-title { font-family: 'Playfair Display', Georgia, serif; font-size: 28px; font-weight: 700; margin-bottom: 40px; letter-spacing: -0.3px; }
+
+    .research-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .research-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 32px; box-shadow: var(--shadow); transition: all 0.25s; position: relative; overflow: hidden; }
+    .research-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .research-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--blue); }
+    .card-label { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--blue); margin-bottom: 14px; }
+    .research-card h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 18px; font-weight: 600; margin-bottom: 12px; line-height: 1.4; }
+    .research-card p { font-size: 14px; color: var(--ink-soft); line-height: 1.75; }
+    .research-card p strong { color: var(--ink); font-weight: 600; }
+
+    .framework-section { background: var(--bg-warm); }
+    .framework-inner { max-width: 1080px; margin: 0 auto; padding: 80px 48px; }
+    .core-intro { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px 48px; margin-bottom: 40px; display: grid; grid-template-columns: auto 1fr; gap: 48px; align-items: center; box-shadow: var(--shadow); }
+    .core-acronym { font-family: 'Playfair Display', Georgia, serif; font-size: 72px; font-weight: 700; color: var(--blue); line-height: 1; }
+    .core-intro h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 22px; font-weight: 700; margin-bottom: 12px; }
+    .core-intro p { font-size: 15px; color: var(--ink-soft); line-height: 1.8; }
+    .core-pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .pillar { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 28px 20px; text-align: center; box-shadow: var(--shadow); transition: all 0.25s; }
+    .pillar:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .pillar-icon { font-size: 28px; margin-bottom: 14px; }
+    .pillar h4 { font-size: 14px; font-weight: 600; margin-bottom: 10px; line-height: 1.4; }
+    .pillar p { font-size: 12px; color: var(--ink-muted); line-height: 1.65; }
+
+    .journey-section { background: var(--ink); color: white; }
+    .journey-inner { max-width: 1080px; margin: 0 auto; padding: 80px 48px; }
+    .journey-section .section-label { color: rgba(255,255,255,0.45); }
+    .journey-section .section-title { color: white; }
+    .journey-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .journey-step { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 32px; position: relative; transition: all 0.25s; }
+    .journey-step:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+    .journey-step .step-num { font-family: 'Playfair Display', Georgia, serif; font-size: 48px; font-weight: 700; color: rgba(255,255,255,0.06); position: absolute; top: 16px; right: 20px; line-height: 1; }
+    .journey-step .step-phase { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--blue-mid); margin-bottom: 12px; }
+    .journey-step h4 { font-size: 16px; font-weight: 600; margin-bottom: 14px; color: white; }
+    .journey-step p { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.75; margin-bottom: 16px; }
+    .journey-step ul { list-style: none; }
+    .journey-step li { font-size: 13px; color: rgba(255,255,255,0.5); padding: 3px 0; padding-left: 16px; position: relative; }
+    .journey-step li::before { content: '→'; position: absolute; left: 0; color: var(--blue-mid); font-size: 12px; }
+
+    .cta { text-align: center; padding: 80px 48px; max-width: 640px; margin: 0 auto; }
+    .cta h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 28px; font-weight: 700; margin-bottom: 16px; }
+    .cta p { color: var(--ink-soft); font-size: 15px; margin-bottom: 32px; line-height: 1.8; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 6px; background: var(--ink); color: white; padding: 12px 28px; border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; transition: all 0.2s; }
+    .btn-primary:hover { background: var(--blue); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+    .btn-secondary { display: inline-flex; align-items: center; gap: 6px; background: var(--card); color: var(--ink-soft); padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; border: 1px solid var(--border); transition: all 0.2s; }
+    .btn-secondary:hover { border-color: var(--blue); color: var(--blue); }
+
+    footer { text-align: center; padding: 32px 48px; border-top: 1px solid var(--border); color: var(--ink-muted); font-size: 12px; }
+    footer span { color: var(--blue); font-family: 'Playfair Display', Georgia, serif; font-style: italic; }
+
+    @media (max-width: 900px) {
+      .core-intro { grid-template-columns: 1fr; gap: 20px; }
+      .core-acronym { font-size: 48px; }
+      .research-grid, .journey-grid, .core-pillars { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .hero h1 { font-size: 28px; }
+      .section, .journey-inner, .framework-inner { padding: 60px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-logo">Zhu Jun <span>/</span> Research Interest</div>
+      <ul class="nav-links">
+        <li><a href="index-en.html">About</a></li>
+        <li><a href="projects-en.html">Projects</a></li>
+        <li><a href="#" class="active">Research</a></li>
+        <li><a href="contact-en.html">Contact</a></li>
+        <li><a href="research.html" class="lang-toggle">🌐 中文</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-eyebrow">📌 Research Interest</div>
+    <h1>Competency Development for <em>AI Doctoral Students</em><br>Through Experiential Learning</h1>
+    <p class="hero-sub">
+      Research question: How can AI doctoral students develop professional competencies beyond academic skills through <strong>structured project-based experiential learning</strong>?
+    </p>
+    <p class="hero-sub">
+      Based on first-hand observation of AI doctoral students at Beijing Zhongguancun Academy · Zhongguancun Institute of Artificial Intelligence, I propose the CORE framework — integrating Competency-Based Education (CBE) and Kolb's Experiential Learning Theory to bridge the gap between academic training and professional competency for AI doctoral students.
+    </p>
+  </section>
+
+  <!-- Research Problem -->
+  <section class="section" id="research">
+    <div class="section-label">Research Problem</div>
+    <h2 class="section-title">Why This Research Question?</h2>
+    <div class="research-grid">
+      <div class="research-card">
+        <div class="card-label">Observation</div>
+        <h3>Structural Gap in AI Doctoral Training</h3>
+        <p>AI evolves monthly, but doctoral training cycles span years. Doctoral students master model accuracy — yet lack project delivery, team collaboration, and cross-domain transfer competencies demanded by industry.</p>
+      </div>
+      <div class="research-card">
+        <div class="card-label">Discovery</div>
+        <h3>Hidden Growth in Experiential Learning</h3>
+        <p>AI research environments — experimental iterations, open-source contributions, conference deadlines, team collaborations — inherently provide rich competency development opportunities. Yet they lack <strong>intentional design</strong>: growth happens by accident, not system.</p>
+      </div>
+      <div class="research-card">
+        <div class="card-label">Framework</div>
+        <h3>Introducing the CORE Framework</h3>
+        <p>Rooted in CBE and Kolb's experiential learning theory, CORE reframes research projects as structured competency development contexts — helping AI doctoral students <strong>deliberately</strong> construct professional competencies alongside academic output.</p>
+      </div>
+      <div class="research-card">
+        <div class="card-label">Value</div>
+        <h3>Transferable & Verifiable</h3>
+        <p>While AI doctoral students are the primary application context, CORE's logic transfers to engineering, data science, and other research-intensive disciplines. The framework includes operationalized competency definitions, reflection protocols, and assessment tools.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CORE Framework -->
+  <div class="framework-section" id="framework">
+    <div class="framework-inner">
+      <div class="section-label">Theoretical Framework</div>
+      <h2 class="section-title">CORE — Competency-Oriented Research Education</h2>
+      <div class="core-intro">
+        <div class="core-acronym">CORE</div>
+        <div>
+          <h3>Making Research Projects the Vehicle for Competency Development</h3>
+          <p>CORE integrates Competency-Based Education (CBE) with Kolb's Experiential Learning Theory. Through four coordinated components, it helps doctoral students develop professional competencies beyond academic skills while conducting research. Core logic: embedding Kolb's experiential cycle into project structure — so every experimental iteration becomes a complete learning cycle: concrete experience → reflection → conceptualization → application.</p>
+        </div>
+      </div>
+      <div class="core-pillars">
+        <div class="pillar">
+          <div class="pillar-icon">🧭</div>
+          <h4>Competency<br>Definition & Mapping</h4>
+          <p>Six competency domains: disciplinary knowledge, research methods, collaborative practice, self-management, reflective practice, professional communication</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🔩</div>
+          <h4>Structured<br>Project Experience</h4>
+          <p>Collaborative project structures, iterative planning & review cycles, delivery-oriented outcomes — projects as designed learning contexts</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🔄</div>
+          <h4>Reflective<br>Practice Structures</h4>
+          <p>Structured reflection protocols, regular reviews, peer reflection — converting tacit experience into visible competency growth</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">📊</div>
+          <h4>Assessment<br>& Feedback</h4>
+          <p>Competency self-assessment tools, mentor feedback, portfolio documentation — making competency development visible, assessable, and trackable</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Research Journey -->
+  <div class="journey-section" id="progress">
+    <div class="journey-inner">
+      <div class="section-label">Research Progress</div>
+      <h2 class="section-title">Research Framework</h2>
+      <div class="journey-grid">
+        <div class="journey-step">
+          <div class="step-num">01</div>
+          <div class="step-phase">Core Problem</div>
+          <h4>AI Doctoral Competency Gap</h4>
+          <p>AI evolves monthly, doctoral training spans years. Students master model accuracy but lack project delivery, team collaboration, and cross-domain transfer competencies demanded by industry.</p>
+          <ul>
+            <li>Dual pressure: academic output vs. industry readiness</li>
+            <li>Research projects lack intentional competency design</li>
+            <li>Structural mismatch between employability and career development</li>
+          </ul>
+        </div>
+        <div class="journey-step">
+          <div class="step-num">02</div>
+          <div class="step-phase">Theoretical Framework</div>
+          <h4>CORE Framework Design</h4>
+          <p>Integrating CBE and Kolb's experiential learning theory, CORE uses structured project experience and reflective practice to help doctoral students intentionally develop professional competencies.</p>
+          <ul>
+            <li>Competency definition & mapping (6 domains)</li>
+            <li>Embedding Kolb cycle into project structure</li>
+            <li>Operationalizable assessment & feedback mechanisms</li>
+          </ul>
+        </div>
+        <div class="journey-step">
+          <div class="step-num">03</div>
+          <div class="step-phase">Research Foundation</div>
+          <h4>9 Years PM Practice × Doctoral Engagement</h4>
+          <p>From research PM (2021) to AI projects (2023), to deep engagement with doctoral students (2025) — the research problem comes from first-hand observation, the framework design from practice validation.</p>
+          <ul>
+            <li>30+ enterprise-scale project delivery experience</li>
+            <li>Deep engagement with doctoral student population</li>
+            <li>First-hand observation of competency development gap</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <section class="cta">
+    <h2>Let's Connect</h2>
+    <p>If you're interested in AI doctoral competency development research or exploring potential collaboration, feel free to reach out via the contact page.</p>
+    <a href="contact-en.html" class="btn-secondary">Contact →</a>
+  </section>
+
+  <footer>
+    <p>Zhu Jun · <span>Bridging Academic Training and Professional Practice</span> · 2026</p>
+  </footer>
+
+</body>
+</html>
