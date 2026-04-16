@@ -97,6 +97,7 @@
   </style>
 </head>
 <body>
+<script>if(localStorage.getItem('theme')==='light')document.documentElement.setAttribute('data-theme','light');</script>
 
 <div id="loader"><div class="loader-logo">朱珺</div><div class="loader-bar"></div></div>
 <div class="bg-orbs">
@@ -172,7 +173,7 @@
   const obs = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } }); }, { threshold: 0.08 });
   reveals.forEach(el => obs.observe(el));
   const themeToggle = document.getElementById('themeToggle');
-  themeToggle.addEventListener('click', () => { const isLight = document.documentElement.getAttribute('data-theme') === 'light'; document.documentElement.setAttribute('data-theme', isLight ? '' : 'light'); themeToggle.textContent = isLight ? '☀' : '🌙'; });
+  themeToggle.addEventListener('click', () => { const isLight = document.documentElement.getAttribute('data-theme') === 'light'; document.documentElement.setAttribute('data-theme', isLight ? '' : 'light'); localStorage.setItem('theme', isLight ? 'dark' : 'light'); themeToggle.textContent = isLight ? '☀' : '🌙'; });
 </script>
 </body>
 </html>
