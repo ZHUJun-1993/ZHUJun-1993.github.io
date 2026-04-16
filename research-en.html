@@ -8,224 +8,354 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #FAFAF8; --bg-warm: #F5F3EF; --ink: #1A1A2E; --ink-soft: #4A4A6A; --ink-muted: #8A8AAA;
-      --blue: #2563EB; --blue-light: #DBEAFE; --blue-mid: #3B82F6;
-      --border: #E2E0DC; --card: #FFFFFF;
-      --shadow: 0 1px 3px rgba(26,26,46,0.06), 0 4px 16px rgba(26,26,46,0.04);
-      --shadow-md: 0 4px 12px rgba(26,26,46,0.08), 0 8px 32px rgba(26,26,46,0.06);
+      --bg: #070B14; --bg-2: #0D1321; --surface: rgba(13,19,33,0.7); --surface-2: rgba(17,25,42,0.6);
+      --text-1: #E2E8F0; --text-2: #94A3B8; --text-3: #64748B;
+      --border: rgba(255,255,255,0.07); --border-bright: rgba(255,255,255,0.15);
+      --teal: #4ECDC4; --purple: #A78BFA; --coral: #FF6B6B; --blue: #60A5FA;
+      --accent: var(--teal);
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Noto Sans SC', 'Helvetica Neue', Arial, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.8; }
-    ::selection { background: var(--blue-light); }
-
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(250,250,248,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 32px; }
-    .nav-inner { max-width: 1080px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 52px; }
-    .nav-logo { font-size: 15px; font-weight: 600; letter-spacing: 0.5px; }
-    .nav-logo span { color: var(--blue); }
-    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
-    .nav-links a { color: var(--ink-soft); text-decoration: none; font-size: 14px; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--ink); }
-    .nav-links a.active { color: var(--blue); font-weight: 600; }
-    .lang-toggle { display: inline-flex; align-items: center; gap: 6px; background: var(--card); border: 1px solid var(--border); color: var(--ink-soft); padding: 5px 12px; border-radius: 20px; font-size: 12px; text-decoration: none; transition: all 0.2s; }
-    .lang-toggle:hover { border-color: var(--blue); color: var(--blue); }
-
-    .hero { padding: 96px 32px 48px; max-width: 1080px; margin: 0 auto; }
-    .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: var(--blue-light); color: var(--blue); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; margin-bottom: 16px; letter-spacing: 0.5px; }
-    .hero h1 { font-family: 'Playfair Display', Georgia, serif; font-size: 36px; font-weight: 700; line-height: 1.2; margin-bottom: 14px; letter-spacing: -0.3px; }
-    .hero h1 em { font-style: normal; color: var(--blue); }
-    .hero-sub { font-size: 15px; color: var(--ink-soft); line-height: 1.75; margin-bottom: 12px; }
-    .hero-sub strong { color: var(--ink); font-weight: 600; }
-    .hero-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 0; }
-    .tag { display: inline-block; background: var(--bg-warm); border: 1px solid var(--border); color: var(--ink-soft); padding: 3px 12px; border-radius: 16px; font-size: 12px; }
-
-    .section { padding: 80px 48px; max-width: 1080px; margin: 0 auto; }
-    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--blue); margin-bottom: 12px; }
-    .section-title { font-family: 'Playfair Display', Georgia, serif; font-size: 28px; font-weight: 700; margin-bottom: 40px; letter-spacing: -0.3px; }
-
-    .research-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .research-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 32px; box-shadow: var(--shadow); transition: all 0.25s; position: relative; overflow: hidden; }
-    .research-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
-    .research-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--blue); }
-    .card-label { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--blue); margin-bottom: 14px; }
-    .research-card h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 18px; font-weight: 600; margin-bottom: 12px; line-height: 1.4; }
-    .research-card p { font-size: 14px; color: var(--ink-soft); line-height: 1.75; }
-    .research-card p strong { color: var(--ink); font-weight: 600; }
-
-    /* ── Research Question ── */
-    .rq-section { background: var(--ink); color: white; }
-    .rq-inner { max-width: 1080px; margin: 0 auto; padding: 80px 48px; }
-    .rq-label { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 12px; }
-    .rq-title { font-family: 'Playfair Display', Georgia, serif; font-size: 28px; font-weight: 700; color: white; margin-bottom: 40px; }
-    .rq-central {
-      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
-      border-left: 4px solid var(--blue-mid); border-radius: 12px;
-      padding: 36px 40px; margin-bottom: 40px;
+    body {
+      font-family: 'Noto Sans SC', 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg); color: var(--text-1); line-height: 1.8;
+      overflow-x: hidden;
     }
-    .rq-central .rq-tag { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--blue-mid); margin-bottom: 14px; }
-    .rq-central h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 22px; font-weight: 700; color: white; line-height: 1.5; margin-bottom: 16px; }
-    .rq-central p { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.8; }
-    .rq-sub { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 40px; }
-    .rq-sub-item { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 24px; }
-    .rq-sub-item .sub-num { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; color: rgba(255,255,255,0.08); line-height: 1; margin-bottom: 12px; }
-    .rq-sub-item h4 { font-size: 14px; font-weight: 600; color: white; margin-bottom: 10px; }
-    .rq-sub-item p { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.7; }
-    .method-tag { display: inline-block; background: var(--blue); color: white; padding: 4px 14px; border-radius: 20px; font-size: 12px; font-weight: 500; margin-right: 8px; margin-bottom: 8px; }
+    ::selection { background: rgba(78,205,196,0.25); color: var(--teal); }
 
-    .framework-section { background: var(--bg-warm); }
-    .framework-inner { max-width: 1080px; margin: 0 auto; padding: 80px 48px; }
-    .core-intro { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px 48px; margin-bottom: 40px; display: grid; grid-template-columns: auto 1fr; gap: 48px; align-items: center; box-shadow: var(--shadow); border-top: 3px solid var(--blue); }
-    .core-acronym { font-family: 'Playfair Display', Georgia, serif; font-size: 72px; font-weight: 700; color: var(--blue); line-height: 1; }
-    .core-intro h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 22px; font-weight: 700; margin-bottom: 12px; }
-    .core-intro p { font-size: 15px; color: var(--ink-soft); line-height: 1.8; }
+    /* ─── Loader ─── */
+    #loader { position: fixed; inset: 0; z-index: 9999; background: var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.6s; }
+    #loader-bar { width: 120px; height: 2px; background: rgba(255,255,255,0.08); border-radius: 2px; margin-top: 20px; overflow: hidden; }
+    #loader-fill { height: 100%; background: linear-gradient(90deg, var(--teal), var(--purple)); border-radius: 2px; width: 0; transition: width 0.3s; }
+    .loader-logo { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; letter-spacing: -0.5px; }
+
+    /* ─── Orbs ─── */
+    .orb { position: fixed; border-radius: 50%; filter: blur(80px); pointer-events: none; z-index: 0; }
+    .orb-1 { width: 600px; height: 600px; background: rgba(78,205,196,0.08); top: -200px; right: -100px; animation: drift1 20s ease-in-out infinite; }
+    .orb-2 { width: 500px; height: 500px; background: rgba(167,139,250,0.07); bottom: -150px; left: -150px; animation: drift2 25s ease-in-out infinite; }
+    .orb-3 { width: 400px; height: 400px; background: rgba(255,107,107,0.05); top: 50%; left: 50%; animation: drift3 18s ease-in-out infinite; }
+    @keyframes drift1 { 0%,100%{transform:translate(0,0)} 33%{transform:translate(-60px,80px)} 66%{transform:translate(40px,-40px)} }
+    @keyframes drift2 { 0%,100%{transform:translate(0,0)} 40%{transform:translate(80px,-60px)} 70%{transform:translate(-40px,40px)} }
+    @keyframes drift3 { 0%,100%{transform:translate(-50%,-50%)} 50%{transform:translate(calc(-50% + 60px),calc(-50% - 40px))} }
+
+    /* ─── Nav ─── */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(7,11,20,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 0 40px; }
+    .nav-inner { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a { color: var(--text-3); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text-1); }
+    .nav-links a.active { color: var(--accent); font-weight: 600; }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .theme-toggle { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border); background: var(--surface); color: var(--text-2); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; transition: all 0.3s; }
+    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .lang-toggle { display: inline-flex; align-items: center; gap: 6px; background: var(--surface-2); border: 1px solid var(--border); color: var(--text-2); padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 500; text-decoration: none; transition: all 0.2s; backdrop-filter: blur(8px); }
+    .lang-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ─── Hero ─── */
+    .hero { position: relative; z-index: 1; padding: 120px 40px 64px; }
+    .hero-inner { max-width: 1160px; margin: 0 auto; }
+    .hero-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(78,205,196,0.1); border: 1px solid rgba(78,205,196,0.2); color: var(--teal); padding: 4px 14px; border-radius: 20px; font-size: 12px; font-weight: 500; margin-bottom: 20px; backdrop-filter: blur(8px); }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(28px, 4.5vw, 48px); font-weight: 700; line-height: 1.2; margin-bottom: 20px; letter-spacing: -0.5px; }
+    .hero h1 em { font-style: normal; color: var(--teal); }
+    .hero h1 .line-2 { font-size: clamp(18px, 2.5vw, 28px); font-weight: 400; background: linear-gradient(135deg, var(--purple), var(--teal)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: block; margin-top: 6px; }
+    .hero-sub { font-size: 15px; color: var(--text-2); line-height: 1.85; margin-bottom: 12px; }
+    .hero-sub strong { color: var(--text-1); font-weight: 600; }
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .hero-tag-item { font-size: 11px; padding: 4px 12px; border-radius: 20px; background: var(--surface); border: 1px solid var(--border); color: var(--text-3); backdrop-filter: blur(8px); }
+
+    /* ─── Section wrap ─── */
+    .section-wrap { position: relative; z-index: 1; padding: 0 40px 80px; }
+    .section-inner { max-width: 1160px; margin: 0 auto; }
+    .section-header { margin-bottom: 40px; }
+    .section-tag { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--teal); margin-bottom: 8px; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(22px, 3vw, 32px); font-weight: 700; margin-bottom: 12px; }
+    .section-desc { font-size: 14px; color: var(--text-2); max-width: 600px; }
+
+    /* ─── Research Cards (4-grid) ─── */
+    .research-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .res-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 18px;
+      padding: 28px 32px; backdrop-filter: blur(10px);
+      transition: all 0.3s; position: relative; overflow: hidden;
+    }
+    .res-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; border-radius: 3px 0 0 3px; transition: width 0.3s; }
+    .res-card:hover { border-color: var(--border-bright); transform: translateX(4px); }
+    .res-card:hover::before { width: 5px; }
+    .res-card.q1::before { background: var(--purple); }
+    .res-card.q2::before { background: var(--teal); }
+    .res-card.q3::before { background: var(--coral); }
+    .res-card.base::before { background: var(--blue); }
+    .res-card .rc-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+    .res-card.q1 .rc-label { color: var(--purple); }
+    .res-card.q2 .rc-label { color: var(--teal); }
+    .res-card.q3 .rc-label { color: var(--coral); }
+    .res-card.base .rc-label { color: var(--blue); }
+    .res-card h3 { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 600; margin-bottom: 12px; line-height: 1.4; }
+    .res-card p { font-size: 13px; color: var(--text-2); line-height: 1.75; }
+    .res-card p strong { color: var(--text-1); font-weight: 600; }
+
+    /* ─── RQ Section (dark) ─── */
+    .rq-section {
+      background: rgba(255,255,255,0.02); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      position: relative; z-index: 1;
+    }
+    .rq-inner { max-width: 1160px; margin: 0 auto; padding: 72px 40px; }
+    .rq-central {
+      background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--teal);
+      border-radius: 18px; padding: 36px 44px; margin: 32px 0 40px;
+      backdrop-filter: blur(10px);
+    }
+    .rq-central .rc-tag { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--teal); margin-bottom: 14px; }
+    .rq-central h3 { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; line-height: 1.5; margin-bottom: 16px; }
+    .rq-central p { font-size: 14px; color: var(--text-2); line-height: 1.85; }
+    .rq-sub-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+    .rq-sub-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+      padding: 28px 24px; backdrop-filter: blur(10px);
+      transition: all 0.3s; position: relative; overflow: hidden;
+    }
+    .rq-sub-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; border-radius: 3px 0 0 3px; }
+    .rq-sub-card.q1-sub::before { background: var(--purple); }
+    .rq-sub-card.q2-sub::before { background: var(--teal); }
+    .rq-sub-card.q3-sub::before { background: var(--coral); }
+    .rq-sub-card:hover { border-color: var(--border-bright); transform: translateX(4px); }
+    .rq-num { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: rgba(255,255,255,0.06); line-height: 1; margin-bottom: 12px; }
+    .rq-sub-card.q1-sub .rq-num { color: rgba(167,139,250,0.15); }
+    .rq-sub-card.q2-sub .rq-num { color: rgba(78,205,196,0.15); }
+    .rq-sub-card.q3-sub .rq-num { color: rgba(255,107,107,0.15); }
+    .rq-sub-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 10px; line-height: 1.4; }
+    .rq-sub-card p { font-size: 12px; color: var(--text-3); line-height: 1.7; }
+
+    /* ─── Framework ─── */
+    .framework-section { position: relative; z-index: 1; padding: 0 40px 80px; }
+    .framework-inner { max-width: 1160px; margin: 0 auto; }
+    .core-intro {
+      background: var(--surface); border: 1px solid var(--border); border-top: 3px solid var(--teal);
+      border-radius: 20px; padding: 48px 56px; margin-bottom: 40px;
+      display: grid; grid-template-columns: auto 1fr; gap: 56px; align-items: center;
+      backdrop-filter: blur(10px);
+    }
+    .core-acronym { font-family: 'Playfair Display', serif; font-size: 80px; font-weight: 700; background: linear-gradient(135deg, var(--teal), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
+    .core-intro h3 { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; margin-bottom: 14px; }
+    .core-intro p { font-size: 14px; color: var(--text-2); line-height: 1.85; }
     .core-pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-    .pillar { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 28px 20px; text-align: center; box-shadow: var(--shadow); transition: all 0.25s; }
-    .pillar:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .pillar {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 18px;
+      padding: 28px 20px; text-align: center; backdrop-filter: blur(10px);
+      transition: all 0.3s; position: relative; overflow: hidden;
+    }
+    .pillar::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 3px 3px 0 0; }
+    .pillar:nth-child(1)::before { background: linear-gradient(90deg, var(--purple), transparent); }
+    .pillar:nth-child(2)::before { background: linear-gradient(90deg, var(--teal), transparent); }
+    .pillar:nth-child(3)::before { background: linear-gradient(90deg, var(--blue), transparent); }
+    .pillar:nth-child(4)::before { background: linear-gradient(90deg, var(--coral), transparent); }
+    .pillar:hover { border-color: var(--border-bright); transform: translateY(-4px); }
     .pillar-icon { font-size: 28px; margin-bottom: 14px; }
-    .pillar h4 { font-size: 14px; font-weight: 600; margin-bottom: 10px; line-height: 1.4; }
-    .pillar p { font-size: 12px; color: var(--ink-muted); line-height: 1.65; }
+    .pillar h4 { font-size: 13px; font-weight: 600; margin-bottom: 10px; line-height: 1.4; }
+    .pillar p { font-size: 11px; color: var(--text-3); line-height: 1.7; }
 
-    .journey-section { background: var(--ink); color: white; }
-    .journey-inner { max-width: 1080px; margin: 0 auto; padding: 80px 48px; }
-    .journey-section .section-label { color: rgba(255,255,255,0.45); }
-    .journey-section .section-title { color: white; }
-    .journey-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-    .journey-step { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 32px; position: relative; transition: all 0.25s; }
-    .journey-step:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
-    .journey-step .step-num { font-family: 'Playfair Display', Georgia, serif; font-size: 48px; font-weight: 700; color: rgba(255,255,255,0.06); position: absolute; top: 16px; right: 20px; line-height: 1; }
-    .journey-step .step-phase { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--blue-mid); margin-bottom: 12px; }
-    .journey-step h4 { font-size: 16px; font-weight: 600; margin-bottom: 14px; color: white; }
-    .journey-step p { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.75; margin-bottom: 16px; }
+    /* ─── Journey ─── */
+    .journey-section {
+      background: rgba(255,255,255,0.02); border-top: 1px solid var(--border);
+      position: relative; z-index: 1;
+    }
+    .journey-inner { max-width: 1160px; margin: 0 auto; padding: 72px 40px; }
+    .journey-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .journey-step {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 18px;
+      padding: 32px 28px; position: relative; overflow: hidden;
+      backdrop-filter: blur(10px); transition: all 0.3s;
+    }
+    .journey-step:hover { border-color: var(--border-bright); transform: translateY(-4px); }
+    .step-num { font-family: 'Playfair Display', serif; font-size: 52px; font-weight: 700; color: rgba(255,255,255,0.05); position: absolute; top: 12px; right: 20px; line-height: 1; }
+    .step-phase { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--teal); margin-bottom: 12px; }
+    .journey-step h4 { font-size: 15px; font-weight: 600; margin-bottom: 14px; line-height: 1.4; }
+    .journey-step p { font-size: 12px; color: var(--text-2); line-height: 1.75; margin-bottom: 16px; }
     .journey-step ul { list-style: none; }
-    .journey-step li { font-size: 13px; color: rgba(255,255,255,0.5); padding: 3px 0; padding-left: 16px; position: relative; }
-    .journey-step li::before { content: '→'; position: absolute; left: 0; color: var(--blue-mid); font-size: 12px; }
+    .journey-step li { font-size: 12px; color: var(--text-3); padding: 3px 0; padding-left: 14px; position: relative; }
+    .journey-step li::before { content: '→'; position: absolute; left: 0; color: var(--teal); font-size: 11px; }
 
-    .cta { text-align: center; padding: 80px 48px; max-width: 640px; margin: 0 auto; }
-    .cta h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 28px; font-weight: 700; margin-bottom: 16px; }
-    .cta p { color: var(--ink-soft); font-size: 15px; margin-bottom: 32px; line-height: 1.8; }
-    .btn-primary { display: inline-flex; align-items: center; gap: 6px; background: var(--ink); color: white; padding: 12px 28px; border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; transition: all 0.2s; }
-    .btn-primary:hover { background: var(--blue); transform: translateY(-1px); box-shadow: var(--shadow-md); }
-    .btn-secondary { display: inline-flex; align-items: center; gap: 6px; background: var(--card); color: var(--ink-soft); padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; border: 1px solid var(--border); transition: all 0.2s; }
-    .btn-secondary:hover { border-color: var(--blue); color: var(--blue); }
+    /* ─── Method tags ─── */
+    .method-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+    .method-tag { font-size: 11px; padding: 4px 14px; border-radius: 20px; font-weight: 500; }
+    .method-tag.qual { background: rgba(167,139,250,0.15); border: 1px solid rgba(167,139,250,0.25); color: var(--purple); }
+    .method-tag.mixed { background: rgba(78,205,196,0.15); border: 1px solid rgba(78,205,196,0.25); color: var(--teal); }
+    .method-tag.survey { background: rgba(96,165,250,0.15); border: 1px solid rgba(96,165,250,0.25); color: var(--blue); }
 
-    footer { text-align: center; padding: 32px 48px; border-top: 1px solid var(--border); color: var(--ink-muted); font-size: 12px; }
-    footer span { color: var(--blue); font-family: 'Playfair Display', Georgia, serif; font-style: italic; }
+    /* ─── Reveal ─── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ─── CTA ─── */
+    .cta { position: relative; z-index: 1; text-align: center; padding: 80px 40px; }
+    .cta h2 { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; margin-bottom: 14px; }
+    .cta p { font-size: 14px; color: var(--text-2); max-width: 480px; margin: 0 auto 28px; line-height: 1.8; }
+    .cta-btns { display: flex; gap: 12px; justify-content: center; }
+    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 11px 24px; border-radius: 10px; font-size: 14px; font-weight: 500; text-decoration: none; transition: all 0.2s; }
+    .btn-ghost { background: var(--surface); border: 1px solid var(--border); color: var(--text-2); backdrop-filter: blur(8px); }
+    .btn-ghost:hover { border-color: var(--teal); color: var(--teal); }
+
+    /* ─── Footer ─── */
+    footer { position: relative; z-index: 1; text-align: center; padding: 28px 40px; border-top: 1px solid var(--border); color: var(--text-3); font-size: 12px; }
+    footer span { color: var(--teal); font-family: 'Playfair Display', serif; font-style: italic; }
+
+    /* ─── Theme: Light ─── */
+    body.light {
+      --bg: #FAFAF8; --bg-2: #F5F3EF; --surface: rgba(255,255,255,0.8); --surface-2: rgba(245,243,239,0.7);
+      --text-1: #1A1A2E; --text-2: #4A4A6A; --text-3: #8A8AAA;
+      --border: rgba(26,26,46,0.1); --border-bright: rgba(26,26,46,0.2);
+      --teal: #0D9488; --purple: #7C3AED; --coral: #DC2626; --blue: #2563EB;
+      --accent: var(--teal);
+    }
 
     @media (max-width: 900px) {
+      .research-grid-2, .rq-sub-grid, .core-pillars, .journey-grid { grid-template-columns: 1fr; }
       .core-intro { grid-template-columns: 1fr; gap: 20px; }
       .core-acronym { font-size: 48px; }
-      .research-grid, .journey-grid, .core-pillars, .rq-sub { grid-template-columns: 1fr; }
-      .rq-inner, .rq-central { padding: 40px 24px; }
       .nav-links { display: none; }
-      .hero h1 { font-size: 28px; }
-      .section, .journey-inner, .framework-inner { padding: 60px 24px; }
+      .hero { padding: 100px 20px 48px; }
+      .section-wrap, .framework-section, .rq-inner, .journey-inner, .cta { padding-left: 20px; padding-right: 20px; }
     }
   </style>
 </head>
 <body>
 
+  <!-- Loader -->
+  <div id="loader">
+    <div class="loader-logo">Zhu Jun</div>
+    <div id="loader-bar"><div id="loader-fill"></div></div>
+  </div>
+
+  <!-- Background orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- Nav -->
   <nav>
     <div class="nav-inner">
-      <div class="nav-logo">Zhu Jun <span>/</span> Research Interest</div>
+      <div class="nav-logo">Zhu Jun <span>/</span> Research</div>
       <ul class="nav-links">
         <li><a href="index-en.html">About</a></li>
         <li><a href="projects-en.html">Projects</a></li>
         <li><a href="#" class="active">Research</a></li>
         <li><a href="contact-en.html">Contact</a></li>
-        <li><a href="research.html" class="lang-toggle">🌐 中文</a></li>
       </ul>
+      <div class="nav-actions">
+        <a href="research.html" class="lang-toggle">🌐 中文</a>
+        <button class="theme-toggle" id="themeToggle" title="Toggle theme">☀</button>
+      </div>
     </div>
   </nav>
 
   <!-- Hero -->
   <section class="hero">
-    <div class="hero-eyebrow">📌 Research Interest</div>
-    <h1>Competency Development for <em>AI Doctoral Students</em><br>Through Experiential Learning</h1>
-    <p class="hero-sub">
-      Research question: How can AI doctoral students develop professional competencies beyond academic skills through <strong>structured project-based experiential learning</strong>?
-    </p>
-    <p class="hero-sub">
-      Based on first-hand observation of AI doctoral students at Beijing Zhongguancun Academy · Zhongguancun Institute of Artificial Intelligence, I propose the CORE framework — integrating Competency-Based Education (CBE) and Kolb's Experiential Learning Theory to bridge the gap between academic training and professional competency for AI doctoral students.
-    </p>
-  </section>
-
-  <!-- Research Problem -->
-  <section class="section" id="research">
-    <div class="section-label">Research Problem</div>
-    <h2 class="section-title">Why This Research Question?</h2>
-    <div class="research-grid">
-      <div class="research-card">
-        <div class="card-label">Observation</div>
-        <h3>Structural Gap in AI Doctoral Training</h3>
-        <p>AI evolves monthly, but doctoral training cycles span years. Doctoral students master model accuracy — yet lack project delivery, team collaboration, and cross-domain transfer competencies demanded by industry.</p>
-      </div>
-      <div class="research-card">
-        <div class="card-label">Discovery</div>
-        <h3>Hidden Growth in Experiential Learning</h3>
-        <p>AI research environments — experimental iterations, open-source contributions, conference deadlines, team collaborations — inherently provide rich competency development opportunities. Yet they lack <strong>intentional design</strong>: growth happens by accident, not system.</p>
-      </div>
-      <div class="research-card">
-        <div class="card-label">Framework</div>
-        <h3>Introducing the CORE Framework</h3>
-        <p>Rooted in CBE and Kolb's experiential learning theory, CORE reframes research projects as structured competency development contexts — helping AI doctoral students <strong>deliberately</strong> construct professional competencies alongside academic output.</p>
-      </div>
-      <div class="research-card">
-        <div class="card-label">Value</div>
-        <h3>Transferable & Verifiable</h3>
-        <p>While AI doctoral students are the primary application context, CORE's logic transfers to engineering, data science, and other research-intensive disciplines. The framework includes operationalized competency definitions, reflection protocols, and assessment tools.</p>
+    <div class="hero-inner">
+    <div class="hero-tag">📌 Research Interest</div>
+      <h1>
+        Competency Development for <em>AI Doctoral Students</em><br>
+        <span class="line-2">Through Experiential Learning</span>
+      </h1>
+      <p class="hero-sub">Research question: How can AI doctoral students develop professional competencies beyond academic skills through <strong>structured project-based experiential learning</strong>?</p>
+      <p class="hero-sub">Based on first-hand observation at Beijing Zhongguancun Academy · Zhongguancun Institute of Artificial Intelligence, I propose the <strong>CORE</strong> framework — integrating Competency-Based Education (CBE) and Kolb's Experiential Learning Theory to bridge the gap between academic training and professional competency.</p>
+      <div class="hero-tags">
+        <span class="hero-tag-item">Experiential Learning</span>
+        <span class="hero-tag-item">Competency-Based Education</span>
+        <span class="hero-tag-item">AI Doctoral Training</span>
+        <span class="hero-tag-item">Project-Based Learning</span>
       </div>
     </div>
   </section>
 
-  <!-- Research Question & Methodology -->
+  <!-- Research Problem -->
+  <div class="section-wrap">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="section-tag">Research Problem</div>
+        <h2 class="section-title">Why This Question?</h2>
+        <p class="section-desc">Four observations that led to the CORE framework.</p>
+      </div>
+      <div class="research-grid-2">
+        <div class="res-card q1 reveal">
+          <div class="rc-label">Observation</div>
+          <h3>Structural Gap in AI Doctoral Training</h3>
+          <p>AI evolves monthly, but doctoral training cycles span years. Students master model accuracy — yet lack project delivery, team collaboration, and cross-domain transfer competencies demanded by industry.</p>
+        </div>
+        <div class="res-card q2 reveal reveal-delay-1">
+          <div class="rc-label">Discovery</div>
+          <h3>Hidden Growth in Experiential Learning</h3>
+          <p>AI research environments — experimental iterations, open-source contributions, conference deadlines, team collaborations — inherently provide rich competency development opportunities. Yet they lack <strong>intentional design</strong>: growth happens by accident, not system.</p>
+        </div>
+        <div class="res-card q3 reveal">
+          <div class="rc-label">Framework</div>
+          <h3>Introducing the CORE Framework</h3>
+          <p>Rooted in CBE and Kolb's experiential learning theory, CORE reframes research projects as structured competency development contexts — helping AI doctoral students <strong>deliberately</strong> construct professional competencies alongside academic output.</p>
+        </div>
+        <div class="res-card base reveal reveal-delay-1">
+          <div class="rc-label">Value</div>
+          <h3>Transferable & Verifiable</h3>
+          <p>While AI doctoral students are the primary application context, CORE's logic transfers to engineering, data science, and other research-intensive disciplines. The framework includes operationalized competency definitions, reflection protocols, and assessment tools.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Research Question -->
   <div class="rq-section">
     <div class="rq-inner">
-      <div class="rq-label">Research Question</div>
-      <h2 class="rq-title">Central Question & Hypotheses</h2>
-
-      <div class="rq-central">
-        <div class="rq-tag">Central Research Question</div>
+      <div class="section-header reveal">
+        <div class="section-tag">Research Question</div>
+        <h2 class="section-title">Central Question & Hypotheses</h2>
+      </div>
+      <div class="rq-central reveal">
+        <div class="rc-tag">Central Research Question</div>
         <h3>How do AI doctoral students intentionally develop professional competencies beyond academic skills through structured project experiences?</h3>
         <p>This study proposes that by intentionally designing AI doctoral project experiences based on the CORE framework, measurable gains can be achieved in collaborative practice, self-management, and professional communication — thereby bridging the structural gap between academic training and industry competency demands.</p>
       </div>
-
-      <div class="rq-sub">
-        <div class="rq-sub-item">
-          <div class="sub-num">Q1</div>
+      <div class="rq-sub-grid">
+        <div class="rq-sub-card q1-sub reveal">
+          <div class="rq-num">Q1</div>
           <h4>Does the competency gap exist?</h4>
           <p>What systematic gaps exist between the competencies AI doctoral students develop through academic training and those expected by industry?</p>
         </div>
-        <div class="rq-sub-item">
-          <div class="sub-num">Q2</div>
+        <div class="rq-sub-card q2-sub reveal reveal-delay-1">
+          <div class="rq-num">Q2</div>
           <h4>How do project experiences drive development?</h4>
           <p>Can structured project experiences (collaborative delivery, iterative reflection, cross-team coordination) promote AI doctoral students' practical competency development?</p>
         </div>
-        <div class="rq-sub-item">
-          <div class="sub-num">Q3</div>
+        <div class="rq-sub-card q3-sub reveal reveal-delay-2">
+          <div class="rq-num">Q3</div>
           <h4>Is the CORE framework effective?</h4>
           <p>Can the CORE framework be operationally embedded into AI doctoral training to produce measurable competency improvements?</p>
         </div>
       </div>
-
-      <div>
-        <div class="rq-label" style="margin-bottom:16px;">Methodology</div>
-        <div>
-          <span class="method-tag">Qualitative</span>
-          <span class="method-tag">Grounded Theory Coding</span>
-          <span class="method-tag">Survey</span>
-          <span class="method-tag">Competency Self-Assessment</span>
-          <span class="method-tag">Mixed Methods</span>
+      <div style="margin-top: 32px;" class="reveal">
+        <div class="section-tag" style="margin-bottom: 12px;">Methodology</div>
+        <div class="method-tags">
+          <span class="method-tag qual">Qualitative</span>
+          <span class="method-tag qual">Grounded Theory</span>
+          <span class="method-tag survey">Survey</span>
+          <span class="method-tag survey">Competency Self-Assessment</span>
+          <span class="method-tag mixed">Mixed Methods</span>
         </div>
       </div>
     </div>
   </div>
 
   <!-- CORE Framework -->
-  <div class="framework-section" id="framework">
+  <div class="framework-section">
     <div class="framework-inner">
-      <div class="section-label">Theoretical Framework</div>
-      <h2 class="section-title">CORE — Competency-Oriented Research Education</h2>
-      <div class="core-intro">
+      <div class="section-header reveal">
+        <div class="section-tag">Theoretical Framework</div>
+        <h2 class="section-title">CORE — Competency-Oriented Research Education</h2>
+        <p class="section-desc">Making research projects the vehicle for competency development.</p>
+      </div>
+      <div class="core-intro reveal">
         <div class="core-acronym">CORE</div>
         <div>
           <h3>Making Research Projects the Vehicle for Competency Development</h3>
@@ -233,22 +363,22 @@
         </div>
       </div>
       <div class="core-pillars">
-        <div class="pillar">
+        <div class="pillar reveal">
           <div class="pillar-icon">🧭</div>
           <h4>Competency<br>Definition & Mapping</h4>
           <p>Six competency domains: disciplinary knowledge, research methods, collaborative practice, self-management, reflective practice, professional communication</p>
         </div>
-        <div class="pillar">
+        <div class="pillar reveal reveal-delay-1">
           <div class="pillar-icon">🔩</div>
           <h4>Structured<br>Project Experience</h4>
           <p>Collaborative project structures, iterative planning & review cycles, delivery-oriented outcomes — projects as designed learning contexts</p>
         </div>
-        <div class="pillar">
+        <div class="pillar reveal reveal-delay-2">
           <div class="pillar-icon">🔄</div>
           <h4>Reflective<br>Practice Structures</h4>
           <p>Structured reflection protocols, regular reviews, peer reflection — converting tacit experience into visible competency growth</p>
         </div>
-        <div class="pillar">
+        <div class="pillar reveal reveal-delay-3">
           <div class="pillar-icon">📊</div>
           <h4>Assessment<br>& Feedback</h4>
           <p>Competency self-assessment tools, mentor feedback, portfolio documentation — making competency development visible, assessable, and trackable</p>
@@ -258,12 +388,14 @@
   </div>
 
   <!-- Research Journey -->
-  <div class="journey-section" id="progress">
+  <div class="journey-section">
     <div class="journey-inner">
-      <div class="section-label">Research Progress</div>
-      <h2 class="section-title">Research Framework</h2>
+      <div class="section-header reveal">
+        <div class="section-tag">Research Foundation</div>
+        <h2 class="section-title">From Practice to Research</h2>
+      </div>
       <div class="journey-grid">
-        <div class="journey-step">
+        <div class="journey-step reveal">
           <div class="step-num">01</div>
           <div class="step-phase">Core Problem</div>
           <h4>AI Doctoral Competency Gap</h4>
@@ -274,9 +406,9 @@
             <li>Structural mismatch between employability and career development</li>
           </ul>
         </div>
-        <div class="journey-step">
+        <div class="journey-step reveal reveal-delay-1">
           <div class="step-num">02</div>
-          <div class="step-phase">Theoretical Framework</div>
+          <div class="step-phase">Theoretical Foundation</div>
           <h4>CORE Framework Design</h4>
           <p>Integrating CBE and Kolb's experiential learning theory, CORE uses structured project experience and reflective practice to help doctoral students intentionally develop professional competencies.</p>
           <ul>
@@ -285,7 +417,7 @@
             <li>Operationalizable assessment & feedback mechanisms</li>
           </ul>
         </div>
-        <div class="journey-step">
+        <div class="journey-step reveal reveal-delay-2">
           <div class="step-num">03</div>
           <div class="step-phase">Research Foundation</div>
           <h4>9 Years PM Practice × Doctoral Engagement</h4>
@@ -301,15 +433,47 @@
   </div>
 
   <!-- CTA -->
-  <section class="cta">
+  <div class="cta reveal">
     <h2>Let's Connect</h2>
-    <p>If you're interested in AI doctoral competency development research or exploring potential collaboration, feel free to reach out via the contact page.</p>
-    <a href="contact-en.html" class="btn-secondary">Contact →</a>
-  </section>
+    <p>If you're interested in AI doctoral competency development research or exploring potential collaboration, feel free to reach out.</p>
+    <div class="cta-btns">
+      <a href="contact-en.html" class="btn btn-ghost">Contact →</a>
+    </div>
+  </div>
 
   <footer>
     <p>Zhu Jun · <span>Bridging Academic Training and Professional Practice</span> · 2026</p>
   </footer>
 
+  <script>
+    // Loader
+    let progress = 0;
+    const fill = document.getElementById('loader-fill');
+    const loader = document.getElementById('loader');
+    const loadInterval = setInterval(() => {
+      progress += Math.random() * 30 + 10;
+      if (progress > 100) progress = 100;
+      fill.style.width = progress + '%';
+      if (progress >= 100) {
+        clearInterval(loadInterval);
+        setTimeout(() => { loader.style.opacity = '0'; setTimeout(() => loader.remove(), 600); }, 200);
+      }
+    }, 200);
+
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    revealEls.forEach(el => revealObs.observe(el));
+
+    // Theme toggle
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') document.body.classList.add('light');
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      document.body.classList.toggle('light');
+      localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+    });
+  </script>
 </body>
 </html>

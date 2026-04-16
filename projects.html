@@ -3,296 +3,404 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>朱珺 · 项目经历</title>
+  <title>Jun Zhu · Projects</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Noto Serif SC:wght@400;600;700&family=Noto Sans SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #FAFAF8; --bg-warm: #F5F3EF; --ink: #1A1A2E; --ink-soft: #4A4A6A; --ink-muted: #8A8AAA;
-      --blue: #2563EB; --blue-light: #DBEAFE; --blue-mid: #3B82F6;
-      --border: #E2E0DC; --card: #FFFFFF;
-      --shadow: 0 1px 3px rgba(26,26,46,0.06), 0 4px 16px rgba(26,26,46,0.04);
-      --shadow-md: 0 4px 12px rgba(26,26,46,0.08), 0 8px 32px rgba(26,26,46,0.06);
+      --bg: #0a0a0f; --bg-2: #0f0f1a;
+      --surface: rgba(255,255,255,0.04); --surface-2: rgba(255,255,255,0.07);
+      --border: rgba(255,255,255,0.08); --border-bright: rgba(255,255,255,0.15);
+      --text: #f0f0f8; --text-2: #9090b0; --text-3: #5a5a80;
+      --accent: #7c6fff; --accent-2: #a78bfa; --accent-glow: rgba(124,111,255,0.3);
+      --coral: #ff6b6b; --teal: #4ecdc4; --warm: #ffd93d;
+      --card-bg: rgba(255,255,255,0.03);
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Noto Sans SC', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.8; }
-    ::selection { background: var(--blue-light); }
+    body { font-family: 'Space Grotesk','Noto Serif SC',sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; overflow-x: hidden; }
 
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(250,250,248,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 32px; }
-    .nav-inner { max-width: 1080px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 52px; }
-    .nav-logo { font-size: 15px; font-weight: 600; letter-spacing: 0.5px; }
-    .nav-logo span { color: var(--blue); }
-    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
-    .nav-links a { color: var(--ink-soft); text-decoration: none; font-size: 14px; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--ink); }
-    .nav-links a.active { color: var(--blue); font-weight: 600; }
-    .lang-toggle { display: inline-flex; align-items: center; gap: 6px; background: var(--card); border: 1px solid var(--border); color: var(--ink-soft); padding: 5px 12px; border-radius: 20px; font-size: 12px; text-decoration: none; transition: all 0.2s; }
-    .lang-toggle:hover { border-color: var(--blue); color: var(--blue); }
+    /* ── Loader ── */
+    #loader { position: fixed; inset: 0; z-index: 9999; background: var(--bg); display: flex; align-items: center; justify-content: center; transition: opacity 0.6s ease, visibility 0.6s ease; }
+    #loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .loader-bar { width: 120px; height: 2px; background: var(--border); border-radius: 2px; overflow: hidden; }
+    .loader-bar::after { content: ''; display: block; width: 40%; height: 100%; background: var(--accent); border-radius: 2px; animation: loadSlide 1s ease-in-out infinite; }
+    @keyframes loadSlide { 0% { transform: translateX(-100%); } 100% { transform: translateX(350%); } }
 
-    .hero { padding: 96px 32px 56px; max-width: 1080px; margin: 0 auto; }
-    .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: var(--blue-light); color: var(--blue); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; margin-bottom: 16px; letter-spacing: 0.5px; }
-    .hero h1 { font-family: 'Noto Serif SC', serif; font-size: 36px; font-weight: 700; line-height: 1.25; margin-bottom: 14px; letter-spacing: -0.5px; }
-    .hero-sub { font-size: 15px; color: var(--ink-soft); line-height: 1.75; }
+    /* ── BG Orbs ── */
+    .bg-orbs { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.15; animation: orbFloat 20s ease-in-out infinite; }
+    .orb-1 { width: 600px; height: 600px; background: var(--accent); top: -200px; left: -200px; animation-delay: 0s; }
+    .orb-2 { width: 400px; height: 400px; background: var(--coral); top: 30%; right: -100px; animation-delay: -7s; }
+    .orb-3 { width: 500px; height: 500px; background: var(--teal); bottom: -100px; left: 20%; animation-delay: -14s; }
+    @keyframes orbFloat { 0%,100% { transform: translate(0,0) scale(1); } 25% { transform: translate(40px,-30px) scale(1.05); } 50% { transform: translate(-20px,20px) scale(0.95); } 75% { transform: translate(30px,10px) scale(1.02); } }
 
-    .section { padding: 56px 32px; max-width: 1080px; margin: 0 auto; }
-    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--blue); margin-bottom: 8px; }
-    .section-title { font-family: 'Noto Serif SC', serif; font-size: 26px; font-weight: 700; margin-bottom: 32px; letter-spacing: -0.3px; }
+    /* ── Nav ── */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 40px; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); transition: all 0.3s; }
+    nav.scrolled { background: rgba(10,10,15,0.85); }
+    .nav-inner { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    .nav-logo { font-size: 15px; font-weight: 600; letter-spacing: 0.5px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a { color: var(--text-3); text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 0.3px; transition: color 0.2s; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.3s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.active { color: var(--text); }
+    .nav-links a.active::after { width: 100%; }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .lang-toggle { display: inline-flex; align-items: center; gap: 6px; background: var(--surface-2); border: 1px solid var(--border); color: var(--text-2); padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 500; text-decoration: none; transition: all 0.2s; backdrop-filter: blur(8px); }
+    .lang-toggle:hover { border-color: var(--accent); color: var(--accent); }
 
-    .company-section { margin-bottom: 56px; }
-    .company-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
-    .company-logo { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: white; flex-shrink: 0; }
-    .company-info h3 { font-family: 'Noto Serif SC', serif; font-size: 18px; font-weight: 700; margin-bottom: 2px; }
-    .company-info p { font-size: 13px; color: var(--ink-muted); }
+    /* ── Hero ── */
+    .hero { position: relative; z-index: 1; padding: 120px 40px 60px; }
+    .hero-inner { max-width: 1160px; margin: 0 auto; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; background: var(--surface-2); border: 1px solid var(--border); color: var(--accent); padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 24px; backdrop-filter: blur(10px); }
+    .eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .hero h1 { font-family: 'Noto Serif SC', serif; font-size: clamp(36px, 4vw, 56px); font-weight: 700; line-height: 1.2; letter-spacing: -1px; margin-bottom: 16px; }
+    .hero h1 .accent-line { background: linear-gradient(135deg, var(--accent), var(--teal)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-sub { font-size: 15px; color: var(--text-2); line-height: 1.8; margin-bottom: 12px; }
+    .hero-sub strong { color: var(--text); font-weight: 600; }
 
-    .project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    /* ── Section ── */
+    .content { position: relative; z-index: 1; padding: 0 40px 80px; }
+    .content-inner { max-width: 1160px; margin: 0 auto; }
+    .section-divider { height: 1px; background: var(--border); margin: 64px 0; }
+
+    /* ── Company Block ── */
+    .company-block { margin-bottom: 64px; }
+    .company-header { display: flex; align-items: center; gap: 20px; margin-bottom: 32px; }
+    .company-logo { width: 52px; height: 52px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: white; flex-shrink: 0; box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
+    .company-meta .company-period { font-size: 11px; font-weight: 600; color: var(--text-3); letter-spacing: 0.5px; margin-bottom: 3px; }
+    .company-meta h3 { font-family: 'Noto Serif SC', serif; font-size: 18px; font-weight: 700; margin-bottom: 2px; }
+    .company-meta p { font-size: 12px; color: var(--text-3); }
+
+    /* ── Project Grid ── */
+    .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .project-card {
-      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
-      padding: 24px; box-shadow: var(--shadow); transition: all 0.25s;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 18px; padding: 24px 28px;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s; position: relative; overflow: hidden;
     }
-    .project-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
-    .project-card-label { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
-    .project-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 10px; line-height: 1.4; }
-    .project-card p { font-size: 13px; color: var(--ink-soft); line-height: 1.7; margin-bottom: 14px; }
-    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-    .tag { display: inline-block; background: var(--bg-warm); border: 1px solid var(--border); color: var(--ink-muted); padding: 2px 10px; border-radius: 12px; font-size: 11px; }
+    .project-card:hover { border-color: var(--border-bright); transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+    .project-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; border-radius: 3px 0 0 3px; }
+    .project-card.accent::before { background: var(--accent); }
+    .project-card.coral::before { background: var(--coral); }
+    .project-card.teal::before { background: var(--teal); }
+    .project-card.warm::before { background: var(--warm); }
+    .pc-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 10px; }
+    .pc-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
+    .project-card.accent .pc-label { color: var(--accent); }
+    .project-card.coral .pc-label { color: var(--coral); }
+    .project-card.teal .pc-label { color: var(--teal); }
+    .project-card.warm .pc-label { color: var(--warm); }
+    .pc-year { font-size: 11px; color: var(--text-3); font-weight: 500; }
+    .pc-title { font-size: 15px; font-weight: 600; margin-bottom: 8px; line-height: 1.4; }
+    .pc-desc { font-size: 13px; color: var(--text-2); line-height: 1.7; margin-bottom: 12px; }
+    .pc-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .pc-tag { font-size: 10px; padding: 3px 9px; border-radius: 6px; background: var(--surface-2); border: 1px solid var(--border); color: var(--text-3); }
+    .pc-stats { display: flex; gap: 20px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
+    .pc-stat { text-align: left; }
+    .pc-stat-num { font-size: 20px; font-weight: 700; font-family: 'Space Grotesk', monospace; }
+    .project-card.accent .pc-stat-num { color: var(--accent); }
+    .project-card.coral .pc-stat-num { color: var(--coral); }
+    .project-card.teal .pc-stat-num { color: var(--teal); }
+    .project-card.warm .pc-stat-num { color: var(--warm); }
+    .pc-stat-label { font-size: 10px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
 
-    .project-stats { display: flex; gap: 16px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
-    .stat { text-align: center; }
-    .stat-num { font-size: 18px; font-weight: 700; color: var(--blue); font-family: 'Playfair Display', serif; }
-    .stat-label { font-size: 10px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+    /* ── Footer CTA ── */
+    .footer-cta { position: relative; z-index: 1; padding: 0 40px 80px; }
+    .footer-cta-inner { max-width: 1160px; margin: 0 auto; background: linear-gradient(135deg, rgba(124,111,255,0.12), rgba(78,205,196,0.08)); border: 1px solid rgba(124,111,255,0.18); border-radius: 20px; padding: 40px 48px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+    .footer-cta h3 { font-family: 'Noto Serif SC', serif; font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .footer-cta p { font-size: 13px; color: var(--text-2); }
+    .btn-outline { display: inline-flex; align-items: center; gap: 8px; background: var(--surface-2); border: 1px solid var(--border); color: var(--text-2); padding: 10px 22px; border-radius: 10px; font-size: 13px; font-weight: 600; text-decoration: none; transition: all 0.3s; backdrop-filter: blur(8px); white-space: nowrap; }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
 
-    footer { text-align: center; padding: 32px 32px; border-top: 1px solid var(--border); color: var(--ink-muted); font-size: 12px; }
-    footer span { color: var(--blue); font-family: 'Playfair Display', serif; font-style: italic; }
+    /* ── Reveal ── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
 
-    .btn-secondary {
-      display: inline-flex; align-items: center; gap: 6px; background: var(--card);
-      color: var(--ink-soft); padding: 9px 18px; border-radius: 8px; font-size: 14px;
-      font-weight: 500; text-decoration: none; border: 1px solid var(--border); transition: all 0.2s;
-    }
-    .btn-secondary:hover { border-color: var(--blue); color: var(--blue); }
-    .back-link { padding: 0 32px 40px; max-width: 1080px; margin: 0 auto; }
+    /* ── Footer ── */
+    footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 28px 40px; text-align: center; font-size: 12px; color: var(--text-3); }
+    footer a { color: var(--accent); text-decoration: none; }
 
-    .cta { text-align: center; padding: 80px 48px; max-width: 640px; margin: 0 auto; }
-    .cta h2 { font-family: 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; margin-bottom: 16px; }
-    .cta p { color: var(--ink-soft); font-size: 15px; margin-bottom: 32px; line-height: 1.8; }
-
+    /* ── Responsive ── */
     @media (max-width: 900px) {
       .project-grid { grid-template-columns: 1fr; }
       .nav-links { display: none; }
-      .hero h1 { font-size: 30px; }
-      .section { padding: 40px 20px; }
+      .footer-cta-inner { flex-direction: column; align-items: flex-start; }
     }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
   </style>
 </head>
 <body>
 
-  <nav>
-    <div class="nav-inner">
-      <div class="nav-logo">朱珺 <span>/</span> 项目经历</div>
-      <ul class="nav-links">
-        <li><a href="index.html">关于我</a></li>
-        <li><a href="#" class="active">项目经历</a></li>
-        <li><a href="research.html">研究兴趣</a></li>
-        <li><a href="contact.html">联系方式</a></li>
-        <li><a href="projects-en.html" class="lang-toggle">🌐 English</a></li>
-      </ul>
+<div id="loader"><div class="loader-bar"></div></div>
+<div class="bg-orbs">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+
+<nav id="mainNav">
+  <div class="nav-inner">
+    <div class="nav-logo">JUN ZHU</div>
+    <ul class="nav-links">
+      <li><a href="index.html">关于我</a></li>
+      <li><a href="#" class="active">项目经历</a></li>
+      <li><a href="research.html">研究兴趣</a></li>
+      <li><a href="contact.html">联系方式</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="projects-en.html" class="lang-toggle">🌐 EN</a>
     </div>
-  </nav>
+  </div>
+</nav>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero-eyebrow">📌 项目经历</div>
-    <h1>从项目交付到胜任力发展</h1>
-    <p class="hero-sub">
-      9年项目交付经验，30+企业级项目，涵盖AI算法落地、卫星通讯、汽车OEM等多个领域。每一个项目都是对团队协作、风险管理和技术交付的深度历练。
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-inner">
+  <div class="eyebrow reveal">
+      <span class="eyebrow-dot"></span>
+      Projects · 项目经历
+    </div>
+    <h1 class="reveal reveal-delay-1">
+      30+企业级项目<br>
+      <span class="accent-line">从交付到胜任力建构</span>
+    </h1>
+    <p class="hero-sub reveal reveal-delay-2">
+      9年项目交付经验，涵盖<strong>AI算法落地、卫星通讯、汽车OEM</strong>等多个领域。每一次交付都是对团队协作、风险管理与技术整合的深度历练——这些实践，正在塑造我博士研究的底层问题意识。
     </p>
-  </section>
+  </div>
+</div>
 
-  <!-- Projects -->
-  <section class="section">
-    <div class="section-label">企业项目</div>
-    <h2 class="section-title">代表性项目</h2>
+<!-- Projects -->
+<div class="content">
+  <div class="content-inner">
 
     <!-- 六分科技 -->
-    <div class="company-section">
+    <div class="company-block reveal">
       <div class="company-header">
-        <div class="company-logo" style="background:#2563EB;">六分</div>
-        <div class="company-info">
+        <div class="company-logo" style="background: linear-gradient(135deg,#2563EB,#1D4ED8); font-size:10px;">六分科技<br>四维图新</div>
+        <div class="company-meta">
+          <div class="company-period">2023.02 — 2025.07 · 项目经理</div>
           <h3>六分科技（四维图新）</h3>
-          <p>2023.02 — 2025.07 · 项目经理</p>
+          <p>AI高精度定位 · 跨职能团队管理 · OEM项目交付</p>
         </div>
       </div>
       <div class="project-grid">
-        <div class="project-card">
-          <div class="project-card-label">OEM 项目</div>
-          <h4>高精度定位OEM项目交付</h4>
-          <p>主导上汽大通612SP、奇瑞M116、百度IDG-RT6等主机厂项目，完成从需求对接到验收交付全流程管理；同时拓展小鹏、移远等新客户，达成初步合作意向。</p>
-          <div class="project-tags">
-            <span class="tag">OEM</span>
-            <span class="tag">客户开发</span>
-            <span class="tag">全周期管理</span>
+        <div class="project-card accent">
+          <div class="pc-top">
+            <div class="pc-label">OEM 项目</div>
+            <div class="pc-year">2023–2025</div>
           </div>
-          <div class="project-stats">
-            <div class="stat"><div class="stat-num">5+</div><div class="stat-label">OEM项目</div></div>
-            <div class="stat"><div class="stat-num">3</div><div class="stat-label">新客户拓展</div></div>
+          <h3 class="pc-title">高精度定位OEM项目交付</h3>
+          <p class="pc-desc">主导上汽大通612SP、奇瑞M116、百度IDG-RT6等主机厂项目，完成从需求对接到验收交付全流程；同时拓展小鹏、移远等新客户，达成初步合作意向。</p>
+          <div class="pc-tags">
+            <span class="pc-tag">OEM</span><span class="pc-tag">客户开发</span><span class="pc-tag">全周期管理</span>
           </div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-label">研发项目</div>
-          <h4>GNSS/IMU模块研发交付</h4>
-          <p>主导高精度定位AI算法落地，协调跨职能团队（算法、硬件、测试），识别里程碑与风险，完成GNSS和IMU模块按期交付，协助通过ASPICE L2、IATF 16949质量认证。</p>
-          <div class="project-tags">
-            <span class="tag">AI算法</span>
-            <span class="tag">跨职能协调</span>
-            <span class="tag">质量认证</span>
-          </div>
-          <div class="project-stats">
-            <div class="stat"><div class="stat-num">20%</div><div class="stat-label">成本降低</div></div>
-            <div class="stat"><div class="stat-num">8-10</div><div class="stat-label">团队规模</div></div>
+          <div class="pc-stats">
+            <div class="pc-stat"><div class="pc-stat-num">5+</div><div class="pc-stat-label">OEM项目</div></div>
+            <div class="pc-stat"><div class="pc-stat-num">3</div><div class="pc-stat-label">新客户</div></div>
           </div>
         </div>
-        <div class="project-card">
-          <div class="project-card-label">项目组合管理</div>
-          <h4>多项目并行推进</h4>
-          <p>同时管理8-12个项目，处理资源冲突与优先级排序，建立阶段审查机制，确保多个客户项目的高质量并行交付，95%以上按时交付率。</p>
-          <div class="project-tags">
-            <span class="tag">多项目管理</span>
-            <span class="tag">资源协调</span>
-            <span class="tag">阶段审查</span>
+        <div class="project-card accent">
+          <div class="pc-top">
+            <div class="pc-label">研发项目</div>
+            <div class="pc-year">2023–2024</div>
           </div>
-          <div class="project-stats">
-            <div class="stat"><div class="stat-num">8-12</div><div class="stat-label">并行项目</div></div>
-            <div class="stat"><div class="stat-num">95%+</div><div class="stat-label">按时交付率</div></div>
+          <h3 class="pc-title">GNSS/IMU模块研发交付</h3>
+          <p class="pc-desc">主导高精度定位AI算法落地，协调算法、硬件、测试跨职能团队，识别里程碑与风险，完成GNSS和IMU模块按期交付，协助通过ASPICE L2、IATF 16949质量认证，成本降低20%。</p>
+          <div class="pc-tags">
+            <span class="pc-tag">AI算法</span><span class="pc-tag">跨职能协调</span><span class="pc-tag">质量认证</span>
+          </div>
+          <div class="pc-stats">
+            <div class="pc-stat"><div class="pc-stat-num">20%</div><div class="pc-stat-label">成本降低</div></div>
+            <div class="pc-stat"><div class="pc-stat-num">8–10</div><div class="pc-stat-label">团队规模</div></div>
           </div>
         </div>
-        <div class="project-card">
-          <div class="project-card-label">质量体系</div>
-          <h4>质量体系认证与客户审核</h4>
-          <p>主导ASPICE L2、IATF 16949等质量体系认证准备，对接比亚迪、奇瑞等客户审核，确保100%通过率；完善供应链管理和项目交付流程。</p>
-          <div class="project-tags">
-            <span class="tag">ASPICE L2</span>
-            <span class="tag">IATF 16949</span>
-            <span class="tag">客户审核</span>
+        <div class="project-card accent">
+          <div class="pc-top">
+            <div class="pc-label">组合管理</div>
+            <div class="pc-year">2023–2025</div>
           </div>
-          <div class="project-stats">
-            <div class="stat"><div class="stat-num">100%</div><div class="stat-label">审核通过率</div></div>
+          <h3 class="pc-title">多项目并行推进</h3>
+          <p class="pc-desc">同时管理8–12个项目，处理资源冲突与优先级排序，建立阶段审查机制，确保多个客户项目的高质量并行交付，95%以上按时交付率。</p>
+          <div class="pc-tags">
+            <span class="pc-tag">多项目管理</span><span class="pc-tag">资源协调</span><span class="pc-tag">阶段审查</span>
+          </div>
+          <div class="pc-stats">
+            <div class="pc-stat"><div class="pc-stat-num">8–12</div><div class="pc-stat-label">并行项目</div></div>
+            <div class="pc-stat"><div class="pc-stat-num">95%+</div><div class="pc-stat-label">按时交付率</div></div>
+          </div>
+        </div>
+        <div class="project-card accent">
+          <div class="pc-top">
+            <div class="pc-label">质量体系</div>
+            <div class="pc-year">2024</div>
+          </div>
+          <h3 class="pc-title">ASPICE L2 / IATF 16949 认证</h3>
+          <p class="pc-desc">主导ASPICE L2、IATF 16949等质量体系认证准备，对接比亚迪、奇瑞等客户审核，100%通过率；完善供应链管理和项目交付流程。</p>
+          <div class="pc-tags">
+            <span class="pc-tag">ASPICE L2</span><span class="pc-tag">IATF 16949</span><span class="pc-tag">客户审核</span>
+          </div>
+          <div class="pc-stats">
+            <div class="pc-stat"><div class="pc-stat-num">100%</div><div class="pc-stat-label">审核通过率</div></div>
           </div>
         </div>
       </div>
     </div>
+
+    <div class="section-divider"></div>
 
     <!-- 霍莱沃 -->
-    <div class="company-section">
+    <div class="company-block reveal">
       <div class="company-header">
-        <div class="company-logo" style="background:#D97706;">霍莱沃</div>
-        <div class="company-info">
+        <div class="company-logo" style="background: linear-gradient(135deg,#D97706,#B45309); font-size:11px;">霍莱沃</div>
+        <div class="company-meta">
+          <div class="company-period">2021.06 — 2023.01 · 项目经理</div>
           <h3>上海霍莱沃电子系统有限公司</h3>
-          <p>2021.06 — 2023.01 · 项目经理</p>
+          <p>科研项目管理 · CMMI · 国军标质量体系</p>
         </div>
       </div>
       <div class="project-grid">
-        <div class="project-card">
-          <div class="project-card-label">科研院所项目</div>
-          <h4>科研院所项目交付</h4>
-          <p>完成上海卫星装备研究所、中兴通讯等科研院所项目，涵盖需求分析、方案设计、项目执行到验收交付全流程。</p>
-          <div class="project-tags">
-            <span class="tag">科研院所</span>
-            <span class="tag">全周期管理</span>
+        <div class="project-card coral">
+          <div class="pc-top">
+            <div class="pc-label">科研院所</div>
+            <div class="pc-year">2021–2023</div>
           </div>
-          <div class="project-stats">
-            <div class="stat"><div class="stat-num">3+</div><div class="stat-label">院所客户</div></div>
+          <h3 class="pc-title">科研院所项目交付</h3>
+          <p class="pc-desc">完成上海卫星装备研究所、中兴通讯等科研院所项目，涵盖需求分析、方案设计、项目执行到验收交付全流程，建立风险监控机制与应急计划。</p>
+          <div class="pc-tags">
+            <span class="pc-tag">科研院所</span><span class="pc-tag">全周期管理</span><span class="pc-tag">风险管理</span>
           </div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-label">客户开发</div>
-          <h4>企业客户拓展</h4>
-          <p>参与华为、新微等企业客户开发，积累科研项目管理中的客户关系维护与需求挖掘经验，达成初步合作意向。</p>
-          <div class="project-tags">
-            <span class="tag">客户开发</span>
-            <span class="tag">需求挖掘</span>
+          <div class="pc-stats">
+            <div class="pc-stat"><div class="pc-stat-num">3+</div><div class="pc-stat-label">院所客户</div></div>
           </div>
         </div>
-        <div class="project-card">
-          <div class="project-card-label">质量体系</div>
-          <h4>CMMI认证与国军标认证</h4>
-          <p>参与CMMI三级认证与国军标质量体系认证，负责项目过程文档规范化，推动团队过程改进，提升项目管理的标准化水平。</p>
-          <div class="project-tags">
-            <span class="tag">CMMI</span>
-            <span class="tag">国军标</span>
+        <div class="project-card coral">
+          <div class="pc-top">
+            <div class="pc-label">质量体系</div>
+            <div class="pc-year">2022</div>
+          </div>
+          <h3 class="pc-title">CMMI L3 · 国军标认证</h3>
+          <p class="pc-desc">参与CMMI三级认证与国军标质量体系认证，负责项目过程文档规范化，推动团队过程改进，提升项目管理的标准化水平。</p>
+          <div class="pc-tags">
+            <span class="pc-tag">CMMI</span><span class="pc-tag">国军标</span><span class="pc-tag">过程改进</span>
+          </div>
+          <div class="pc-stats">
+            <div class="pc-stat"><div class="pc-stat-num">L3</div><div class="pc-stat-label">CMMI等级</div></div>
           </div>
         </div>
-        <div class="project-card">
-          <div class="project-card-label">项目管控</div>
-          <h4>风险、供应链与交付管理</h4>
-          <p>建立风险监控机制与应急计划，管理供应商选择与交付排期，推动验收评审与售后跟进，定期复盘团队效率并总结项目问题。</p>
-          <div class="project-tags">
-            <span class="tag">风险管理</span>
-            <span class="tag">供应链</span>
-            <span class="tag">交付管理</span>
+        <div class="project-card coral">
+          <div class="pc-top">
+            <div class="pc-label">客户开发</div>
+            <div class="pc-year">2021–2022</div>
+          </div>
+          <h3 class="pc-title">华为、新微等企业客户拓展</h3>
+          <p class="pc-desc">参与华为、新微等企业客户开发，积累科研项目管理中的客户关系维护与需求挖掘经验，达成初步合作意向。</p>
+          <div class="pc-tags">
+            <span class="pc-tag">客户开发</span><span class="pc-tag">需求挖掘</span><span class="pc-tag">关系维护</span>
+          </div>
+        </div>
+        <div class="project-card coral">
+          <div class="pc-top">
+            <div class="pc-label">项目管控</div>
+            <div class="pc-year">2021–2023</div>
+          </div>
+          <h3 class="pc-title">风险、供应链与交付管理</h3>
+          <p class="pc-desc">管理供应商选择与交付排期，推动验收评审与售后跟进，定期复盘团队效率并总结项目问题，建立可复用的管控模板。</p>
+          <div class="pc-tags">
+            <span class="pc-tag">风险管理</span><span class="pc-tag">供应链</span><span class="pc-tag">交付管理</span>
           </div>
         </div>
       </div>
     </div>
+
+    <div class="section-divider"></div>
 
     <!-- 曼恩/大昌行 -->
-    <div class="company-section">
+    <div class="company-block reveal">
       <div class="company-header">
-        <div class="company-logo" style="background:#DC2626;">曼恩</div>
-        <div class="company-info">
+        <div class="company-logo" style="background: linear-gradient(135deg,#DC2626,#991B1B); font-size:10px;">曼恩<br>大昌行</div>
+        <div class="company-meta">
+          <div class="company-period">2016.10 — 2021.01 · 项目工程师</div>
           <h3>曼恩/大昌行（香港）</h3>
-          <p>2016.10 — 2021.01 · 项目工程师</p>
+          <p>港府项目 · 企业交付 · PM思维雏形</p>
         </div>
       </div>
       <div class="project-grid">
-        <div class="project-card">
-          <div class="project-card-label">政府项目</div>
-          <h4>特区政府部门项目</h4>
-          <p>完成香港特区政府机电署、消防处、政府档案处等多个部门项目，涵盖项目策划、执行、交付全流程；对接政府部门合规要求。</p>
-          <div class="project-tags">
-            <span class="tag">政府项目</span>
-            <span class="tag">合规管理</span>
-            <span class="tag">多部门协调</span>
+        <div class="project-card teal">
+          <div class="pc-top">
+            <div class="pc-label">政府项目</div>
+            <div class="pc-year">2016–2021</div>
           </div>
-          <div class="project-stats">
-            <div class="stat"><div class="stat-num">3+</div><div class="stat-label">政府部门</div></div>
+          <h3 class="pc-title">特区政府部门项目</h3>
+          <p class="pc-desc">完成香港特区政府机电署、消防处、政府档案处等多个部门项目，对接政府部门合规要求，涵盖项目策划、执行、交付全流程。</p>
+          <div class="pc-tags">
+            <span class="pc-tag">政府项目</span><span class="pc-tag">合规管理</span><span class="pc-tag">多部门协调</span>
           </div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-label">企业项目</div>
-          <h4>企业级项目交付</h4>
-          <p>完成香港石化公司、九龙巴士（1933）有限公司等企业项目；参与供应商管理与产品验收测试，提升供应链协调能力。</p>
-          <div class="project-tags">
-            <span class="tag">企业管理</span>
-            <span class="tag">供应商管理</span>
-            <span class="tag">验收测试</span>
+          <div class="pc-stats">
+            <div class="pc-stat"><div class="pc-stat-num">3+</div><div class="pc-stat-label">政府部门</div></div>
           </div>
         </div>
-        <div class="project-card">
-          <div class="project-card-label">技术支持</div>
-          <h4>市场调研与项目可行性分析</h4>
-          <p>撰写市场调研报告、项目提案及可行性研究报告，为企业决策提供数据支持，积累政商环境下的项目管理方法论。</p>
-          <div class="project-tags">
-            <span class="tag">市场调研</span>
-            <span class="tag">可行性研究</span>
-            <span class="tag">提案撰写</span>
+        <div class="project-card teal">
+          <div class="pc-top">
+            <div class="pc-label">企业项目</div>
+            <div class="pc-year">2016–2021</div>
+          </div>
+          <h3 class="pc-title">企业级项目交付</h3>
+          <p class="pc-desc">完成香港石化公司、九龙巴士（1933）有限公司等企业项目；参与供应商管理与产品验收测试，提升供应链协调能力。</p>
+          <div class="pc-tags">
+            <span class="pc-tag">企业管理</span><span class="pc-tag">供应商管理</span><span class="pc-tag">验收测试</span>
+          </div>
+        </div>
+        <div class="project-card teal">
+          <div class="pc-top">
+            <div class="pc-label">技术支持</div>
+            <div class="pc-year">2016–2021</div>
+          </div>
+          <h3 class="pc-title">市场调研与可行性分析</h3>
+          <p class="pc-desc">撰写市场调研报告、项目提案及可行性研究报告，为企业决策提供数据支持，积累政商环境下的项目管理方法论。</p>
+          <div class="pc-tags">
+            <span class="pc-tag">市场调研</span><span class="pc-tag">可行性研究</span><span class="pc-tag">提案撰写</span>
           </div>
         </div>
       </div>
     </div>
 
-  </section>
+  </div>
+</div>
 
-  <!-- CTA -->
-  <section class="cta">
-    <h2>了解更多关于我的研究</h2>
-    <p>我的研究问题来自9年项目管理实践中的第一手观察。如果你想了解我关于AI博士胜任力发展的研究框架，欢迎访问研究兴趣页面。</p>
-    <a href="research.html" class="btn-secondary">研究兴趣 →</a>
-  </section>
+<!-- CTA -->
+<div class="footer-cta">
+  <div class="footer-cta-inner reveal">
+    <div>
+      <h3>了解我的研究框架</h3>
+      <p>9年项目管理实践中发现胜任力缺口 → CORE框架的提出</p>
+    </div>
+    <a href="research.html" class="btn-outline">
+      研究兴趣 →
+    </a>
+  </div>
+</div>
 
-  <footer>
-    <p>朱珺 · <span>Bridging Academic Training and Professional Practice</span> · 2026</p>
-  </footer>
+<footer>
+  <p>Jun Zhu · Bridging Academic Training and Professional Practice · 2026 &nbsp;·&nbsp; <a href="contact.html">jzhubh@connect.ust.hk</a></p>
+</footer>
 
+<script>
+  window.addEventListener('load', () => { setTimeout(() => { document.getElementById('loader').classList.add('hidden'); }, 600); });
+  window.addEventListener('scroll', () => { document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 40); });
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } }); }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  reveals.forEach(el => obs.observe(el));
+</script>
 </body>
 </html>

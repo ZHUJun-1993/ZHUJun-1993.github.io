@@ -3,301 +3,342 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>朱珺 · 研究兴趣</title>
+  <title>Jun Zhu · Research</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #FAFAF8;
-      --bg-warm: #F5F3EF;
-      --ink: #1A1A2E;
-      --ink-soft: #4A4A6A;
-      --ink-muted: #8A8AAA;
-      --blue: #2563EB;
-      --blue-light: #DBEAFE;
-      --blue-mid: #3B82F6;
-      --border: #E2E0DC;
-      --card: #FFFFFF;
-      --shadow: 0 1px 3px rgba(26,26,46,0.06), 0 4px 16px rgba(26,26,46,0.04);
-      --shadow-md: 0 4px 12px rgba(26,26,46,0.08), 0 8px 32px rgba(26,26,46,0.06);
+      --bg: #0a0a0f; --bg-2: #0f0f1a;
+      --surface: rgba(255,255,255,0.04); --surface-2: rgba(255,255,255,0.07);
+      --border: rgba(255,255,255,0.08); --border-bright: rgba(255,255,255,0.15);
+      --text: #f0f0f8; --text-2: #9090b0; --text-3: #5a5a80;
+      --accent: #7c6fff; --accent-2: #a78bfa; --accent-glow: rgba(124,111,255,0.3);
+      --coral: #ff6b6b; --teal: #4ecdc4; --warm: #ffd93d;
+      --card-bg: rgba(255,255,255,0.03);
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Noto Sans SC', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.8; }
-    ::selection { background: var(--blue-light); }
+    body { font-family: 'Space Grotesk','Noto Serif SC',sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; overflow-x: hidden; }
+
+    /* ── Loader ── */
+    #loader { position: fixed; inset: 0; z-index: 9999; background: var(--bg); display: flex; align-items: center; justify-content: center; transition: opacity 0.6s ease, visibility 0.6s ease; }
+    #loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .loader-bar { width: 120px; height: 2px; background: var(--border); border-radius: 2px; overflow: hidden; }
+    .loader-bar::after { content: ''; display: block; width: 40%; height: 100%; background: var(--accent); border-radius: 2px; animation: loadSlide 1s ease-in-out infinite; }
+    @keyframes loadSlide { 0% { transform: translateX(-100%); } 100% { transform: translateX(350%); } }
+
+    /* ── BG Orbs ── */
+    .bg-orbs { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.15; animation: orbFloat 20s ease-in-out infinite; }
+    .orb-1 { width: 600px; height: 600px; background: var(--accent); top: -200px; left: -200px; animation-delay: 0s; }
+    .orb-2 { width: 400px; height: 400px; background: var(--coral); top: 30%; right: -100px; animation-delay: -7s; }
+    .orb-3 { width: 500px; height: 500px; background: var(--teal); bottom: -100px; left: 20%; animation-delay: -14s; }
+    @keyframes orbFloat { 0%,100% { transform: translate(0,0) scale(1); } 25% { transform: translate(40px,-30px) scale(1.05); } 50% { transform: translate(-20px,20px) scale(0.95); } 75% { transform: translate(30px,10px) scale(1.02); } }
 
     /* ── Nav ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(250,250,248,0.92); backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border); padding: 0 32px;
-    }
-    .nav-inner { max-width: 1080px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 52px; }
-    .nav-logo { font-size: 15px; font-weight: 600; letter-spacing: 0.5px; }
-    .nav-logo span { color: var(--blue); }
-    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
-    .nav-links a { color: var(--ink-soft); text-decoration: none; font-size: 14px; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--ink); }
-    .nav-links a.active { color: var(--blue); font-weight: 600; }
-    .lang-toggle {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--card); border: 1px solid var(--border); color: var(--ink-soft);
-      padding: 5px 12px; border-radius: 20px; font-size: 12px;
-      text-decoration: none; transition: all 0.2s;
-    }
-    .lang-toggle:hover { border-color: var(--blue); color: var(--blue); }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 40px; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); transition: all 0.3s; }
+    nav.scrolled { background: rgba(10,10,15,0.85); }
+    .nav-inner { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    .nav-logo { font-size: 15px; font-weight: 600; letter-spacing: 0.5px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a { color: var(--text-3); text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 0.3px; transition: color 0.2s; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.3s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.active { color: var(--text); }
+    .nav-links a.active::after { width: 100%; }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .lang-toggle { display: inline-flex; align-items: center; gap: 6px; background: var(--surface-2); border: 1px solid var(--border); color: var(--text-2); padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 500; text-decoration: none; transition: all 0.2s; backdrop-filter: blur(8px); }
+    .lang-toggle:hover { border-color: var(--accent); color: var(--accent); }
 
     /* ── Hero ── */
-    .hero { padding: 96px 32px 48px; max-width: 1080px; margin: 0 auto; }
-    .hero-eyebrow {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--blue-light); color: var(--blue);
-      padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500;
-      margin-bottom: 16px; letter-spacing: 0.5px;
-    }
-    .hero h1 {
-      font-family: 'Noto Serif SC', serif;
-      font-size: 36px; font-weight: 700; line-height: 1.25;
-      margin-bottom: 14px; letter-spacing: -0.5px;
-    }
-    .hero h1 em { font-style: normal; color: var(--blue); }
-    .hero-sub { font-size: 15px; color: var(--ink-soft); line-height: 1.75; margin-bottom: 12px; }
-    .hero-sub strong { color: var(--ink); font-weight: 600; }
-    .hero-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 0; }
-    .tag { display: inline-block; background: var(--bg-warm); border: 1px solid var(--border); color: var(--ink-soft); padding: 3px 12px; border-radius: 16px; font-size: 12px; }
+    .hero { position: relative; z-index: 1; padding: 120px 40px 60px; }
+    .hero-inner { max-width: 1160px; margin: 0 auto; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; background: var(--surface-2); border: 1px solid var(--border); color: var(--accent); padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 24px; backdrop-filter: blur(10px); }
+    .eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .hero h1 { font-family: 'Noto Serif SC', serif; font-size: clamp(36px, 4vw, 56px); font-weight: 700; line-height: 1.2; letter-spacing: -1px; margin-bottom: 16px; }
+    .hero h1 .accent-line { background: linear-gradient(135deg, var(--accent), var(--teal)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-sub { font-size: 15px; color: var(--text-2); line-height: 1.8; margin-bottom: 10px; }
+    .hero-sub strong { color: var(--text); font-weight: 600; }
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+    .htag { display: inline-flex; align-items: center; gap: 6px; background: var(--surface-2); border: 1px solid var(--border); color: var(--text-2); padding: 5px 13px; border-radius: 14px; font-size: 12px; font-weight: 500; backdrop-filter: blur(8px); transition: all 0.2s; }
+    .htag:hover { border-color: var(--accent); color: var(--accent); }
+    .htag .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; opacity: 0.5; }
 
-    /* ── Section ── */
-    .section { padding: 80px 48px; max-width: 1080px; margin: 0 auto; }
-    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--blue); margin-bottom: 12px; }
-    .section-title { font-family: 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; margin-bottom: 40px; letter-spacing: -0.3px; }
+    /* ── Sections ── */
+    .content { position: relative; z-index: 1; padding: 0 40px 80px; }
+    .content-inner { max-width: 1160px; margin: 0 auto; }
+    .section-divider { height: 1px; background: var(--border); margin: 72px 0; }
 
     /* ── Research Cards ── */
-    .research-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .research-card {
-      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
-      padding: 32px; box-shadow: var(--shadow); transition: all 0.25s;
+    .card-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .rcard {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 18px;
+      padding: 28px 32px; backdrop-filter: blur(10px); transition: all 0.3s;
       position: relative; overflow: hidden;
     }
-    .research-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
-    .research-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--blue); }
-    .card-label { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--blue); margin-bottom: 14px; }
-    .research-card h3 { font-family: 'Noto Serif SC', serif; font-size: 18px; font-weight: 600; margin-bottom: 12px; line-height: 1.4; }
-    .research-card p { font-size: 14px; color: var(--ink-soft); line-height: 1.75; }
-    .research-card p strong { color: var(--ink); font-weight: 600; }
+    .rcard:hover { border-color: var(--border-bright); transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+    .rcard::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; border-radius: 3px 0 0 3px; }
+    .rcard.accent::before { background: var(--accent); }
+    .rcard.teal::before { background: var(--teal); }
+    .rcard.coral::before { background: var(--coral); }
+    .rcard.warm::before { background: var(--warm); }
+    .rcard-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; }
+    .rcard.accent .rcard-label { color: var(--accent); }
+    .rcard.teal .rcard-label { color: var(--teal); }
+    .rcard.coral .rcard-label { color: var(--coral); }
+    .rcard.warm .rcard-label { color: var(--warm); }
+    .rcard h3 { font-family: 'Noto Serif SC', serif; font-size: 17px; font-weight: 700; margin-bottom: 10px; line-height: 1.4; }
+    .rcard p { font-size: 13px; color: var(--text-2); line-height: 1.75; }
+    .rcard p strong { color: var(--text); font-weight: 600; }
 
-    /* ── Research Question ── */
-    .rq-section { background: var(--ink); color: white; }
-    .rq-inner { max-width: 1080px; margin: 0 auto; padding: 80px 48px; }
-    .rq-label { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 12px; }
-    .rq-title { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: white; margin-bottom: 40px; }
+    /* ── Section Header ── */
+    .sec-header { margin-bottom: 32px; }
+    .sec-tag { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+    .sec-tag.cyan { color: var(--teal); }
+    .sec-tag.purple { color: var(--accent); }
+    .sec-tag.coral { color: var(--coral); }
+    .sec-title { font-family: 'Noto Serif SC', serif; font-size: 26px; font-weight: 700; letter-spacing: -0.3px; }
+    .sec-desc { font-size: 14px; color: var(--text-2); margin-top: 6px; max-width: 580px; line-height: 1.7; }
 
-    .rq-central {
-      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
-      border-left: 4px solid var(--blue-mid); border-radius: 12px;
-      padding: 36px 40px; margin-bottom: 40px;
+    /* ── RQ Block ── */
+    .rq-block {
+      background: linear-gradient(135deg, rgba(124,111,255,0.1), rgba(78,205,196,0.06));
+      border: 1px solid rgba(124,111,255,0.2);
+      border-radius: 20px; padding: 40px 44px; margin-bottom: 20px;
     }
-    .rq-central .rq-tag { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--blue-mid); margin-bottom: 14px; }
-    .rq-central h3 { font-family: 'Noto Serif SC', serif; font-size: 22px; font-weight: 700; color: white; line-height: 1.5; margin-bottom: 16px; }
-    .rq-central p { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.8; }
+    .rq-tag { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .rq-main { font-family: 'Noto Serif SC', serif; font-size: 22px; font-weight: 700; line-height: 1.5; margin-bottom: 14px; }
+    .rq-body { font-size: 13px; color: var(--text-2); line-height: 1.8; }
 
-    .rq-sub { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 40px; }
-    .rq-sub-item {
-      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 10px; padding: 24px;
+    /* ── Q Cards ── */
+    .q-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .qcard {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 24px 26px; backdrop-filter: blur(10px);
+      transition: all 0.3s;
     }
-    .rq-sub-item .sub-num { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; color: rgba(255,255,255,0.08); line-height: 1; margin-bottom: 12px; }
-    .rq-sub-item h4 { font-size: 14px; font-weight: 600; color: white; margin-bottom: 10px; }
-    .rq-sub-item p { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.7; }
+    .qcard:hover { border-color: var(--border-bright); transform: translateY(-2px); }
+    .qnum { font-family: 'Space Grotesk', monospace; font-size: 40px; font-weight: 700; color: var(--border-bright); line-height: 1; margin-bottom: 12px; }
+    .qcard h4 { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+    .qcard p { font-size: 12px; color: var(--text-3); line-height: 1.7; }
 
-    .method-tag { display: inline-block; background: var(--blue); color: white; padding: 4px 14px; border-radius: 20px; font-size: 12px; font-weight: 500; margin-right: 8px; margin-bottom: 8px; }
+    /* ── Method Tags ── */
+    .method-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .mtag { display: inline-flex; align-items: center; gap: 5px; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; background: var(--surface-2); border: 1px solid var(--border); color: var(--text-2); }
 
     /* ── CORE Framework ── */
-    .framework-section { background: var(--bg-warm); }
-    .framework-inner { max-width: 1080px; margin: 0 auto; padding: 80px 48px; }
-    .core-intro {
-      background: var(--card); border: 1px solid var(--border); border-radius: 16px;
-      padding: 40px 48px; margin-bottom: 40px;
-      display: grid; grid-template-columns: auto 1fr; gap: 48px; align-items: center;
-      box-shadow: var(--shadow); border-top: 3px solid var(--blue);
+    .core-intro-card {
+      background: var(--surface); border: 1px solid rgba(124,111,255,0.2);
+      border-radius: 20px; padding: 40px 44px;
+      display: grid; grid-template-columns: auto 1fr;
+      gap: 48px; align-items: center; margin-bottom: 20px;
     }
-    .core-acronym { font-family: 'Playfair Display', serif; font-size: 72px; font-weight: 700; color: var(--blue); line-height: 1; }
-    .core-intro h3 { font-family: 'Noto Serif SC', serif; font-size: 22px; font-weight: 700; margin-bottom: 12px; }
-    .core-intro p { font-size: 15px; color: var(--ink-soft); line-height: 1.8; }
-    .core-pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .core-acronym { font-family: 'Space Grotesk', monospace; font-size: 80px; font-weight: 700; line-height: 1; background: linear-gradient(135deg, var(--accent), var(--teal)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .core-intro h3 { font-family: 'Noto Serif SC', serif; font-size: 20px; font-weight: 700; margin-bottom: 10px; }
+    .core-intro p { font-size: 13px; color: var(--text-2); line-height: 1.8; }
+    .pillar-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
     .pillar {
-      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
-      padding: 28px 20px; text-align: center; box-shadow: var(--shadow); transition: all 0.25s;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+      padding: 24px 20px; text-align: center; backdrop-filter: blur(10px); transition: all 0.3s;
     }
-    .pillar:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
-    .pillar-icon { font-size: 28px; margin-bottom: 14px; }
-    .pillar h4 { font-size: 14px; font-weight: 600; margin-bottom: 10px; line-height: 1.4; }
-    .pillar p { font-size: 12px; color: var(--ink-muted); line-height: 1.65; }
+    .pillar:hover { border-color: var(--border-bright); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+    .pillar-icon { font-size: 28px; margin-bottom: 12px; }
+    .pillar h4 { font-size: 13px; font-weight: 600; margin-bottom: 8px; line-height: 1.4; }
+    .pillar p { font-size: 11px; color: var(--text-3); line-height: 1.65; }
 
-    /* ── Research Journey ── */
-    .journey-section { background: var(--ink); color: white; }
-    .journey-inner { max-width: 1080px; margin: 0 auto; padding: 80px 48px; }
-    .journey-section .section-label { color: rgba(255,255,255,0.45); }
-    .journey-section .section-title { color: white; }
-    .journey-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-    .journey-step {
-      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 12px; padding: 32px; position: relative; transition: all 0.25s;
+    /* ── Progress Steps ── */
+    .step-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .step-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 18px; padding: 28px; position: relative; overflow: hidden;
+      backdrop-filter: blur(10px); transition: all 0.3s;
     }
-    .journey-step:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
-    .journey-step .step-num {
-      font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700;
-      color: rgba(255,255,255,0.06); position: absolute; top: 16px; right: 20px; line-height: 1;
-    }
-    .journey-step .step-phase { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--blue-mid); margin-bottom: 12px; }
-    .journey-step h4 { font-size: 16px; font-weight: 600; margin-bottom: 14px; color: white; }
-    .journey-step p { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.75; margin-bottom: 16px; }
-    .journey-step ul { list-style: none; }
-    .journey-step li { font-size: 13px; color: rgba(255,255,255,0.5); padding: 3px 0; padding-left: 16px; position: relative; }
-    .journey-step li::before { content: '→'; position: absolute; left: 0; color: var(--blue-mid); font-size: 12px; }
+    .step-card:hover { border-color: var(--border-bright); transform: translateY(-3px); }
+    .step-num { font-family: 'Space Grotesk', monospace; font-size: 52px; font-weight: 700; color: var(--border-bright); line-height: 1; position: absolute; top: 14px; right: 18px; }
+    .step-phase { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    .step-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 10px; }
+    .step-card p { font-size: 12px; color: var(--text-2); line-height: 1.7; margin-bottom: 12px; }
+    .step-list { list-style: none; }
+    .step-list li { font-size: 12px; color: var(--text-3); padding: 3px 0; padding-left: 14px; position: relative; }
+    .step-list li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 11px; }
 
-    /* ── Footer CTA ── */
-    .cta { text-align: center; padding: 80px 48px; max-width: 640px; margin: 0 auto; }
-    .cta h2 { font-family: 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; margin-bottom: 16px; }
-    .cta p { color: var(--ink-soft); font-size: 15px; margin-bottom: 32px; line-height: 1.8; }
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 6px; background: var(--ink); color: white;
-      padding: 12px 28px; border-radius: 8px; font-size: 14px; font-weight: 500;
-      text-decoration: none; transition: all 0.2s;
-    }
-    .btn-primary:hover { background: var(--blue); transform: translateY(-1px); box-shadow: var(--shadow-md); }
-    .btn-secondary {
-      display: inline-flex; align-items: center; gap: 6px; background: var(--card);
-      color: var(--ink-soft); padding: 12px 24px; border-radius: 8px; font-size: 14px;
-      font-weight: 500; text-decoration: none; border: 1px solid var(--border); transition: all 0.2s;
-    }
-    .btn-secondary:hover { border-color: var(--blue); color: var(--blue); }
+    /* ── CTA ── */
+    .footer-cta { position: relative; z-index: 1; padding: 0 40px 80px; }
+    .footer-cta-inner { max-width: 1160px; margin: 0 auto; background: linear-gradient(135deg, rgba(124,111,255,0.12), rgba(78,205,196,0.08)); border: 1px solid rgba(124,111,255,0.18); border-radius: 20px; padding: 40px 48px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+    .footer-cta h3 { font-family: 'Noto Serif SC', serif; font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .footer-cta p { font-size: 13px; color: var(--text-2); }
+    .btn-outline { display: inline-flex; align-items: center; gap: 8px; background: var(--surface-2); border: 1px solid var(--border); color: var(--text-2); padding: 10px 22px; border-radius: 10px; font-size: 13px; font-weight: 600; text-decoration: none; transition: all 0.3s; backdrop-filter: blur(8px); white-space: nowrap; }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
 
-    footer { text-align: center; padding: 32px 48px; border-top: 1px solid var(--border); color: var(--ink-muted); font-size: 12px; }
-    footer span { color: var(--blue); font-family: 'Playfair Display', serif; font-style: italic; }
+    /* ── Reveal ── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
 
+    /* ── Footer ── */
+    footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 28px 40px; text-align: center; font-size: 12px; color: var(--text-3); }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* ── Responsive ── */
     @media (max-width: 900px) {
-      .core-intro { grid-template-columns: 1fr; gap: 20px; }
+      .card-grid-2, .q-grid, .pillar-grid, .step-grid { grid-template-columns: 1fr; }
+      .core-intro-card { grid-template-columns: 1fr; gap: 20px; }
       .core-acronym { font-size: 48px; }
-      .research-grid, .bg-grid, .core-pillars, .journey-grid, .rq-sub { grid-template-columns: 1fr; }
-      .rq-inner, .rq-central { padding: 40px 24px; }
       .nav-links { display: none; }
-      .hero h1 { font-size: 30px; }
-      .section, .journey-inner, .framework-inner { padding: 60px 24px; }
+      .footer-cta-inner { flex-direction: column; align-items: flex-start; }
     }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
-  <nav>
-    <div class="nav-inner">
-      <div class="nav-logo">朱珺 <span>/</span> 研究兴趣</div>
-      <ul class="nav-links">
-        <li><a href="index.html">关于我</a></li>
-        <li><a href="projects.html">项目经历</a></li>
-        <li><a href="#" class="active">研究兴趣</a></li>
-        <li><a href="contact.html">联系方式</a></li>
-        <li><a href="research-en.html" class="lang-toggle">🌐 English</a></li>
-      </ul>
+<div id="loader"><div class="loader-bar"></div></div>
+<div class="bg-orbs">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+
+<nav id="mainNav">
+  <div class="nav-inner">
+    <div class="nav-logo">JUN ZHU</div>
+    <ul class="nav-links">
+      <li><a href="index.html">关于我</a></li>
+      <li><a href="projects.html">项目经历</a></li>
+      <li><a href="#" class="active">研究兴趣</a></li>
+      <li><a href="contact.html">联系方式</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="research-en.html" class="lang-toggle">🌐 EN</a>
     </div>
-  </nav>
+  </div>
+</nav>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero-eyebrow">📌 研究兴趣</div>
-    <h1>AI博士生的<em>胜任力发展</em><br>与体验式学习研究</h1>
-    <p class="hero-sub">
-      研究问题：AI博士如何在结构化项目体验中，有意图地发展 <strong>超越学术技能的专业胜任力</strong>？
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-inner">
+  <div class="eyebrow reveal">
+      <span class="eyebrow-dot"></span>
+      Research · 研究兴趣
+    </div>
+    <h1 class="reveal reveal-delay-1">
+      AI博士生<em style="font-style:normal;"></em><br>
+      <span class="accent-line">胜任力发展 × 体验式学习</span>
+    </h1>
+    <p class="hero-sub reveal reveal-delay-2">
+      <strong>核心问题：</strong>AI博士如何在结构化项目体验中，有意图地发展超越学术技能的专业胜任力？
     </p>
-    <p class="hero-sub">
-      基于在中关村学院 · 中关村人工智能研究院深度接触AI博士生群体的第一手观察，提出CORE框架——整合胜任力本位教育(CBE)与Kolb体验学习理论，为AI博士研究生探索一条弥合学术训练与产业胜任力缺口的发展路径。
+    <p class="hero-sub reveal reveal-delay-2">
+      在中关村学院·中关村人工智能研究院深度接触AI博士生群体的第一手观察中，我发现：学术训练与工业胜任力之间，存在一条<strong>可弥合的结构性缺口</strong>——这成为CORE框架的出发点。
     </p>
-  </section>
+    <div class="hero-tags reveal reveal-delay-3">
+      <span class="htag"><span class="dot"></span>胜任力本位教育 CBE</span>
+      <span class="htag"><span class="dot"></span>Kolb体验学习</span>
+      <span class="htag"><span class="dot"></span>混合研究方法</span>
+      <span class="htag"><span class="dot"></span>扎根理论</span>
+    </div>
+  </div>
+</div>
 
-  <!-- Research Problem -->
-  <section class="section" id="research">
-    <div class="section-label">研究问题</div>
-    <h2 class="section-title">为什么关注这个方向？</h2>
-    <div class="research-grid">
-      <div class="research-card">
-        <div class="card-label">观察</div>
-        <h3>AI博士培养的结构性缺口</h3>
-        <p>AI领域技术迭代以月计，但博士训练周期以年计。学术产出压力与工业界就业预期并存——博士掌握模型精度，却缺乏项目交付、团队协作、跨场景迁移等实践胜任力。</p>
+
+
+<!-- Content -->
+<div class="content">
+  <div class="content-inner">
+
+    <!-- Research Problem -->
+    <div class="reveal">
+      <div class="sec-header">
+        <div class="sec-tag cyan">Why This Matters · 为什么关注</div>
+        <h2 class="sec-title">研究问题的来源</h2>
+        <p class="sec-desc">问题来自9年项目管理实践 + 深度接触博士研究生群体的第一手观察</p>
       </div>
-      <div class="research-card">
-        <div class="card-label">发现</div>
-        <h3>体验学习中的隐性成长</h3>
-        <p>AI研究环境（实验迭代、开源贡献、会议冲刺、团队协作）本身提供了丰富的胜任力发展机会，但缺乏<strong>意图性的设计</strong>——成长主要靠偶发，而非系统。</p>
-      </div>
-      <div class="research-card">
-        <div class="card-label">框架</div>
-        <h3>CORE框架的提出</h3>
-        <p>基于胜任力本位教育(CBE)与Kolb体验学习理论，提出CORE框架——将研究项目本身重塑为胜任力发展的结构化情境，帮助AI博士<strong>有意识地</strong>建构实践性胜任力。</p>
-      </div>
-      <div class="research-card">
-        <div class="card-label">价值</div>
-        <h3>框架可迁移、可验证</h3>
-        <p>AI博士是CORE框架的典型应用场景，其核心逻辑可迁移至工程、数据科学、计算机等研究型专业。框架设计包含可操作的胜任力定义、反思机制与评估工具。</p>
+      <div class="card-grid-2">
+        <div class="rcard accent">
+          <div class="rcard-label">观察 Observation</div>
+          <h3>AI博士培养的结构性缺口</h3>
+          <p>AI领域技术迭代以月计，但博士训练周期以年计。学术产出压力与工业界就业预期并存——博士掌握模型精度，却缺乏<strong>项目交付、团队协作、跨场景迁移</strong>等实践胜任力。</p>
+        </div>
+        <div class="rcard teal">
+          <div class="rcard-label">发现 Insight</div>
+          <h3>体验学习中的隐性成长</h3>
+          <p>AI研究环境（实验迭代、开源贡献、会议冲刺、团队协作）本身提供了丰富的胜任力发展机会，但缺乏<strong>意图性的设计</strong>——成长主要靠偶发，而非系统。</p>
+        </div>
+        <div class="rcard coral">
+          <div class="rcard-label">框架 Framework</div>
+          <h3>CORE框架的提出</h3>
+          <p>整合胜任力本位教育(CBE)与Kolb体验学习理论，提出CORE框架——将研究项目本身重塑为胜任力发展的结构化情境，帮助AI博士<strong>有意识地</strong>建构实践性胜任力。</p>
+        </div>
+        <div class="rcard warm">
+          <div class="rcard-label">价值 Value</div>
+          <h3>框架可迁移、可验证</h3>
+          <p>AI博士是CORE框架的典型应用场景，其核心逻辑可迁移至工程、数据科学、计算机等研究型专业。框架设计包含可操作的胜任力定义、反思机制与评估工具。</p>
+        </div>
       </div>
     </div>
-  </section>
 
-  <!-- Research Question & Methodology -->
-  <div class="rq-section">
-    <div class="rq-inner">
-      <div class="rq-label">研究问题</div>
-      <h2 class="rq-title">核心问题与研究假设</h2>
+    <div class="section-divider"></div>
 
-      <div class="rq-central">
+    <!-- Research Questions -->
+    <div class="reveal">
+      <div class="sec-header">
+        <div class="sec-tag purple">Research Questions · 研究问题</div>
+        <h2 class="sec-title">核心问题与子研究问题</h2>
+      </div>
+      <div class="rq-block">
         <div class="rq-tag">Central Research Question</div>
-        <h3>AI博士研究生如何在结构化项目体验中，有意图地发展超越学术技能的专业胜任力？</h3>
-        <p>本研究提出：通过对AI博士项目体验进行意图性设计（基于CORE框架），可以显著提升其在协作实践、自我管理、专业沟通等非学术胜任力域的发展水平，从而弥合学术训练与产业胜任力需求之间的结构性缺口。</p>
+        <div class="rq-main">AI博士研究生如何在结构化项目体验中，有意图地发展超越学术技能的专业胜任力？</div>
+        <p class="rq-body">本研究提出：通过对AI博士项目体验进行意图性设计（基于CORE框架），可以显著提升其在协作实践、自我管理、专业沟通等非学术胜任力域的发展水平，从而弥合学术训练与产业胜任力需求之间的结构性缺口。</p>
       </div>
-
-      <div class="rq-sub">
-        <div class="rq-sub-item">
-          <div class="sub-num">Q1</div>
+      <div class="q-grid">
+        <div class="qcard">
+          <div class="qnum">Q1</div>
           <h4>胜任力缺口存在吗？</h4>
           <p>AI博士在学术训练中获得的胜任力，与工业界对博士的胜任力预期之间，存在哪些系统性差距？</p>
         </div>
-        <div class="rq-sub-item">
-          <div class="sub-num">Q2</div>
+        <div class="qcard">
+          <div class="qnum">Q2</div>
           <h4>项目体验如何影响发展？</h4>
           <p>结构化项目体验（协作交付、迭代复盘、跨团队协调）能否，以及如何促进AI博士的实践性胜任力发展？</p>
         </div>
-        <div class="rq-sub-item">
-          <div class="sub-num">Q3</div>
+        <div class="qcard">
+          <div class="qnum">Q3</div>
           <h4>CORE框架有效吗？</h4>
           <p>CORE框架（胜任力定义+结构化项目+反思机制+评估反馈）能否可操作地嵌入AI博士培养过程，产生可测量的胜任力提升？</p>
         </div>
       </div>
-
-      <div>
-        <div class="rq-label" style="margin-bottom:16px;">研究方法</div>
-        <div>
-          <span class="method-tag">质性研究</span>
-          <span class="method-tag">扎根理论编码</span>
-          <span class="method-tag">问卷调查</span>
-          <span class="method-tag">胜任力自评工具</span>
-          <span class="method-tag">混合方法</span>
-        </div>
+      <div class="method-row">
+        <span class="mtag">质性研究</span>
+        <span class="mtag">扎根理论编码</span>
+        <span class="mtag">问卷调查</span>
+        <span class="mtag">胜任力自评工具</span>
+        <span class="mtag">混合方法</span>
       </div>
     </div>
-  </div>
 
-  <!-- CORE Framework -->
-  <div class="framework-section" id="framework">
-    <div class="framework-inner">
-      <div class="section-label">理论框架</div>
-      <h2 class="section-title">CORE — Competency-Oriented Research Education</h2>
-      <div class="core-intro">
+    <div class="section-divider"></div>
+
+    <!-- CORE Framework -->
+    <div class="reveal">
+      <div class="sec-header">
+        <div class="sec-tag purple">CORE Framework · 理论框架</div>
+        <h2 class="sec-title">Competency-Oriented Research Education</h2>
+        <p class="sec-desc">整合 CBE + Kolb体验学习，以结构化项目体验为载体发展AI博士实践性胜任力</p>
+      </div>
+      <div class="core-intro-card">
         <div class="core-acronym">CORE</div>
-        <div>
+        <div class="core-intro">
           <h3>让研究项目成为胜任力发展的载体</h3>
-          <p>CORE框架整合胜任力本位教育(CBE)与Kolb体验学习理论，通过四组件协同，帮助博士研究生在完成科研任务的同时，有意图地发展超越学术技能的专业胜任力。核心逻辑：将Kolb体验循环嵌入项目结构——让每一次实验迭代都成为"具体经验→反思→概念化→应用"的完整学习循环。</p>
+          <p>将Kolb体验循环嵌入项目结构——让每一次实验迭代都成为"具体经验→反思→概念化→应用"的完整学习循环。四组件协同，帮助博士在完成科研任务的同时，有意图地发展超越学术技能的专业胜任力。</p>
         </div>
       </div>
-      <div class="core-pillars">
+      <div class="pillar-grid">
         <div class="pillar">
           <div class="pillar-icon">🧭</div>
           <h4>胜任力定义<br>& 映射</h4>
@@ -320,42 +361,45 @@
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Research Journey -->
-  <div class="journey-section" id="progress">
-    <div class="journey-inner">
-      <div class="section-label">研究进展</div>
-      <h2 class="section-title">研究框架</h2>
-      <div class="journey-grid">
-        <div class="journey-step">
+    <div class="section-divider"></div>
+
+    <!-- Research Foundation -->
+    <div class="reveal">
+      <div class="sec-header">
+        <div class="sec-tag coral">Research Foundation · 研究基础</div>
+        <h2 class="sec-title">从实践到研究问题意识</h2>
+        <p class="sec-desc">9年项目管理实践 × 深度接触博士研究生群体 = CORE框架的提出</p>
+      </div>
+      <div class="step-grid">
+        <div class="step-card">
           <div class="step-num">01</div>
           <div class="step-phase">核心问题</div>
           <h4>AI博士胜任力发展缺口</h4>
-          <p>AI领域技术迭代以月计，但博士训练周期以年计。博士掌握模型精度，却缺乏项目交付、团队协作、跨场景迁移等实践胜任力。</p>
-          <ul>
+          <p>AI领域技术迭代以月计，但博士训练周期以年计。博士掌握模型精度，却缺乏项目交付、团队协作等实践胜任力。</p>
+          <ul class="step-list">
             <li>学术产出 vs 工业胜任力的双重压力</li>
             <li>科研项目缺乏胜任力发展的意图设计</li>
             <li>就业力与职业发展结构性不匹配</li>
           </ul>
         </div>
-        <div class="journey-step">
+        <div class="step-card">
           <div class="step-num">02</div>
           <div class="step-phase">理论框架</div>
           <h4>CORE框架设计</h4>
-          <p>整合胜任力本位教育(CBE)与Kolb体验学习理论，通过结构化项目体验和反思性实践，帮助博士有意图地发展专业胜任力。</p>
-          <ul>
+          <p>整合CBE与Kolb体验学习理论，通过结构化项目体验和反思性实践，帮助博士有意图地发展专业胜任力。</p>
+          <ul class="step-list">
             <li>胜任力定义与映射（6大域）</li>
             <li>Kolb体验循环嵌入项目结构</li>
             <li>可操作的评估与反馈机制</li>
           </ul>
         </div>
-        <div class="journey-step">
+        <div class="step-card">
           <div class="step-num">03</div>
           <div class="step-phase">研究基础</div>
           <h4>9年PM实践 × 博士群体接触</h4>
-          <p>从2021年科研管理到2023年AI项目，再到2025年深度接触博士研究生群体——问题来自第一手观察，框架设计来自实践验证。</p>
-          <ul>
+          <p>从科研管理到AI项目，再到深度接触博士研究生群体——问题来自第一手观察，框架设计来自实践验证。</p>
+          <ul class="step-list">
             <li>30+企业级项目交付经验</li>
             <li>深度接触博士研究生群体</li>
             <li>第一手发现胜任力发展缺口</li>
@@ -363,19 +407,33 @@
         </div>
       </div>
     </div>
+
   </div>
+</div>
 
-  <!-- CTA -->
-  <section class="cta">
-    <h2>希望进一步交流</h2>
-    <p>如果你对AI博士生胜任力发展这一研究方向感兴趣，或希望探讨合作可能，欢迎通过联系方式与我联系。</p>
-    <a href="contact.html" class="btn-secondary">联系方式 →</a>
-  </section>
+<!-- CTA -->
+<div class="footer-cta">
+  <div class="footer-cta-inner reveal">
+    <div>
+      <h3>希望进一步交流</h3>
+      <p>对AI博士生胜任力发展这一研究方向感兴趣，或希望探讨合作可能，欢迎联系我。</p>
+    </div>
+    <a href="contact.html" class="btn-outline">
+      联系方式 →
+    </a>
+  </div>
+</div>
 
-  <!-- Footer -->
-  <footer>
-    <p>朱珺 · <span>Bridging Academic Training and Professional Practice</span> · 2026</p>
-  </footer>
+<footer>
+  <p>Jun Zhu · Bridging Academic Training and Professional Practice · 2026 &nbsp;·&nbsp; <a href="contact.html">jzhubh@connect.ust.hk</a></p>
+</footer>
 
+<script>
+  window.addEventListener('load', () => { setTimeout(() => { document.getElementById('loader').classList.add('hidden'); }, 600); });
+  window.addEventListener('scroll', () => { document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 40); });
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } }); }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  reveals.forEach(el => obs.observe(el));
+</script>
 </body>
 </html>

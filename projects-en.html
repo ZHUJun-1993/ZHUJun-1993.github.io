@@ -5,88 +5,218 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Zhu Jun · Projects</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Noto Sans SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #FAFAF8; --bg-warm: #F5F3EF; --ink: #1A1A2E; --ink-soft: #4A4A6A; --ink-muted: #8A8AAA;
-      --blue: #2563EB; --blue-light: #DBEAFE; --blue-mid: #3B82F6;
-      --border: #E2E0DC; --card: #FFFFFF;
-      --shadow: 0 1px 3px rgba(26,26,46,0.06), 0 4px 16px rgba(26,26,46,0.04);
-      --shadow-md: 0 4px 12px rgba(26,26,46,0.08), 0 8px 32px rgba(26,26,46,0.06);
+      --bg: #070B14; --bg-2: #0D1321; --surface: rgba(13,19,33,0.7); --surface-2: rgba(17,25,42,0.6);
+      --text-1: #E2E8F0; --text-2: #94A3B8; --text-3: #64748B;
+      --border: rgba(255,255,255,0.07); --border-bright: rgba(255,255,255,0.15);
+      --teal: #4ECDC4; --purple: #A78BFA; --coral: #FF6B6B; --blue: #60A5FA;
+      --accent: var(--teal);
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Noto Sans SC', 'Helvetica Neue', Arial, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.8; }
-    ::selection { background: var(--blue-light); }
-
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(250,250,248,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 32px; }
-    .nav-inner { max-width: 1080px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 52px; }
-    .nav-logo { font-size: 15px; font-weight: 600; letter-spacing: 0.5px; }
-    .nav-logo span { color: var(--blue); }
-    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
-    .nav-links a { color: var(--ink-soft); text-decoration: none; font-size: 14px; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--ink); }
-    .nav-links a.active { color: var(--blue); font-weight: 600; }
-    .lang-toggle { display: inline-flex; align-items: center; gap: 6px; background: var(--card); border: 1px solid var(--border); color: var(--ink-soft); padding: 5px 12px; border-radius: 20px; font-size: 12px; text-decoration: none; transition: all 0.2s; }
-    .lang-toggle:hover { border-color: var(--blue); color: var(--blue); }
-
-    .hero { padding: 96px 32px 56px; max-width: 1080px; margin: 0 auto; }
-    .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: var(--blue-light); color: var(--blue); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; margin-bottom: 16px; letter-spacing: 0.5px; }
-    .hero h1 { font-family: 'Playfair Display', Georgia, serif; font-size: 42px; font-weight: 700; line-height: 1.15; margin-bottom: 14px; letter-spacing: -0.3px; }
-    .hero-sub { font-size: 15px; color: var(--ink-soft); line-height: 1.75; }
-
-    .section { padding: 56px 32px; max-width: 1080px; margin: 0 auto; }
-    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--blue); margin-bottom: 8px; }
-    .section-title { font-family: 'Playfair Display', Georgia, serif; font-size: 26px; font-weight: 700; margin-bottom: 32px; letter-spacing: -0.3px; }
-
-    .company-section { margin-bottom: 56px; }
-    .company-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
-    .company-logo { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: white; flex-shrink: 0; }
-    .company-info h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 18px; font-weight: 700; margin-bottom: 2px; }
-    .company-info p { font-size: 13px; color: var(--ink-muted); }
-
-    .project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-    .project-card {
-      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
-      padding: 24px; box-shadow: var(--shadow); transition: all 0.25s;
+    body {
+      font-family: 'Noto Sans SC', 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg); color: var(--text-1); line-height: 1.8;
+      overflow-x: hidden;
     }
-    .project-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
-    .project-card-label { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
-    .project-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 10px; line-height: 1.4; }
-    .project-card p { font-size: 13px; color: var(--ink-soft); line-height: 1.7; margin-bottom: 14px; }
-    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-    .tag { display: inline-block; background: var(--bg-warm); border: 1px solid var(--border); color: var(--ink-muted); padding: 2px 10px; border-radius: 12px; font-size: 11px; }
+    ::selection { background: rgba(78,205,196,0.25); color: var(--teal); }
 
-    .project-stats { display: flex; gap: 16px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
-    .stat { text-align: center; }
-    .stat-num { font-size: 18px; font-weight: 700; color: var(--blue); font-family: 'Playfair Display', serif; }
-    .stat-label { font-size: 10px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+    /* ─── Loader ─── */
+    #loader { position: fixed; inset: 0; z-index: 9999; background: var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.6s; }
+    #loader-bar { width: 120px; height: 2px; background: rgba(255,255,255,0.08); border-radius: 2px; margin-top: 20px; overflow: hidden; }
+    #loader-fill { height: 100%; background: linear-gradient(90deg, var(--teal), var(--purple)); border-radius: 2px; width: 0; transition: width 0.3s; }
+    .loader-logo { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; letter-spacing: -0.5px; }
 
-    footer { text-align: center; padding: 32px 32px; border-top: 1px solid var(--border); color: var(--ink-muted); font-size: 12px; }
-    footer span { color: var(--blue); font-family: 'Playfair Display', Georgia, serif; font-style: italic; }
+    /* ─── Orbs ─── */
+    .orb { position: fixed; border-radius: 50%; filter: blur(80px); pointer-events: none; z-index: 0; }
+    .orb-1 { width: 600px; height: 600px; background: rgba(78,205,196,0.08); top: -200px; right: -100px; animation: drift1 20s ease-in-out infinite; }
+    .orb-2 { width: 500px; height: 500px; background: rgba(167,139,250,0.07); bottom: -150px; left: -150px; animation: drift2 25s ease-in-out infinite; }
+    .orb-3 { width: 400px; height: 400px; background: rgba(255,107,107,0.05); top: 50%; left: 50%; animation: drift3 18s ease-in-out infinite; }
+    @keyframes drift1 { 0%,100%{transform:translate(0,0)} 33%{transform:translate(-60px,80px)} 66%{transform:translate(40px,-40px)} }
+    @keyframes drift2 { 0%,100%{transform:translate(0,0)} 40%{transform:translate(80px,-60px)} 70%{transform:translate(-40px,40px)} }
+    @keyframes drift3 { 0%,100%{transform:translate(-50%,-50%)} 50%{transform:translate(calc(-50% + 60px),calc(-50% - 40px))} }
 
-    .btn-secondary {
-      display: inline-flex; align-items: center; gap: 6px; background: var(--card);
-      color: var(--ink-soft); padding: 9px 18px; border-radius: 8px; font-size: 14px;
-      font-weight: 500; text-decoration: none; border: 1px solid var(--border); transition: all 0.2s;
+    /* ─── Nav ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(7,11,20,0.85); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 40px;
     }
-    .btn-secondary:hover { border-color: var(--blue); color: var(--blue); }
-    .back-link { padding: 0 32px 40px; max-width: 1080px; margin: 0 auto; }
+    .nav-inner { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a { color: var(--text-3); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text-1); }
+    .nav-links a.active { color: var(--accent); font-weight: 600; }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .theme-toggle {
+      width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border);
+      background: var(--surface); color: var(--text-2); cursor: pointer;
+      display: flex; align-items: center; justify-content: center; font-size: 14px; transition: all 0.3s;
+    }
+    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .lang-toggle {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--surface-2); border: 1px solid var(--border);
+      color: var(--text-2); padding: 6px 14px; border-radius: 20px;
+      font-size: 12px; font-weight: 500; text-decoration: none; transition: all 0.2s;
+      backdrop-filter: blur(8px);
+    }
+    .lang-toggle:hover { border-color: var(--accent); color: var(--accent); }
 
-    .cta { text-align: center; padding: 80px 48px; max-width: 640px; margin: 0 auto; }
-    .cta h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 28px; font-weight: 700; margin-bottom: 16px; }
-    .cta p { color: var(--ink-soft); font-size: 15px; margin-bottom: 32px; line-height: 1.8; }
+    /* ─── Hero ─── */
+    .hero {
+      position: relative; z-index: 1; padding: 120px 40px 64px;
+    }
+    .hero-inner { max-width: 1160px; margin: 0 auto; }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(78,205,196,0.1); border: 1px solid rgba(78,205,196,0.2);
+      color: var(--teal); padding: 4px 14px; border-radius: 20px;
+      font-size: 12px; font-weight: 500; margin-bottom: 20px;
+      backdrop-filter: blur(8px);
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 5vw, 52px); font-weight: 700;
+      line-height: 1.15; margin-bottom: 20px; letter-spacing: -0.5px;
+    }
+    .hero h1 .accent { color: var(--teal); }
+    .hero h1 .line-2 {
+      font-size: clamp(22px, 3vw, 36px); font-weight: 400;
+      background: linear-gradient(135deg, var(--purple), var(--teal));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      display: block; margin-top: 4px;
+    }
+    .hero-sub { font-size: 15px; color: var(--text-2); line-height: 1.85; }
 
-    @media (max-width: 900px) {
-      .project-grid { grid-template-columns: 1fr; }
+    /* ─── Company Block ─── */
+    .section-wrap { position: relative; z-index: 1; padding: 0 40px 80px; }
+    .section-inner { max-width: 1160px; margin: 0 auto; }
+    .company-block { margin-bottom: 72px; }
+    .company-block:last-child { margin-bottom: 0; }
+
+    .company-header {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 24px; padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .company-logo {
+      width: 44px; height: 44px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; color: white; flex-shrink: 0;
+    }
+    .company-info .ci-name { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; margin-bottom: 2px; }
+    .company-info .ci-role { font-size: 12px; color: var(--text-3); }
+    .company-badge {
+      margin-left: auto;
+      padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 500;
+      backdrop-filter: blur(8px);
+    }
+
+    /* ─── Cards Grid ─── */
+    .card-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 18px; padding: 24px 28px;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s; position: relative; overflow: hidden;
+    }
+    .card::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 3px; height: 100%; border-radius: 3px 0 0 3px;
+      transition: width 0.3s;
+    }
+    .card.sixents::before { background: var(--purple); }
+    .card.hollywave::before { background: var(--coral); }
+    .card.mandch::before { background: var(--teal); }
+    .card:hover { border-color: var(--border-bright); transform: translateX(4px); }
+    .card:hover::before { width: 5px; }
+
+    .card-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .card-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
+    .card.sixents .card-label { color: var(--purple); }
+    .card.hollywave .card-label { color: var(--coral); }
+    .card.mandch .card-label { color: var(--teal); }
+    .card h4 { font-size: 15px; font-weight: 600; margin-bottom: 10px; line-height: 1.45; }
+    .card p { font-size: 13px; color: var(--text-2); line-height: 1.7; margin-bottom: 14px; }
+    .card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+    .card-tag { font-size: 10px; padding: 3px 9px; border-radius: 6px; background: var(--surface-2); border: 1px solid var(--border); color: var(--text-3); }
+
+    .card-stats { display: flex; gap: 20px; padding-top: 12px; border-top: 1px solid var(--border); }
+    .card-stat { text-align: center; }
+    .card-stat .cs-num { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; }
+    .card.sixents .cs-num { color: var(--purple); }
+    .card.hollywave .cs-num { color: var(--coral); }
+    .card.mandch .cs-num { color: var(--teal); }
+    .card-stat .cs-label { font-size: 10px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* ─── Reveal ─── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ─── CTA ─── */
+    .cta {
+      position: relative; z-index: 1; text-align: center;
+      padding: 80px 40px;
+    }
+    .cta h2 { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; margin-bottom: 14px; }
+    .cta p { font-size: 14px; color: var(--text-2); max-width: 480px; margin: 0 auto 28px; line-height: 1.8; }
+    .cta-btns { display: flex; gap: 12px; justify-content: center; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 11px 24px; border-radius: 10px; font-size: 14px; font-weight: 500;
+      text-decoration: none; transition: all 0.2s; cursor: pointer; border: none;
+    }
+    .btn-ghost {
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text-2); backdrop-filter: blur(8px);
+    }
+    .btn-ghost:hover { border-color: var(--teal); color: var(--teal); }
+
+    /* ─── Footer ─── */
+    footer { position: relative; z-index: 1; text-align: center; padding: 28px 40px; border-top: 1px solid var(--border); color: var(--text-3); font-size: 12px; }
+    footer span { color: var(--teal); font-family: 'Playfair Display', serif; font-style: italic; }
+
+    /* ─── Theme: Light ─── */
+    body.light {
+      --bg: #FAFAF8; --bg-2: #F5F3EF; --surface: rgba(255,255,255,0.8); --surface-2: rgba(245,243,239,0.7);
+      --text-1: #1A1A2E; --text-2: #4A4A6A; --text-3: #8A8AAA;
+      --border: rgba(26,26,46,0.1); --border-bright: rgba(26,26,46,0.2);
+      --teal: #0D9488; --purple: #7C3AED; --coral: #DC2626; --blue: #2563EB;
+      --accent: var(--teal);
+    }
+
+    @media (max-width: 768px) {
+      .card-grid-2 { grid-template-columns: 1fr; }
       .nav-links { display: none; }
-      .hero h1 { font-size: 30px; }
-      .section { padding: 40px 20px; }
+      .hero h1 { font-size: 28px; }
+      .section-wrap { padding: 0 20px 60px; }
+      .hero { padding: 100px 20px 48px; }
     }
   </style>
 </head>
 <body>
 
+  <!-- Loader -->
+  <div id="loader">
+    <div class="loader-logo">Zhu Jun</div>
+    <div id="loader-bar"><div id="loader-fill"></div></div>
+  </div>
+
+  <!-- Background orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- Nav -->
   <nav>
     <div class="nav-inner">
       <div class="nav-logo">Zhu Jun <span>/</span> Projects</div>
@@ -95,204 +225,248 @@
         <li><a href="#" class="active">Projects</a></li>
         <li><a href="research-en.html">Research</a></li>
         <li><a href="contact-en.html">Contact</a></li>
-        <li><a href="projects.html" class="lang-toggle">🌐 中文</a></li>
       </ul>
+      <div class="nav-actions">
+        <a href="projects.html" class="lang-toggle">🌐 中文</a>
+        <button class="theme-toggle" id="themeToggle" title="Toggle theme">☀</button>
+      </div>
     </div>
   </nav>
 
   <!-- Hero -->
   <section class="hero">
-    <div class="hero-eyebrow">📌 Projects</div>
-    <h1>From Project Delivery to Competency Development</h1>
-    <p class="hero-sub">
-      9 years of project delivery experience across 30+ enterprise-scale projects — spanning AI algorithm deployment, satellite communications, automotive OEM, and government sectors. Each project is a deep exercise in team collaboration, risk management, and technical delivery.
-    </p>
+    <div class="hero-inner">
+    <div class="hero-tag">📌 Projects</div>
+      <h1>
+        From Project Delivery<br>
+        <span class="line-2">to Competency Development</span>
+      </h1>
+      <p class="hero-sub">
+        9 years across 30+ enterprise-scale projects — AI algorithm deployment, satellite communications, automotive OEM, and government sectors. Each project is a deep exercise in team collaboration, risk management, and technical delivery.
+      </p>
+    </div>
   </section>
 
-  <!-- Projects -->
-  <section class="section">
-    <div class="section-label">Enterprise Projects</div>
-    <h2 class="section-title">Selected Projects</h2>
+  <!-- Projects by Company -->
+  <div class="section-wrap">
+    <div class="section-inner">
 
-    <!-- Sixents -->
-    <div class="company-section">
-      <div class="company-header">
-        <div class="company-logo" style="background:#2563EB;">SF</div>
-        <div class="company-info">
-          <h3>Sixents Technology (NavInfo Co., Ltd.)</h3>
-          <p>2023.02 — 2025.07 · Project Manager</p>
+      <!-- Sixents -->
+      <div class="company-block reveal">
+        <div class="company-header">
+          <div class="company-logo" style="background: linear-gradient(135deg, #7C3AED, #A78BFA);">SF</div>
+          <div class="company-info">
+            <div class="ci-name">Sixents Technology (NavInfo Co., Ltd.)</div>
+            <div class="ci-role">2023.02 — 2025.07 · Project Manager · AI High-Precision Positioning</div>
+          </div>
+          <div class="company-badge" style="background: rgba(167,139,250,0.12); border: 1px solid rgba(167,139,250,0.2); color: var(--purple);">AI · Automotive</div>
         </div>
-      </div>
-      <div class="project-grid">
-        <div class="project-card">
-          <div class="project-card-label">OEM Projects</div>
-          <h4>High-Precision Positioning OEM Delivery</h4>
-          <p>Led OEM projects for SAIC Maxus 612SP, Chery M116, Baidu IDG-RT6 and others, managing full lifecycle from requirement alignment to acceptance delivery. Simultaneously developed new client relationships with Xiaopeng and Quectel.</p>
-          <div class="project-tags">
-            <span class="tag">OEM</span>
-            <span class="tag">Client Development</span>
-            <span class="tag">Full Lifecycle</span>
+        <div class="card-grid-2">
+          <div class="card sixents">
+            <div class="card-meta"><span class="card-label">OEM Projects</span></div>
+            <h4>High-Precision Positioning OEM Delivery</h4>
+            <p>Led OEM projects for SAIC Maxus 612SP, Chery M116, Baidu IDG-RT6 and others, managing full lifecycle from requirement alignment to acceptance delivery. Simultaneously developed new client relationships with Xiaopeng and Quectel.</p>
+            <div class="card-tags">
+              <span class="card-tag">OEM</span><span class="card-tag">Client Development</span><span class="card-tag">Full Lifecycle</span>
+            </div>
+            <div class="card-stats">
+              <div class="card-stat"><div class="cs-num">5+</div><div class="cs-label">OEM Projects</div></div>
+              <div class="card-stat"><div class="cs-num">3</div><div class="cs-label">New Clients</div></div>
+            </div>
           </div>
-          <div class="project-stats">
-            <div class="stat"><div class="stat-num">5+</div><div class="stat-label">OEM Projects</div></div>
-            <div class="stat"><div class="stat-num">3</div><div class="stat-label">New Clients</div></div>
+          <div class="card sixents reveal reveal-delay-1">
+            <div class="card-meta"><span class="card-label">R&D Project</span></div>
+            <h4>GNSS/IMU Module R&D Delivery</h4>
+            <p>Led high-precision positioning AI algorithm deployment, coordinated cross-functional teams (algorithm, hardware, testing), identified milestones and risks, completed GNSS and IMU module on-schedule delivery, supported ASPICE L2 and IATF 16949 certification.</p>
+            <div class="card-tags">
+              <span class="card-tag">AI Algorithm</span><span class="card-tag">Cross-Functional</span><span class="card-tag">Quality Cert</span>
+            </div>
+            <div class="card-stats">
+              <div class="card-stat"><div class="cs-num">20%</div><div class="cs-label">Cost Reduction</div></div>
+              <div class="card-stat"><div class="cs-num">8–10</div><div class="cs-label">Team Size</div></div>
+            </div>
           </div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-label">R&D Project</div>
-          <h4>GNSS/IMU Module R&D Delivery</h4>
-          <p>Led high-precision positioning AI algorithm deployment, coordinated cross-functional teams (algorithm, hardware, testing), identified milestones and risks, completed GNSS and IMU module on-schedule delivery, supported ASPICE L2 and IATF 16949 certification.</p>
-          <div class="project-tags">
-            <span class="tag">AI Algorithm</span>
-            <span class="tag">Cross-Functional</span>
-            <span class="tag">Quality Cert</span>
+          <div class="card sixents reveal">
+            <div class="card-meta"><span class="card-label">Portfolio Management</span></div>
+            <h4>Multi-Project Parallel Execution</h4>
+            <p>Simultaneously managed 8–12 projects, handled resource conflicts and priority balancing, established stage review mechanisms, ensuring high-quality parallel delivery with 95%+ on-time delivery rate.</p>
+            <div class="card-tags">
+              <span class="card-tag">Multi-Project</span><span class="card-tag">Resource Mgmt</span><span class="card-tag">Stage Review</span>
+            </div>
+            <div class="card-stats">
+              <div class="card-stat"><div class="cs-num">8–12</div><div class="cs-label">Parallel Projects</div></div>
+              <div class="card-stat"><div class="cs-num">95%+</div><div class="cs-label">On-Time Rate</div></div>
+            </div>
           </div>
-          <div class="project-stats">
-            <div class="stat"><div class="stat-num">20%</div><div class="stat-label">Cost Reduction</div></div>
-            <div class="stat"><div class="stat-num">8-10</div><div class="stat-label">Team Size</div></div>
-          </div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-label">Portfolio Management</div>
-          <h4>Multi-Project Parallel Execution</h4>
-          <p>Simultaneously managed 8-12 projects, handled resource conflicts and priority balancing, established stage review mechanisms, ensuring high-quality parallel delivery across multiple client engagements with 95%+ on-time delivery rate.</p>
-          <div class="project-tags">
-            <span class="tag">Multi-Project</span>
-            <span class="tag">Resource Mgmt</span>
-            <span class="tag">Stage Review</span>
-          </div>
-          <div class="project-stats">
-            <div class="stat"><div class="stat-num">8-12</div><div class="stat-label">Parallel Projects</div></div>
-            <div class="stat"><div class="stat-num">95%+</div><div class="stat-label">On-Time Rate</div></div>
-          </div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-label">Quality System</div>
-          <h4>Quality Certification & Customer Audits</h4>
-          <p>Led ASPICE L2 and IATF 16949 quality system certification preparation, coordinated BYD, Chery and other customer audits, achieving 100% pass rate; improved supply chain and delivery processes.</p>
-          <div class="project-tags">
-            <span class="tag">ASPICE L2</span>
-            <span class="tag">IATF 16949</span>
-            <span class="tag">Customer Audits</span>
-          </div>
-          <div class="project-stats">
-            <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Audit Pass Rate</div></div>
+          <div class="card sixents reveal reveal-delay-1">
+            <div class="card-meta"><span class="card-label">Quality System</span></div>
+            <h4>ASPICE L2 & IATF 16949 Certification</h4>
+            <p>Led ASPICE L2 and IATF 16949 quality system certification preparation, coordinated BYD, Chery and other customer audits, achieving 100% pass rate; improved supply chain and delivery processes.</p>
+            <div class="card-tags">
+              <span class="card-tag">ASPICE L2</span><span class="card-tag">IATF 16949</span><span class="card-tag">Customer Audits</span>
+            </div>
+            <div class="card-stats">
+              <div class="card-stat"><div class="cs-num">100%</div><div class="cs-label">Audit Pass Rate</div></div>
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- Hollywave -->
+      <div class="company-block reveal">
+        <div class="company-header">
+          <div class="company-logo" style="background: linear-gradient(135deg, #DC2626, #FF6B6B);">HW</div>
+          <div class="company-info">
+            <div class="ci-name">Shanghai Hollywave Electronic System Co., Ltd.</div>
+            <div class="ci-role">2021.06 — 2023.01 · Project Manager · Research Management</div>
+          </div>
+          <div class="company-badge" style="background: rgba(255,107,107,0.12); border: 1px solid rgba(255,107,107,0.2); color: var(--coral);">Research · Science</div>
+        </div>
+        <div class="card-grid-2">
+          <div class="card hollywave">
+            <div class="card-meta"><span class="card-label">Research Institute</span></div>
+            <h4>Research Institute Project Delivery</h4>
+            <p>Completed projects for Shanghai Satellite Equipment Research Institute and ZTE Electronics, covering full lifecycle from requirement analysis and solution design to execution and acceptance.</p>
+            <div class="card-tags">
+              <span class="card-tag">Research Institute</span><span class="card-tag">Full Lifecycle</span>
+            </div>
+            <div class="card-stats">
+              <div class="card-stat"><div class="cs-num">3+</div><div class="cs-label">Clients</div></div>
+            </div>
+          </div>
+          <div class="card hollywave reveal reveal-delay-1">
+            <div class="card-meta"><span class="card-label">Client Development</span></div>
+            <h4>Enterprise Client Acquisition</h4>
+            <p>Engaged with Huawei and Xinwei for new client development, building client relationship management and requirement discovery skills in a research PM context.</p>
+            <div class="card-tags">
+              <span class="card-tag">Client Dev</span><span class="card-tag">Requirement Discovery</span>
+            </div>
+            <div class="card-stats">
+              <div class="card-stat"><div class="cs-num">2</div><div class="cs-label">New Clients</div></div>
+            </div>
+          </div>
+          <div class="card hollywave reveal">
+            <div class="card-meta"><span class="card-label">Quality System</span></div>
+            <h4>CMMI & Military Standard Certification</h4>
+            <p>Participated in CMMI Level 3 certification and national military quality system certification, standardizing project documentation and driving process improvement.</p>
+            <div class="card-tags">
+              <span class="card-tag">CMMI L3</span><span class="card-tag">Military Std</span>
+            </div>
+          </div>
+          <div class="card hollywave reveal reveal-delay-1">
+            <div class="card-meta"><span class="card-label">Project Controls</span></div>
+            <h4>Risk, Supply Chain & Delivery Management</h4>
+            <p>Established risk monitoring and contingency planning; managed supplier selection, delivery scheduling, acceptance reviews, and post-sale follow-up; regularly reviewed team efficiency.</p>
+            <div class="card-tags">
+              <span class="card-tag">Risk Mgmt</span><span class="card-tag">Supply Chain</span><span class="card-tag">Delivery</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAN/DCH -->
+      <div class="company-block reveal">
+        <div class="company-header">
+          <div class="company-logo" style="background: linear-gradient(135deg, #0891B2, #4ECDC4);">MAN</div>
+          <div class="company-info">
+            <div class="ci-name">MAN Truck & Bus HK / Dah Chong Hong Holdings</div>
+            <div class="ci-role">2016.10 — 2021.01 · Project Engineer</div>
+          </div>
+          <div class="company-badge" style="background: rgba(78,205,196,0.12); border: 1px solid rgba(78,205,196,0.2); color: var(--teal);">Gov · Enterprise</div>
+        </div>
+        <div class="card-grid-2">
+          <div class="card mandch">
+            <div class="card-meta"><span class="card-label">Government Projects</span></div>
+            <h4>HKSAR Government Department Projects</h4>
+            <p>Completed projects for HKSAR EMSD, FSD, and GFS departments, covering project planning, execution, and delivery. Navigated government compliance requirements and multi-stakeholder coordination.</p>
+            <div class="card-tags">
+              <span class="card-tag">Gov Projects</span><span class="card-tag">Compliance</span><span class="card-tag">Multi-Stakeholder</span>
+            </div>
+            <div class="card-stats">
+              <div class="card-stat"><div class="cs-num">3+</div><div class="cs-label">Gov Depts</div></div>
+            </div>
+          </div>
+          <div class="card mandch reveal reveal-delay-1">
+            <div class="card-meta"><span class="card-label">Enterprise Projects</span></div>
+            <h4>Corporate Project Delivery</h4>
+            <p>Completed projects for Hong Kong Petrochemical Co. and The Kowloon Motor Bus Co. (1933) Ltd; managed supplier relationships and product acceptance testing, building supply chain coordination capabilities.</p>
+            <div class="card-tags">
+              <span class="card-tag">Enterprise</span><span class="card-tag">Supplier Mgmt</span><span class="card-tag">Acceptance Testing</span>
+            </div>
+          </div>
+          <div class="card mandch reveal">
+            <div class="card-meta"><span class="card-label">Technical Support</span></div>
+            <h4>Market Research & Feasibility Studies</h4>
+            <p>Prepared market research reports, project proposals, and feasibility studies to support business decisions, building project management methodology in a government-business environment.</p>
+            <div class="card-tags">
+              <span class="card-tag">Market Research</span><span class="card-tag">Feasibility Study</span><span class="card-tag">Proposal Writing</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
-
-    <!-- Hollywave -->
-    <div class="company-section">
-      <div class="company-header">
-        <div class="company-logo" style="background:#D97706;">HW</div>
-        <div class="company-info">
-          <h3>Shanghai Hollywave Electronic System Co., Ltd.</h3>
-          <p>2021.06 — 2023.01 · Project Manager</p>
-        </div>
-      </div>
-      <div class="project-grid">
-        <div class="project-card">
-          <div class="project-card-label">Research Institute</div>
-          <h4>Research Institute Project Delivery</h4>
-          <p>Completed projects for Shanghai Satellite Equipment Research Institute and ZTE Electronics, covering full lifecycle from requirement analysis and solution design to execution and acceptance.</p>
-          <div class="project-tags">
-            <span class="tag">Research Institute</span>
-            <span class="tag">Full Lifecycle</span>
-          </div>
-          <div class="project-stats">
-            <div class="stat"><div class="stat-num">3+</div><div class="stat-label">Clients</div></div>
-          </div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-label">Client Development</div>
-          <h4>Enterprise Client Acquisition</h4>
-          <p>Engaged with Huawei and Xinwei for new client development, building client relationship management and requirement discovery skills in a research PM context.</p>
-          <div class="project-tags">
-            <span class="tag">Client Dev</span>
-            <span class="tag">Requirement Discovery</span>
-          </div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-label">Quality System</div>
-          <h4>CMMI & Military Standard Certification</h4>
-          <p>Participated in CMMI Level 3 certification and national military quality system certification, standardizing project documentation and driving process improvement.</p>
-          <div class="project-tags">
-            <span class="tag">CMMI</span>
-            <span class="tag">Military Std</span>
-          </div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-label">Project Controls</div>
-          <h4>Risk, Supply Chain & Delivery Management</h4>
-          <p>Established risk monitoring and contingency planning; managed supplier selection, delivery scheduling, acceptance reviews, and post-sale follow-up; regularly reviewed team efficiency.</p>
-          <div class="project-tags">
-            <span class="tag">Risk Mgmt</span>
-            <span class="tag">Supply Chain</span>
-            <span class="tag">Delivery</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- MAN/DCH -->
-    <div class="company-section">
-      <div class="company-header">
-        <div class="company-logo" style="background:#DC2626;">MAN</div>
-        <div class="company-info">
-          <h3>MAN Truck & Bus Hong Kong / Dah Chong Hong Holdings</h3>
-          <p>2016.10 — 2021.01 · Project Engineer</p>
-        </div>
-      </div>
-      <div class="project-grid">
-        <div class="project-card">
-          <div class="project-card-label">Government Projects</div>
-          <h4>HKSAR Government Department Projects</h4>
-          <p>Completed projects for HKSAR EMSD, FSD, and GFS departments, covering project planning, execution, and delivery. Navigated government compliance requirements and multi-stakeholder coordination.</p>
-          <div class="project-tags">
-            <span class="tag">Gov Projects</span>
-            <span class="tag">Compliance</span>
-            <span class="tag">Multi-Stakeholder</span>
-          </div>
-          <div class="project-stats">
-            <div class="stat"><div class="stat-num">3+</div><div class="stat-label">Gov Depts</div></div>
-          </div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-label">Enterprise Projects</div>
-          <h4>Corporate Project Delivery</h4>
-          <p>Completed projects for Hong Kong Petrochemical Co. and The Kowloon Motor Bus Co. (1933) Ltd; managed supplier relationships and product acceptance testing, building supply chain coordination capabilities.</p>
-          <div class="project-tags">
-            <span class="tag">Enterprise</span>
-            <span class="tag">Supplier Mgmt</span>
-            <span class="tag">Acceptance Testing</span>
-          </div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-label">Technical Support</div>
-          <h4>Market Research & Feasibility Studies</h4>
-          <p>Prepared market research reports, project proposals, and feasibility studies to support business decisions, building project management methodology in a government-business environment.</p>
-          <div class="project-tags">
-            <span class="tag">Market Research</span>
-            <span class="tag">Feasibility Study</span>
-            <span class="tag">Proposal Writing</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </section>
+  </div>
 
   <!-- CTA -->
-  <section class="cta">
+  <div class="cta reveal">
     <h2>Learn More About My Research</h2>
-    <p>My research question emerges from 9 years of project management practice and first-hand observation. To learn more about my CORE framework for AI doctoral competency development, visit the Research page.</p>
-    <a href="research-en.html" class="btn-secondary">Research →</a>
-  </section>
+    <p>My CORE framework emerges from 9 years of project management practice and first-hand observation of AI doctoral students. The Research page explores this in depth.</p>
+    <div class="cta-btns">
+      <a href="research-en.html" class="btn btn-ghost">Research →</a>
+    </div>
+  </div>
 
   <footer>
     <p>Zhu Jun · <span>Bridging Academic Training and Professional Practice</span> · 2026</p>
   </footer>
 
+  <script>
+    // Loader
+    let progress = 0;
+    const fill = document.getElementById('loader-fill');
+    const loader = document.getElementById('loader');
+    const loadInterval = setInterval(() => {
+      progress += Math.random() * 30 + 10;
+      if (progress > 100) progress = 100;
+      fill.style.width = progress + '%';
+      if (progress >= 100) {
+        clearInterval(loadInterval);
+        setTimeout(() => { loader.style.opacity = '0'; setTimeout(() => loader.remove(), 600); }, 200);
+      }
+    }, 200);
+
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    revealEls.forEach(el => revealObs.observe(el));
+
+    // Counter
+    document.querySelectorAll('.cs-num').forEach(el => {
+      const text = el.textContent;
+      const match = text.match(/[\d.]+/);
+      if (!match) return;
+      const target = parseFloat(match[0]);
+      const suffix = text.replace(match[0], '');
+      const prefix = text.slice(0, text.indexOf(match[0]));
+      let current = 0;
+      const step = target / 40;
+      const intv = setInterval(() => {
+        current = Math.min(current + step, target);
+        el.textContent = prefix + (Number.isInteger(target) ? Math.round(current) : current.toFixed(1)) + suffix;
+        if (current >= target) clearInterval(intv);
+      }, 30);
+    });
+
+    // Theme toggle
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') document.body.classList.add('light');
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      document.body.classList.toggle('light');
+      localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+    });
+  </script>
 </body>
 </html>

@@ -3,237 +3,905 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>朱珺 · 关于我</title>
+  <title>朱珺 · 科研项目经理</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #FAFAF8; --bg-warm: #F5F3EF; --ink: #1A1A2E; --ink-soft: #4A4A6A; --ink-muted: #8A8AAA;
-      --blue: #2563EB; --blue-light: #DBEAFE; --blue-mid: #3B82F6;
-      --border: #E2E0DC; --card: #FFFFFF;
-      --shadow: 0 1px 3px rgba(26,26,46,0.06), 0 4px 16px rgba(26,26,46,0.04);
-      --shadow-md: 0 4px 12px rgba(26,26,46,0.08), 0 8px 32px rgba(26,26,46,0.06);
+      --bg: #0a0a0f;
+      --bg-2: #0f0f1a;
+      --surface: rgba(255,255,255,0.04);
+      --surface-2: rgba(255,255,255,0.07);
+      --border: rgba(255,255,255,0.08);
+      --border-bright: rgba(255,255,255,0.15);
+      --text: #f0f0f8;
+      --text-2: #9090b0;
+      --text-3: #5a5a80;
+      --accent: #7c6fff;
+      --accent-2: #a78bfa;
+      --accent-glow: rgba(124,111,255,0.3);
+      --coral: #ff6b6b;
+      --teal: #4ecdc4;
+      --warm: #ffd93d;
+      --card-bg: rgba(255,255,255,0.03);
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    [data-theme="light"] {
+      --bg: #f5f3f0;
+      --bg-2: #eeecea;
+      --surface: rgba(0,0,0,0.03);
+      --surface-2: rgba(0,0,0,0.05);
+      --border: rgba(0,0,0,0.07);
+      --border-bright: rgba(0,0,0,0.12);
+      --text: #1a1a2e;
+      --text-2: #4a4a6a;
+      --text-3: #8a8aaa;
+      --card-bg: rgba(255,255,255,0.7);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Noto Sans SC', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.8; }
-    ::selection { background: var(--blue-light); }
+    body {
+      font-family: 'Space Grotesk', 'Noto Serif SC', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+      transition: background 0.4s, color 0.4s;
+    }
 
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(250,250,248,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 32px; }
-    .nav-inner { max-width: 1080px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 52px; }
-    .nav-logo { font-size: 15px; font-weight: 600; letter-spacing: 0.5px; }
-    .nav-logo span { color: var(--blue); }
-    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
-    .nav-links a { color: var(--ink-soft); text-decoration: none; font-size: 14px; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--ink); }
-    .nav-links a.active { color: var(--blue); font-weight: 600; }
-    .lang-toggle { display: inline-flex; align-items: center; gap: 6px; background: var(--card); border: 1px solid var(--border); color: var(--ink-soft); padding: 5px 12px; border-radius: 20px; font-size: 12px; text-decoration: none; transition: all 0.2s; }
-    .lang-toggle:hover { border-color: var(--blue); color: var(--blue); }
+    /* ─── LOADING ─── */
+    #loader {
+      position: fixed; inset: 0; z-index: 9999;
+      background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    #loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .loader-bar {
+      width: 120px; height: 2px;
+      background: var(--border);
+      border-radius: 2px; overflow: hidden;
+    }
+    .loader-bar::after {
+      content: ''; display: block;
+      width: 40%; height: 100%;
+      background: var(--accent);
+      border-radius: 2px;
+      animation: loadSlide 1s ease-in-out infinite;
+    }
+    @keyframes loadSlide {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(350%); }
+    }
 
-    .hero { padding: 96px 32px 48px; max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: start; }
-    .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: var(--blue-light); color: var(--blue); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; margin-bottom: 16px; letter-spacing: 0.5px; }
-    .hero h1 { font-family: 'Noto Serif SC', serif; font-size: 36px; font-weight: 700; line-height: 1.25; margin-bottom: 14px; letter-spacing: -0.5px; }
-    .hero h1 em { font-style: normal; color: var(--blue); }
-    .hero-sub { font-size: 15px; color: var(--ink-soft); line-height: 1.75; margin-bottom: 12px; max-width: 520px; }
-    .hero-sub strong { color: var(--ink); font-weight: 600; }
-    .hero-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; }
-    .tag { display: inline-block; background: var(--bg-warm); border: 1px solid var(--border); color: var(--ink-soft); padding: 3px 12px; border-radius: 16px; font-size: 12px; }
-    .hero-actions { display: flex; gap: 10px; }
-    .btn-primary { display: inline-flex; align-items: center; gap: 6px; background: var(--ink); color: white; padding: 9px 20px; border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; transition: all 0.2s; }
-    .btn-primary:hover { background: var(--blue); transform: translateY(-1px); box-shadow: var(--shadow-md); }
-    .btn-secondary { display: inline-flex; align-items: center; gap: 6px; background: var(--card); color: var(--ink-soft); padding: 9px 18px; border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; border: 1px solid var(--border); transition: all 0.2s; }
-    .btn-secondary:hover { border-color: var(--blue); color: var(--blue); }
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 0 40px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: all 0.3s;
+    }
+    nav.scrolled {
+      background: rgba(10,10,15,0.85);
+    }
+    [data-theme="light"] nav.scrolled { background: rgba(245,243,240,0.85); }
+    .nav-inner {
+      max-width: 1160px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo {
+      font-size: 15px; font-weight: 600;
+      letter-spacing: 0.5px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a {
+      color: var(--text-3); text-decoration: none;
+      font-size: 13px; font-weight: 500;
+      letter-spacing: 0.3px;
+      transition: color 0.2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute;
+      bottom: -4px; left: 0; width: 0; height: 1px;
+      background: var(--accent);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.active { color: var(--text); }
+    .nav-links a.active::after { width: 100%; }
 
-    .hero-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 20px; min-width: 240px; box-shadow: var(--shadow); }
-    .hero-card-label { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 12px; }
-    .affiliation-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); }
-    .affiliation-item:last-child { border-bottom: none; }
-    .affil-logo { width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: white; flex-shrink: 0; }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .theme-toggle {
+      width: 36px; height: 36px;
+      border-radius: 50%; border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-2);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .lang-toggle {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text-2);
+      padding: 6px 14px; border-radius: 20px;
+      font-size: 12px; font-weight: 500;
+      text-decoration: none; transition: all 0.2s;
+      backdrop-filter: blur(8px);
+    }
+    .lang-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ─── BG DECO ─── */
+    .bg-orbs {
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none; overflow: hidden;
+    }
+    .orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(80px); opacity: 0.15;
+      animation: orbFloat 20s ease-in-out infinite;
+    }
+    .orb-1 { width: 600px; height: 600px; background: var(--accent); top: -200px; left: -200px; animation-delay: 0s; }
+    .orb-2 { width: 400px; height: 400px; background: var(--coral); top: 30%; right: -100px; animation-delay: -7s; }
+    .orb-3 { width: 500px; height: 500px; background: var(--teal); bottom: -100px; left: 20%; animation-delay: -14s; }
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0,0) scale(1); }
+      25% { transform: translate(40px,-30px) scale(1.05); }
+      50% { transform: translate(-20px,20px) scale(0.95); }
+      75% { transform: translate(30px,10px) scale(1.02); }
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative; z-index: 1;
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 0 40px;
+    }
+    .hero-inner {
+      max-width: 1160px; margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 80px;
+      align-items: center;
+      padding: 120px 0 80px;
+    }
+
+    .hero-left .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--accent);
+      padding: 6px 14px; border-radius: 20px;
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 28px;
+      backdrop-filter: blur(10px);
+    }
+    .eyebrow-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    .hero-left h1 {
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(42px, 5vw, 64px);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -1px;
+      margin-bottom: 8px;
+    }
+    .hero-left h1 .line-accent {
+      background: linear-gradient(135deg, var(--accent), var(--teal));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-subtitle {
+      font-size: 16px; color: var(--text-2);
+      line-height: 1.75; margin-bottom: 28px;
+      max-width: 520px;
+    }
+    .hero-subtitle strong { color: var(--text); font-weight: 600; }
+    .hero-headline-row {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .hero-headline-row span {
+      display: inline-block;
+      font-size: 18px; font-weight: 700;
+      color: var(--accent);
+      padding: 6px 20px;
+      background: linear-gradient(135deg, rgba(124,111,255,0.12), rgba(78,205,196,0.08));
+      border: 1px solid rgba(124,111,255,0.2);
+      border-radius: 30px;
+      margin: 0 6px;
+    }
+    .hero-body {
+      font-size: 15px; color: var(--text-2);
+      line-height: 1.9; margin-bottom: 40px;
+    }
+    .hero-body strong { color: var(--text); font-weight: 600; }
+
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
+    .htag {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text-2);
+      padding: 5px 13px; border-radius: 14px;
+      font-size: 12px; font-weight: 500;
+      backdrop-filter: blur(8px);
+      transition: all 0.2s;
+    }
+    .htag:hover { border-color: var(--accent); color: var(--accent); }
+    .htag .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; opacity: 0.5; }
+
+    .hero-actions { display: flex; gap: 12px; }
+    .btn-hero {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 28px; border-radius: 12px;
+      font-size: 14px; font-weight: 600;
+      text-decoration: none; transition: all 0.3s;
+      cursor: pointer; border: none;
+    }
+    .btn-hero-primary {
+      background: linear-gradient(135deg, var(--accent), #6d5fff);
+      color: white;
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+    .btn-hero-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px var(--accent-glow);
+    }
+    .btn-hero-ghost {
+      background: var(--surface-2);
+      color: var(--text-2);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+    }
+    .btn-hero-ghost:hover { border-color: var(--border-bright); color: var(--text); }
+
+    /* ─── HERO CARD ─── */
+    .hero-card-wrap {
+      position: relative;
+    }
+    .hero-card-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, var(--accent), var(--teal), var(--coral));
+      opacity: 0.2;
+      z-index: -1;
+      animation: borderRotate 6s linear infinite;
+    }
+    @keyframes borderRotate {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+    .hero-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 32px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+    .card-section-label {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--text-3); margin-bottom: 16px;
+    }
+    .affil-item {
+      display: flex; align-items: center; gap: 14px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .affil-item:last-child { border-bottom: none; }
+    .affil-logo {
+      width: 40px; height: 40px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 700; color: white;
+      flex-shrink: 0;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    }
     .affil-info h4 { font-size: 13px; font-weight: 600; line-height: 1.3; }
-    .affil-info p { font-size: 11px; color: var(--ink-muted); margin-top: 1px; }
-
-    .section { padding: 56px 32px; max-width: 1080px; margin: 0 auto; }
-    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--blue); margin-bottom: 8px; }
-    .section-title { font-family: 'Noto Serif SC', serif; font-size: 26px; font-weight: 700; margin-bottom: 28px; letter-spacing: -0.3px; }
-
-    .bg-intro { display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: start; margin-bottom: 36px; }
-    .bg-intro h3 { font-family: 'Noto Serif SC', serif; font-size: 18px; font-weight: 600; margin-bottom: 10px; }
-    .bg-intro p { font-size: 14px; color: var(--ink-soft); line-height: 1.75; }
-    .stats-row { display: flex; flex-direction: column; gap: 8px; }
-    .stat-item { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; text-align: center; box-shadow: var(--shadow); }
-    .stat-num { font-size: 24px; font-weight: 700; color: var(--blue); font-family: 'Playfair Display', serif; }
-    .stat-label { font-size: 10px; color: var(--ink-muted); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.5px; }
-
-    .bg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
-    .bg-col-header { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
-    .bg-col-header h3 { font-family: 'Noto Serif SC', serif; font-size: 16px; font-weight: 600; }
-    .timeline { position: relative; padding-left: 18px; }
-    .timeline::before { content: ''; position: absolute; left: 5px; top: 6px; bottom: 6px; width: 1px; background: var(--border); }
-    .timeline-item { position: relative; margin-bottom: 20px; }
-    .timeline-item::before { content: ''; position: absolute; left: -15px; top: 6px; width: 8px; height: 8px; border-radius: 50%; background: var(--blue); border: 2px solid var(--bg); }
-    .timeline-item .year { font-size: 11px; color: var(--blue); font-weight: 600; margin-bottom: 2px; }
-    .timeline-item h4 { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
-    .timeline-item h4 .highlight { color: var(--blue); font-weight: 500; }
-    .timeline-item p { font-size: 12px; color: var(--ink-soft); line-height: 1.6; }
-    .institution-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; color: var(--ink-muted); background: var(--bg-warm); border: 1px solid var(--border); padding: 1px 7px; border-radius: 10px; font-weight: 400; }
-
-    /* Research CTA strip */
-    .research-strip { background: var(--ink); color: white; }
-    .research-strip-inner { max-width: 1080px; margin: 0 auto; padding: 40px 32px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
-    .research-strip h3 { font-family: 'Noto Serif SC', serif; font-size: 20px; font-weight: 700; color: white; margin-bottom: 6px; }
-    .research-strip p { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; max-width: 560px; }
-    .research-strip .btn-primary { background: white; color: var(--ink); }
-    .research-strip .btn-primary:hover { background: var(--blue-light); color: var(--blue); }
-
-    footer { text-align: center; padding: 24px 32px; border-top: 1px solid var(--border); color: var(--ink-muted); font-size: 12px; }
-    footer span { color: var(--blue); font-family: 'Playfair Display', serif; font-style: italic; }
-
-    .cta { text-align: center; padding: 80px 48px; max-width: 640px; margin: 0 auto; }
-    .cta h2 { font-family: 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; margin-bottom: 16px; }
-    .cta p { color: var(--ink-soft); font-size: 15px; margin-bottom: 32px; line-height: 1.8; }
-    .btn-secondary {
-      display: inline-flex; align-items: center; gap: 6px; background: var(--card);
-      color: var(--ink); padding: 12px 28px; border-radius: 8px; font-size: 14px; font-weight: 500;
-      text-decoration: none; border: 1px solid var(--border); transition: all 0.2s;
+    .affil-info p { font-size: 11px; color: var(--text-3); margin-top: 2px; }
+    .card-divider { height: 1px; background: var(--border); margin: 20px 0; }
+    .cert-row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .cert-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      padding: 4px 10px; border-radius: 8px;
+      font-size: 11px; color: var(--text-2);
+      font-weight: 500;
     }
-    .btn-secondary:hover { border-color: var(--blue); color: var(--blue); }
+    .cert-badge svg { width: 12px; height: 12px; }
 
+    /* ─── STATS BAR ─── */
+    .stats-section {
+      position: relative; z-index: 1;
+      padding: 0 40px 60px;
+    }
+    .stats-inner {
+      max-width: 1160px; margin: 0 auto;
+    }
+    .stats-bar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px 40px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      backdrop-filter: blur(10px);
+    }
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-size: 36px; font-weight: 700;
+      font-family: 'Space Grotesk', monospace;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: block;
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 12px; color: var(--text-3);
+      margin-top: 6px; text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ─── SECTION STYLES ─── */
+    .section { position: relative; z-index: 1; padding: 80px 40px; }
+    .section-inner { max-width: 1160px; margin: 0 auto; }
+    .section-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      margin-bottom: 48px;
+    }
+    .section-tag {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 8px;
+    }
+    .section-title {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 32px; font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .section-desc { font-size: 14px; color: var(--text-2); max-width: 480px; line-height: 1.7; }
+
+    /* ─── SPLIT SECTIONS (Education + Work) ─── */
+    .split-section {
+      position: relative; z-index: 1; padding: 0 40px;
+    }
+    .split-inner { max-width: 1160px; margin: 0 auto; }
+    .split-block {
+      margin-bottom: 64px;
+    }
+    .split-block:last-child { margin-bottom: 0; }
+    .split-header {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 28px;
+    }
+    .split-icon {
+      width: 44px; height: 44px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .split-icon-edu { background: linear-gradient(135deg, rgba(78,205,196,0.2), rgba(78,205,196,0.05)); border: 1px solid rgba(78,205,196,0.25); }
+    .split-icon-work { background: linear-gradient(135deg, rgba(255,107,107,0.2), rgba(255,107,107,0.05)); border: 1px solid rgba(255,107,107,0.25); }
+    .split-header-text .tag-line {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .split-header-text .tag-line.cyan { color: var(--teal); }
+    .split-header-text .tag-line.coral { color: var(--coral); }
+    .split-header-text h3 {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 22px; font-weight: 700;
+    }
+    .split-header-text p {
+      font-size: 13px; color: var(--text-3); margin-top: 2px;
+    }
+    .split-items { display: flex; flex-direction: column; gap: 12px; }
+    .split-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px 28px;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .split-item::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 3px; height: 100%;
+      border-radius: 3px 0 0 3px;
+      transition: width 0.3s;
+    }
+    .split-item.cyan::before { background: var(--teal); }
+    .split-item.coral::before { background: var(--coral); }
+    .split-item:hover { border-color: var(--border-bright); transform: translateX(4px); }
+    .split-item:hover::before { width: 5px; }
+    .split-item-top {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .split-item-left .si-year {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .split-item.cyan .si-year { color: var(--teal); }
+    .split-item.coral .si-year { color: var(--coral); }
+    .split-item-left h4 { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+    .split-item-left .si-sub { font-size: 12px; color: var(--text-3); }
+    .split-item-right { display: flex; align-items: center; gap: 8px; }
+    .school-logo {
+      width: 36px; height: 36px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 9px; font-weight: 700; color: white;
+      flex-shrink: 0;
+    }
+    .split-item-desc { font-size: 13px; color: var(--text-2); line-height: 1.7; margin-bottom: 10px; }
+    .si-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .si-tag {
+      font-size: 10px; padding: 3px 9px;
+      border-radius: 6px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text-3);
+    }
+
+    /* ─── SPLIT GRID for Work ─── */
+    .split-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 768px) { .split-grid-2 { grid-template-columns: 1fr; } }
+    .timeline-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px 32px;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s;
+    }
+    .timeline-card:hover {
+      border-color: var(--border-bright);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    }
+    [data-theme="light"] .timeline-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
+    .tl-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px; }
+    .tl-icon { font-size: 24px; margin-bottom: 8px; }
+    .tl-year {
+      font-size: 11px; font-weight: 700;
+      color: var(--accent); letter-spacing: 0.5px;
+    }
+    .tl-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+    .tl-sub { font-size: 12px; color: var(--text-3); margin-bottom: 12px; }
+    .tl-desc { font-size: 13px; color: var(--text-2); line-height: 1.7; }
+    .tl-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+    .tl-tag {
+      font-size: 10px; padding: 3px 9px;
+      border-radius: 6px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text-3);
+    }
+
+    /* ─── FOOTER CTA ─── */
+    .footer-cta { position: relative; z-index: 1; padding: 80px 40px 80px; }
+    .footer-cta-inner {
+      max-width: 1160px; margin: 0 auto;
+      background: linear-gradient(135deg, rgba(124,111,255,0.12), rgba(78,205,196,0.08));
+      border: 1px solid rgba(124,111,255,0.18);
+      border-radius: 20px;
+      padding: 40px 48px;
+      display: flex; align-items: center; justify-content: space-between; gap: 32px;
+    }
+    .footer-cta h3 { font-family: 'Noto Serif SC', serif; font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .footer-cta p { font-size: 13px; color: var(--text-2); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--surface-2); border: 1px solid var(--border);
+      color: var(--text-2); padding: 10px 22px;
+      border-radius: 10px; font-size: 13px; font-weight: 600;
+      text-decoration: none; transition: all 0.3s;
+      backdrop-filter: blur(8px); white-space: nowrap;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ─── ANIMATE ON SCROLL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      position: relative; z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 32px 40px;
+      text-align: center;
+      font-size: 12px; color: var(--text-3);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* ─── RESPONSIVE ─── */
     @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; padding: 84px 20px 40px; }
-      .hero-card { min-width: unset; }
-      .bg-grid { grid-template-columns: 1fr; }
-      .bg-intro { grid-template-columns: 1fr; }
-      .research-strip-inner { flex-direction: column; align-items: flex-start; }
+      .hero-inner { grid-template-columns: 1fr; gap: 48px; padding: 100px 0 60px; }
+      .hero-card-wrap { max-width: 480px; }
+      .timeline-grid { grid-template-columns: 1fr; }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); }
+      .footer-cta-inner { flex-direction: column; align-items: flex-start; }
       .nav-links { display: none; }
-      .hero h1 { font-size: 30px; }
-      .section, .research-strip-inner { padding: 40px 20px; }
+      .section-title { font-size: 26px; }
     }
+
+    /* ─── CUSTOM SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
   </style>
 </head>
 <body>
 
-  <nav>
-    <div class="nav-inner">
-      <div class="nav-logo">朱珺 <span>/</span> 关于我</div>
-      <ul class="nav-links">
-        <li><a href="#" class="active">关于我</a></li>
-        <li><a href="projects.html">项目经历</a></li>
-        <li><a href="research.html">研究兴趣</a></li>
-        <li><a href="contact.html">联系方式</a></li>
-        <li><a href="index-en.html" class="lang-toggle">🌐 English</a></li>
-      </ul>
-    </div>
-  </nav>
+<!-- Loading -->
+<div id="loader"><div class="loader-bar"></div></div>
 
-  <!-- Hero -->
-  <section class="hero">
+<!-- BG Orbs -->
+<div class="bg-orbs">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+
+<!-- Nav -->
+<nav id="mainNav">
+  <div class="nav-inner">
+    <div class="nav-logo">JUN ZHU</div>
+    <ul class="nav-links">
+      <li><a href="#" class="active">关于我</a></li>
+      <li><a href="projects.html">项目经历</a></li>
+      <li><a href="research.html">研究兴趣</a></li>
+      <li><a href="contact.html">联系方式</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="index-en.html" class="lang-toggle">🌐 EN</a>
+      <button class="theme-toggle" id="themeToggle" title="切换主题">☀</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="eyebrow reveal">
+        <span class="eyebrow-dot"></span>
+        科研项目经理 · 北京
+      </div>
+      <h1 class="reveal reveal-delay-1">
+        朱珺<br>
+        <span class="line-accent">Bridging Theory<br>& Practice</span>
+      </h1>
+      <p class="hero-subtitle reveal reveal-delay-2">
+        中关村学院 · 中关村人工智能研究院 · 科研项目经理。<br>
+        9年<span>项目管理</span>经验，聚焦<strong>AI博士生胜任力发展</strong>与<strong>体验式学习</strong>研究。
+      </p>
+      <div class="hero-tags reveal reveal-delay-2">
+        <span class="htag"><span class="dot"></span>PMP · PRINCE-2</span>
+        <span class="htag"><span class="dot"></span>AI R&D</span>
+        <span class="htag"><span class="dot"></span>体验式学习</span>
+        <span class="htag"><span class="dot"></span>胜任力发展</span>
+      </div>
+      <div class="hero-actions reveal reveal-delay-3"></div>
+    </div>
+
+    <div class="hero-card-wrap reveal reveal-delay-2">
+      <div class="hero-card">
+        <div class="card-section-label">Current Affiliation</div>
+        <div class="affil-item">
+          <div class="affil-logo" style="background: linear-gradient(135deg,#6d28d9,#7c3aed); font-size:9px; line-height:1.3;">ZGCA<br>ZGCI</div>
+          <div class="affil-info">
+            <h4>中关村学院 · 中关村人工智能研究院</h4>
+            <p>科研项目经理 · 2025.10 — 至今</p>
+          </div>
+        </div>
+        <div class="card-divider"></div>
+        <div class="card-section-label">Education</div>
+        <div class="affil-item">
+          <div class="affil-logo" style="background: linear-gradient(135deg,#006400,#00a000);">HKUST</div>
+          <div class="affil-info">
+            <h4>香港科技大学</h4>
+            <p>工程企业管理硕士 MSc · 2020</p>
+          </div>
+        </div>
+        <div class="affil-item">
+          <div class="affil-logo" style="background: linear-gradient(135deg,#003087,#1a4a9a);">PolyU</div>
+          <div class="affil-info">
+            <h4>香港理工大学</h4>
+            <p>BBA + BEng 双学位 · 2016</p>
+          </div>
+        </div>
+        <div class="card-divider"></div>
+        <div class="card-section-label">Certifications</div>
+        <div class="cert-row">
+          <span class="cert-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>
+            PMP
+          </span>
+          <span class="cert-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>
+            PRINCE-2
+          </span>
+          <span class="cert-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>
+            ASPICE L2
+          </span>
+          <span class="cert-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>
+            IATF16949
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<div class="stats-section">
+  <div class="stats-inner">
+    <div class="stats-bar reveal">
+      <div class="stat-item">
+        <span class="stat-num" data-target="9">0</span>
+        <div class="stat-label">年项目管理经验</div>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" data-target="30">0</span>
+        <div class="stat-label">企业级项目交付</div>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" data-target="95">0</span>
+        <div class="stat-label">项目准时率 %</div>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" data-target="20">0</span>
+        <div class="stat-label">成本降低 %</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Education + Work Split -->
+<div class="split-section">
+  <div class="split-inner">
+
+    <!-- Education -->
+    <div class="split-block reveal">
+      <div class="split-header">
+        <div class="split-icon split-icon-edu">🎓</div>
+        <div class="split-header-text">
+          <div class="tag-line cyan">Education</div>
+          <h3>学习经历</h3>
+          <p>学术训练塑造了系统性思维与研究方法基础</p>
+        </div>
+      </div>
+      <div class="split-items">
+        <div class="split-item cyan">
+          <div class="split-item-top">
+            <div class="split-item-left">
+              <div class="si-year">2018.09 — 2020.11</div>
+              <h4>香港科技大学</h4>
+              <div class="si-sub">MSc Engineering Enterprise Management</div>
+            </div>
+            <div class="split-item-right">
+              <div class="school-logo" style="background: linear-gradient(135deg,#006400,#00a000);">HKUST</div>
+            </div>
+          </div>
+          <p class="split-item-desc">工程企业管理硕士（GPA优异）；系统学习项目管理理论与实践；深入理解PBL教学法，培养以项目为载体进行知识建构的教学思维。</p>
+          <div class="si-tags">
+            <span class="si-tag">PBL教学法</span>
+            <span class="si-tag">项目管理理论</span>
+            <span class="si-tag">体验式学习</span>
+            <span class="si-tag">跨国协作</span>
+          </div>
+        </div>
+        <div class="split-item cyan">
+          <div class="split-item-top">
+            <div class="split-item-left">
+              <div class="si-year">2011.09 — 2016.11</div>
+              <h4>香港理工大学</h4>
+              <div class="si-sub">BBA (管理学, 荣誉) + BEng (电气工程, 荣誉) · 双学位</div>
+            </div>
+            <div class="split-item-right">
+              <div class="school-logo" style="background: linear-gradient(135deg,#003087,#1a4a9a);">PolyU</div>
+            </div>
+          </div>
+          <p class="split-item-desc">商学与工程双重学术训练，打下技术与管理复合视野的基础。</p>
+          <div class="si-tags">
+            <span class="si-tag">工商管理</span>
+            <span class="si-tag">电气工程</span>
+            <span class="si-tag">双学位</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Work Experience -->
+    <div class="split-block reveal">
+      <div class="split-header">
+        <div class="split-icon split-icon-work">💼</div>
+        <div class="split-header-text">
+          <div class="tag-line coral">Work Experience</div>
+          <h3>工作经历</h3>
+          <p>从实践中发现学术训练与职业胜任力之间的结构性缺口</p>
+        </div>
+      </div>
+      <div class="split-grid-2">
+        <div class="split-item coral">
+          <div class="split-item-top">
+            <div class="split-item-left">
+              <div class="si-year">2025.10 — 至今</div>
+              <h4>中关村学院 · 中关村人工智能研究院</h4>
+              <div class="si-sub">科研项目经理</div>
+            </div>
+          </div>
+          <p class="split-item-desc">主导AI人才培养项目；深度接触博士研究生群体；发现学术训练与职业胜任力之间的结构性缺口——这成为CORE研究框架的出发点。</p>
+          <div class="si-tags">
+            <span class="si-tag">AI人才培养</span>
+            <span class="si-tag">博士研究生</span>
+            <span class="si-tag">胜任力缺口</span>
+          </div>
+        </div>
+        <div class="split-item coral">
+          <div class="split-item-top">
+            <div class="split-item-left">
+              <div class="si-year">2023.02 — 2025.07</div>
+              <h4>六分科技（四维图新）</h4>
+              <div class="si-sub">项目经理 · AI高精度定位</div>
+            </div>
+          </div>
+          <p class="split-item-desc">主导高精度定位AI算法落地；管理8-10人跨职能团队；同时推进8-12个项目；完成GNSS/IMU模块研发交付；ASPICE L2/IATF16949认证；成本降低20%。</p>
+          <div class="si-tags">
+            <span class="si-tag">AI算法</span>
+            <span class="si-tag">ASPICE L2</span>
+            <span class="si-tag">IATF16949</span>
+            <span class="si-tag">跨职能团队</span>
+          </div>
+        </div>
+        <div class="split-item coral">
+          <div class="split-item-top">
+            <div class="split-item-left">
+              <div class="si-year">2021.06 — 2023.01</div>
+              <h4>上海霍莱沃电子系统</h4>
+              <div class="si-sub">项目经理 · 科研管理</div>
+            </div>
+          </div>
+          <p class="split-item-desc">完成上海卫星装备研究所、中兴通讯等项目交付；参与CMMI认证与国军标质量体系认证。</p>
+          <div class="si-tags">
+            <span class="si-tag">CMMI</span>
+            <span class="si-tag">国军标</span>
+            <span class="si-tag">科研院所</span>
+          </div>
+        </div>
+        <div class="split-item coral">
+          <div class="split-item-top">
+            <div class="split-item-left">
+              <div class="si-year">2016.10 — 2021.01</div>
+              <h4>曼恩/大昌行（香港）</h4>
+              <div class="si-sub">项目工程师</div>
+            </div>
+          </div>
+          <p class="split-item-desc">完成香港特区政府多项机电工程（机电署、消防处、政府档案处），建立系统化项目管理思维雏形；参与CMMI认证。</p>
+          <div class="si-tags">
+            <span class="si-tag">港府项目</span>
+            <span class="si-tag">跨国协作</span>
+            <span class="si-tag">CMMI</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Footer CTA -->
+<div class="footer-cta">
+  <div class="footer-cta-inner reveal">
     <div>
-      <div class="hero-eyebrow">📌 科研项目经理 · 北京</div>
-      <h1>朱珺</h1>
-      <p class="hero-sub">
-        中关村学院 · 中关村人工智能研究院 · 科研项目经理，专注AI博士生胜任力发展与体验式学习研究。
-      </p>
-      <p class="hero-sub" style="margin-top:-8px;">
-        9年<strong>项目管理</strong>经验（科研管理从2021年上海霍莱沃开始，AI项目从2023年六分科技开始），项目管理是我认识世界的方式。
-      </p>
-      <div class="hero-tags">
-        <span class="tag">项目管理 PMP · PRINCE-2</span>
-        <span class="tag">AI R&D</span>
-        <span class="tag">胜任力发展</span>
-        <span class="tag">体验式学习</span>
-      </div>
+      <h3>了解我的项目经历</h3>
+      <p>9年跨领域项目交付，从AI算法落地到政府机电工程</p>
     </div>
+    <a href="projects.html" class="btn-outline">
+      项目经历 →
+    </a>
+  </div>
+</div>
 
-    <div class="hero-card">
-      <div class="hero-card-label">当前机构</div>
-      <div class="affiliation-item">
-        <div class="affil-logo" style="background:#6D28D9;"><span style="font-size:9px; font-weight:700; color:#fff; line-height:1.3;">ZGCA<br>ZGCI</span></div>
-        <div class="affil-info"><h4>中关村学院 · 中关村人工智能研究院</h4><p>科研项目经理 · 2025.10</p></div>
-      </div>
-      <div class="hero-card-label" style="margin-top:20px;">教育背景</div>
-      <div class="affiliation-item">
-        <div class="affil-logo" style="background:#006400;"><span style="font-size:10px; font-weight:700;">HKUST</span></div>
-        <div class="affil-info"><h4>香港科技大学</h4><p>工程企业管理硕士 · 2020</p></div>
-      </div>
-      <div class="affiliation-item">
-        <div class="affil-logo" style="background:#003087;"><span style="font-size:9px; font-weight:700;">PolyU</span></div>
-        <div class="affil-info"><h4>香港理工大学</h4><p>商学 & 工程双学位 · 2016</p></div>
-      </div>
-    </div>
-  </section>
+<!-- Footer -->
+<footer>
+  <p>朱珺 · Bridging Academic Training and Professional Practice · 2026 &nbsp;·&nbsp; <a href="contact.html">jzhubh@connect.ust.hk</a></p>
+</footer>
 
-  <!-- Background -->
-  <section class="section" id="background">
-    <div class="section-label">个人背景</div>
-    <h2 class="section-title">从实践中来</h2>
+<script>
+  // ── Loader ──
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('loader').classList.add('hidden');
+    }, 800);
+  });
 
-    <div class="bg-intro">
-      <div>
-        <h3>9年项目管理实践</h3>
-        <p>从2021年科研管理到2023年AI项目，再到2025年深度接触博士研究生群体——亲眼看到学术训练与产业胜任力之间的断裂。这成为我提出CORE框架的第一手来源。</p>
-      </div>
-      <div class="stats-row">
-        <div class="stat-item"><div class="stat-num">9+</div><div class="stat-label">年项目管理经验</div></div>
-        <div class="stat-item"><div class="stat-num">30+</div><div class="stat-label">企业级项目交付</div></div>
-        <div class="stat-item"><div class="stat-num">2</div><div class="stat-label">段 AI 项目经验</div></div>
-      </div>
-    </div>
+  // ── Theme Toggle ──
+  const themeToggle = document.getElementById('themeToggle');
+  themeToggle.addEventListener('click', () => {
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    document.documentElement.setAttribute('data-theme', isLight ? '' : 'light');
+    themeToggle.textContent = isLight ? '☀' : '🌙';
+  });
 
-    <div class="bg-grid">
-      <div>
-        <div class="bg-col-header"><span style="font-size:20px;">🎓</span><h3>学习经历</h3></div>
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="year">2018.09 — 2020.11</div>
-            <h4><span class="highlight">香港科技大学</span> <span class="institution-badge" style="background:#E6F4EA; border-color:#A8D5A2; color:#1E6B1E;"><span style="display:inline-block;width:8px;height:8px;background:#006400;border-radius:50%;"></span>HKUST MSc</span></h4>
-            <p>工程企业管理硕士（GPA优异）；系统学习项目管理理论与实践；深入理解PBL教学法</p>
-          </div>
-          <div class="timeline-item">
-            <div class="year">2011.09 — 2016.11</div>
-            <h4><span class="highlight">香港理工大学</span> <span class="institution-badge" style="background:#EBF0FB; border-color:#B8C8E8; color:#1A3A8A;"><span style="display:inline-block;width:8px;height:8px;background:#003087;border-radius:50%;"></span>PolyU 双学位</span></h4>
-            <p>BBA (管理学, 荣誉) + BEng (电气工程, 荣誉) 双学位</p>
-          </div>
-        </div>
-      </div>
+  // ── Nav scroll ──
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('mainNav');
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
 
-      <div>
-        <div class="bg-col-header"><span style="font-size:20px;">💼</span><h3>工作经历</h3></div>
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="year">2025.10 — 至今</div>
-            <h4><span class="highlight">中关村学院 · 中关村人工智能研究院</span> <span class="institution-badge" style="background:#F3E8FF; border-color:#D8B4FE; color:#7C3AED;"><span style="display:inline-block;width:8px;height:8px;background:#7C3AED;border-radius:50%;"></span>科研项目经理</span></h4>
-            <p>主导AI人才培养项目；深度接触博士研究生群体；发现学术训练与职业胜任力之间的结构性缺口</p>
-          </div>
-          <div class="timeline-item">
-            <div class="year">2023.02 — 2025.07</div>
-            <h4><span class="highlight">六分科技（四维图新）</span> <span class="institution-badge" style="background:#DBEAFE; border-color:#93C5FD; color:#1D4ED8;"><span style="display:inline-block;width:8px;height:8px;background:#2563EB;border-radius:50%;"></span>项目经理</span></h4>
-            <p>主导高精度定位AI算法落地；管理8-10人跨职能团队；同时推进8-12个项目；完成GNSS和IMU模块研发交付；提升团队效率、降低项目成本20%</p>
-          </div>
-          <div class="timeline-item">
-            <div class="year">2021.06 — 2023.01</div>
-            <h4><span class="highlight">上海霍莱沃电子系统有限公司</span> <span class="institution-badge" style="background:#FEF3C7; border-color:#FCD34D; color:#92400E;"><span style="display:inline-block;width:8px;height:8px;background:#D97706;border-radius:50%;"></span>项目经理</span></h4>
-            <p>完成上海卫星装备研究所、中兴通讯等项目；参与CMMI认证与国军标质量体系认证</p>
-          </div>
-          <div class="timeline-item">
-            <div class="year">2016.10 — 2021.01</div>
-            <h4><span class="highlight">曼恩/大昌行（香港）</span> <span class="institution-badge" style="background:#FEE2E2; border-color:#FCA5A5; color:#991B1B;"><span style="display:inline-block;width:8px;height:8px;background:#DC2626;border-radius:50%;"></span>项目工程师</span></h4>
-            <p>完成香港特区政府部门多项项目（机电署、消防处、政府档案处）；参与CMMI认证</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  // ── Scroll Reveal ──
+  const reveals = document.querySelectorAll('.reveal');
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => revealObs.observe(el));
 
-  <!-- CTA -->
-  <section class="cta">
-    <h2>项目经历：9年项目管理的完整轨迹</h2>
-    <p>从科研项目管理到AI领域，从交付导向到博士生培养，我的项目管理经验覆盖了研发、质控、供应链全链条。</p>
-    <a href="projects.html" class="btn-secondary">项目经历 →</a>
-  </section>
-
-  <footer>
-    <p>朱珺 · <span>Bridging Academic Training and Professional Practice</span> · 2026</p>
-  </footer>
-
+  // ── Counter Animation ──
+  const statNums = document.querySelectorAll('.stat-num[data-target]');
+  const counterObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.dataset.target);
+        const duration = 1500;
+        const start = performance.now();
+        const animate = (now) => {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.round(eased * target) + (target >= 9 ? '+' : target < 100 ? '%' : '+');
+          if (progress < 1) requestAnimationFrame(animate);
+        };
+        requestAnimationFrame(animate);
+        counterObs.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  statNums.forEach(el => counterObs.observe(el));
+</script>
 </body>
 </html>
