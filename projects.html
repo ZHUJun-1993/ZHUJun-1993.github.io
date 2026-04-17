@@ -40,6 +40,7 @@
     /* ── Nav ── */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 40px; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); transition: all 0.3s; }
     nav.scrolled { background: rgba(10,10,15,0.85); }
+    [data-theme="light"] nav.scrolled { background: rgba(245,243,240,0.85); }
     .nav-inner { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
     .nav-logo { font-size: 15px; font-weight: 600; letter-spacing: 0.5px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
@@ -409,6 +410,7 @@
   const obs = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } }); }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
   reveals.forEach(el => obs.observe(el));
   const themeToggle = document.getElementById('themeToggle');
+  if (document.documentElement.getAttribute('data-theme') === 'light') themeToggle.textContent = '🌙';
   themeToggle.addEventListener('click', () => { const isLight = document.documentElement.getAttribute('data-theme') === 'light'; document.documentElement.setAttribute('data-theme', isLight ? '' : 'light'); localStorage.setItem('theme', isLight ? 'dark' : 'light'); themeToggle.textContent = isLight ? '☀' : '🌙'; });
 </script>
 </body>
